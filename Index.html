@@ -4,189 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Petualangan Bahasa Arab: I'sm</title>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background: linear-gradient(to bottom, #f7e7b4, #d4a373);
+      background-image: url('https://via.placeholder.com/1200x800?text=Padang+Pasir');
+      background-size: cover;
+      background-attachment: fixed;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: 'Arial', sans-serif;
-      overflow-x: hidden;
-      body {
-  background: linear-gradient(to bottom, #ffe3a3 60%, #f7c873 100%);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Arial', sans-serif;
-  overflow-x: hidden;
-  position: relative;
-}
-
-/* Matahari */
-.sun {
-  position: absolute;
-  top: 8%;
-  left: 10%;
-  width: 110px;
-  height: 110px;
-  background: radial-gradient(circle at 35% 35%, #fff9c4 60%, #ffe066 100%);
-  border-radius: 50%;
-  box-shadow: 0 0 80px 30px #ffe06666;
-  z-index: 1;
-  animation: sunMove 10s linear infinite alternate;
-}
-@keyframes sunMove {
-  0% { left: 10%; top: 8%; }
-  100% { left: 80%; top: 10%; }
-}
-
-/* Bukit pasir */
-.hill {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  height: 300px;
-  background: radial-gradient(ellipse at 60% 80%, #f3ca89 70%, #e7b87e 100%);
-  border-top-left-radius: 80% 100px;
-  border-top-right-radius: 60% 120px;
-  z-index: 2;
-}
-
-.hill2 {
-  position: absolute;
-  bottom: 0;
-  left: 30vw;
-  width: 70vw;
-  height: 200px;
-  background: radial-gradient(ellipse at 40% 80%, #eac086 60%, #d6a367 100%);
-  border-top-left-radius: 80% 100px;
-  border-top-right-radius: 80% 120px;
-  z-index: 3;
-}
-
-/* Pokok kurma */
-.palm {
-  position: absolute;
-  bottom: 100px;
-  left: 18vw;
-  width: 20px;
-  height: 100px;
-  z-index: 4;
-}
-
-.palm-trunk {
-  width: 16px;
-  height: 100px;
-  background: #b6864a;
-  border-radius: 8px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 5;
-}
-.palm-leaves {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 60px;
-  z-index: 6;
-}
-.palm-leaf {
-  position: absolute;
-  width: 40px;
-  height: 20px;
-  background: #388e3c;
-  border-radius: 50% 50% 0 0;
-  opacity: 0.8;
-}
-.palm-leaf:nth-child(1) { left: 0; top: 16px; transform: rotate(-30deg);}
-.palm-leaf:nth-child(2) { left: 20px; top: 0; transform: rotate(-10deg);}
-.palm-leaf:nth-child(3) { left: 40px; top: 0; transform: rotate(10deg);}
-.palm-leaf:nth-child(4) { left: 60px; top: 16px; transform: rotate(30deg);}
-.palm-leaf:nth-child(5) { left: 20px; top: 24px; transform: rotate(0deg);}
-    }
-    .cloud {
-      position: absolute;
-      top: 10%;
-      width: 100px;
-      height: 40px;
-      background: white;
-      border-radius: 20px;
-      opacity: 0.7;
-      animation: moveCloud 20s linear infinite;
-    }
-    .cloud:nth-child(2) { top: 15%; animation-delay: -5s; }
-    .cloud:nth-child(3) { top: 20%; animation-delay: -10s; }
-    @keyframes moveCloud {
-      0% { transform: translateX(-100px); }
-      100% { transform: translateX(1500px); }
     }
     .character img {
-      animation: bounce 2s infinite;
+      transition: transform 0.3s ease;
     }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .character img:hover {
+      transform: scale(1.1);
     }
     .dialog {
       opacity: 0;
-      transform: translateY(20px);
-      animation: slideIn 0.8s forwards;
-      position: relative;
-      overflow: hidden;
-    }
-    .dialog p {
-      display: inline-block;
-      animation: typing 2s steps(40, end);
-      white-space: normal;
-    }
-    @keyframes slideIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
     }
     .quiz-button {
-      transform: scale(1);
-      transition: transform 0.3s ease, background-color 0.3s ease;
+      transition: all 0.3s ease;
     }
     .quiz-button:hover {
       transform: scale(1.05);
-      background-color: #2f855a;
-    }
-    .quiz-result {
-      opacity: 0;
-      animation: popIn 0.5s forwards;
-    }
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
+      filter: brightness(1.1);
     }
   </style>
 </head>
 <body>
-  <div class="cloud"></div>
-  <div class="cloud"></div>
-  <div class="cloud"></div>
-  <div class="sun"></div>
-<div class="hill"></div>
-<div class="hill2"></div>
-<div class="palm">
-  <div class="palm-trunk"></div>
-  <div class="palm-leaves">
-    <div class="palm-leaf"></div>
-    <div class="palm-leaf"></div>
-    <div class="palm-leaf"></div>
-    <div class="palm-leaf"></div>
-    <div class="palm-leaf"></div>
-  </div>
-</div>
   <div class="container max-w-3xl mx-auto bg-white/90 rounded-2xl shadow-2xl p-6 m-4">
     <h1 class="text-3xl font-bold text-center text-indigo-700 mb-6">Petualangan Bahasa Arab: I'sm</h1>
     <div class="flex justify-center space-x-4 mb-6">
@@ -205,12 +54,12 @@
       <h2 class="text-2xl font-semibold text-indigo-700 mb-4">Kuiz: Kenal Pasti I'sm dan Dhamir</h2>
       <p id="quizQuestion" class="text-lg mb-4"></p>
       <div class="grid grid-cols-1 gap-2">
-        <button onclick="checkAnswer(0)" class="quiz-button bg-green-600 text-white px-4 py-2 rounded-lg"></button>
-        <button onclick="checkAnswer(1)" class="quiz-button bg-green-600 text-white px-4 py-2 rounded-lg"></button>
-        <button onclick="checkAnswer(2)" class="quiz-button bg-green-600 text-white px-4 py-2 rounded-lg"></button>
+        <button onclick="checkAnswer(0)" class="quiz-button bg-green-500 text-white px-4 py-2 rounded-lg"></button>
+        <button onclick="checkAnswer(1)" class="quiz-button bg-green-500 text-white px-4 py-2 rounded-lg"></button>
+        <button onclick="checkAnswer(2)" class="quiz-button bg-green-500 text-white px-4 py-2 rounded-lg"></button>
       </div>
-      <p id="quizResult" class="quiz-result mt-4 text-lg font-medium"></p>
-    </div> 
+      <p id="quizResult" class="mt-4 text-lg font-medium"></p>
+    </div>
   </div>
 
   <script>
@@ -268,10 +117,27 @@
 
     let currentQuizIndex = 0;
 
+    function animateDialog() {
+      anime({
+        targets: '.dialog',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800,
+        easing: 'easeOutQuad'
+      });
+      anime({
+        targets: '.character img',
+        scale: [1, 1.1, 1],
+        duration: 500,
+        easing: 'easeInOutQuad'
+      });
+    }
+
     function nextDialog() {
       dialogIndex++;
       if (dialogIndex < dialogs.length) {
         document.getElementById('dialog').innerHTML = dialogs[dialogIndex];
+        animateDialog();
       } else {
         document.getElementById('dialog').classList.add('hidden');
         document.getElementById('quiz').classList.remove('hidden');
@@ -289,7 +155,7 @@
         });
         document.getElementById('quizResult').innerText = '';
       } else {
-        document.getElementById('quizQuestion').innerText = "Tahniah! Камu telah selesai kuiz untuk topik I'sm!";
+        document.getElementById('quizQuestion').innerText = "Tahniah! Kamu telah selesai kuiz untuk topik I'sm!";
         document.querySelectorAll('.quiz-button').forEach(btn => btn.classList.add('hidden'));
       }
     }
@@ -298,17 +164,18 @@
       const q = quizQuestions[currentQuizIndex];
       if (selected === q.correct) {
         document.getElementById('quizResult').innerText = `Betul! ${q.explanation}`;
-        document.getElementById('quizResult').className = 'quiz-result mt-4 text-lg font-medium text-green-600';
+        document.getElementById('quizResult').className = 'mt-4 text-lg font-medium text-green-600';
       } else {
         document.getElementById('quizResult').innerText = `Maaf, cuba lagi! Jawapan yang betul ialah: ${q.options[q.correct]}. ${q.explanation}`;
-        document.getElementById('quizResult').className = 'quiz-result mt-4 text-lg font-medium text-red-600';
+        document.getElementById('quizResult').className = 'mt-4 text-lg font-medium text-red-600';
       }
       currentQuizIndex++;
       setTimeout(showQuiz, 3000);
     }
 
-    // Initialize first dialog
+    // Initial animation
     document.getElementById('dialog').innerHTML = dialogs[0];
+    animateDialog();
   </script>
 </body>
 </html>

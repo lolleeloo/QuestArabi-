@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Petualangan Bahasa Arab: I'sm</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #f7e7b4, #d4a373);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+      overflow-x: hidden;
+    }
+    .cloud {
+      position: absolute;
+      top: 10%;
+      width: 100px;
+      height: 40px;
+      background: white;
+      border-radius: 20px;
+      opacity: 0.7;
+      animation: moveCloud 20s linear infinite;
+    }
+    .cloud:nth-child(2) { top: 15%; animation-delay: -5s; }
+    .cloud:nth-child(3) { top: 20%; animation-delay: -10s; }
+    @keyframes moveCloud {
+      0% { transform: translateX(-100px); }
+      100% { transform: translateX(1500px); }
+    }
+    .character img {
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .dialog {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideIn 0.8s forwards;
+      position: relative;
+      overflow: hidden;
+    }
+    .dialog p {
+      display: inline-block;
+      animation: typing 2s steps(40, end);
+      white-space: normal;
+    }
+    @keyframes slideIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    .quiz-button {
+      transform: scale(1);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .quiz-button:hover {
+      transform: scale(1.05);
+      background-color: #2f855a;
+    }
+    .quiz-result {
+      opacity: 0;
+      animation: popIn 0.5s forwards;
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+  <div class="container max-w-3xl mx-auto bg-white/90 rounded-2xl shadow-2xl p-6 m-4">
+    <h1 class="text-3xl font-bold text-center text-indigo-700 mb-6">Petualangan Bahasa Arab: I'sm</h1>
+    <div class="flex justify-center space-x-4 mb-6">
+      <div class="character text-center">
+        <img src="https://via.placeholder.com/100?text=Ali" alt="Ali" class="rounded-full">
+        <p class="text-lg font-semibold text-gray-700">Ali</p>
+      </div>
+      <div class="character text-center">
+        <img src="https://via.placeholder.com/100?text=Aisyah" alt="Aisyah" class="rounded-full">
+        <p class="text-lg font-semibold text-gray-700">Aisyah</p>
+      </div>
+    </div>
+    <div class="dialog bg-indigo-50 p-4 rounded-lg shadow-md mb-4" id="dialog"></div>
+    <button onclick="nextDialog()" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors">Teruskan</button>
+    <div class="quiz mt-6 hidden" id="quiz">
+      <h2 class="text-2xl font-semibold text-indigo-700 mb-4">Kuiz: Kenal Pasti I'sm dan Dhamir</h2>
+      <p id="quizQuestion" class="text-lg mb-4"></p>
+      <div class="grid grid-cols-1 gap-2">
+        <button onclick="checkAnswer(0)" class="quiz-button bg-green-600 text-white px-4 py-2 rounded-lg"></button>
+        <button onclick="checkAnswer(1)" class="quiz-button bg-green-600 text-white px-4 py-2 rounded-lg"></button>
+        <button onclick="checkAnswer(2)" class="quiz-button bg-green-600 text-white px-4 py-2 rounded-lg"></button>
+      </div>
+      <p id="quizResult" class="quiz-result mt-4 text-lg font-medium"></p>
+    </div>
+  </div>
+
+  <script>
+    let dialogIndex = 0;
+    const dialogs = [
+      `<p><strong>Ali:</strong> Salam! Selamat datang ke petualangan Bahasa Arab! Hari ini kita akan belajar tentang <strong>I'sm</strong>. I'sm ialah kata nama, iaitu perkataan yang menamakan orang, benda, tempat, atau sesuatu yang lain. Contohnya: "kitab" (buku), "Muhammad" (nama orang), dan "Makkah" (nama tempat). Faham?</p>`,
+      `<p><strong>Aisyah:</strong> Sekarang, mari kita belajar tentang <strong>dhamir</strong>! Dhamir ialah kata ganti nama yang menggantikan i'sm untuk mengelakkan pengulangan. Contohnya, kalau kita cakap tentang "Muhammad", kita boleh guna dhamir "huwa" (dia lelaki) supaya tak ulang nama Muhammad banyak kali.</p>`,
+      `<p><strong>Aisyah:</strong> Berikut ialah senarai dhamir dalam Bahasa Arab:<br>
+      1. أنا (ana) - Saya<br>
+      2. أنتَ (anta) - Kamu (lelaki)<br>
+      3. أنتِ (anti) - Kamu (perempuan)<br>
+      4. هو (huwa) - Dia (lelaki)<br>
+      5. هي (hiya) - Dia (perempuan)<br>
+      6. نحن (nahnu) - Kami<br>
+      7. أنتم (antum) - Kalian (lelaki)<br>
+      8. أنتن (antunna) - Kalian (perempuan)<br>
+      9. هم (hum) - Mereka (lelaki)<br>
+      10. هن (hunna) - Mereka (perempuan)<br>
+      Contoh: أنا أقرأ كتابًا (Ana aqra' kitaban) - Saya membaca buku.</p>`,
+      `<p><strong>Ali:</strong> Sekarang, mari kita uji pemahaman kamu dengan kuiz ringkas! Saya akan tunjukkan ayat, dan kamu kena kenal pasti sama ada perkataan itu i'sm atau dhamir. Bersedia?</p>`
+    ];
+
+    const quizQuestions = [
+      {
+        question: "Dalam ayat 'أنا أحب القراءة', perkataan 'أنا' ialah:",
+        options: ["I'sm", "Dhamir", "Bukan kedua-duanya"],
+        correct: 1,
+        explanation: "'أنا' ialah dhamir kerana ia kata ganti nama yang merujuk kepada 'saya'."
+      },
+      {
+        question: "Dalam ayat 'كتاب على الطاولة', perkataan 'كتاب' ialah:",
+        options: ["I'sm", "Dhamir", "Bukan kedua-duanya"],
+        correct: 0,
+        explanation: "'كتاب' ialah i'sm kerana ia kata nama yang merujuk kepada benda, iaitu 'buku'."
+      },
+      {
+        question: "Dalam ayat 'هو يكتب رسالة', perkataan 'هو' ialah:",
+        options: ["I'sm", "Dhamir", "Fi'l"],
+        correct: 1,
+        explanation: "'هو' ialah dhamir kerana ia kata ganti nama yang merujuk kepada 'dia lelaki'."
+      },
+      {
+        question: "Dalam ayat 'مكة مدينة مقدسة', perkataan 'مكة' ialah:",
+        options: ["I'sm", "Dhamir", "Harf"],
+        correct: 0,
+        explanation: "'مكة' ialah i'sm kerana ia kata nama yang merujuk kepada nama tempat."
+      },
+      {
+        question: "Dalam ayat 'نحن نسافر غدًا', perkataan 'نحن' ialah:",
+        options: ["I'sm", "Dhamir", "Bukan kedua-duanya"],
+        correct: 1,
+        explanation: "'نحن' ialah dhamir kerana ia kata ganti nama yang merujuk kepada 'kami'."
+      }
+    ];
+
+    let currentQuizIndex = 0;
+
+    function nextDialog() {
+      dialogIndex++;
+      if (dialogIndex < dialogs.length) {
+        document.getElementById('dialog').innerHTML = dialogs[dialogIndex];
+      } else {
+        document.getElementById('dialog').classList.add('hidden');
+        document.getElementById('quiz').classList.remove('hidden');
+        showQuiz();
+      }
+    }
+
+    function showQuiz() {
+      if (currentQuizIndex < quizQuestions.length) {
+        const q = quizQuestions[currentQuizIndex];
+        document.getElementById('quizQuestion').innerText = q.question;
+        const buttons = document.querySelectorAll('.quiz-button');
+        buttons.forEach((btn, index) => {
+          btn.innerText = q.options[index];
+        });
+        document.getElementById('quizResult').innerText = '';
+      } else {
+        document.getElementById('quizQuestion').innerText = "Tahniah! Камu telah selesai kuiz untuk topik I'sm!";
+        document.querySelectorAll('.quiz-button').forEach(btn => btn.classList.add('hidden'));
+      }
+    }
+
+    function checkAnswer(selected) {
+      const q = quizQuestions[currentQuizIndex];
+      if (selected === q.correct) {
+        document.getElementById('quizResult').innerText = `Betul! ${q.explanation}`;
+        document.getElementById('quizResult').className = 'quiz-result mt-4 text-lg font-medium text-green-600';
+      } else {
+        document.getElementById('quizResult').innerText = `Maaf, cuba lagi! Jawapan yang betul ialah: ${q.options[q.correct]}. ${q.explanation}`;
+        document.getElementById('quizResult').className = 'quiz-result mt-4 text-lg font-medium text-red-600';
+      }
+      currentQuizIndex++;
+      setTimeout(showQuiz, 3000);
+    }
+
+    // Initialize first dialog
+    document.getElementById('dialog').innerHTML = dialogs[0];
+  </script>
+</body>
+</html>

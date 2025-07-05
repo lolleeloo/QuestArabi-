@@ -96,6 +96,14 @@
       padding: 2px 4px;
       border-radius: 3px;
     }
+    .answer-btn.correct {
+      background-color: #C6F6D5;
+      border: 2px solid #38A169;
+    }
+    .answer-btn.incorrect {
+      background-color: #FED7D7;
+      border: 2px solid #E53E3E;
+    }
   </style>
 </head>
 <body>
@@ -132,7 +140,7 @@
         <div class="w-full bg-gray-200 rounded-full h-2.5">
           <div id="progress-bar" class="progress-bar bg-green-600 h-2.5 rounded-full" style="width: 0%"></div>
         </div>
-        <span id="progress-text" class="ml-3 text-sm font-medium text-gray-700">0/8</span>
+        <span id="progress-text" class="ml-3 text-sm font-medium text-gray-700">0/10</span>
       </div>
 
       <!-- Question containers will be inserted here by JavaScript -->
@@ -205,7 +213,7 @@
       }
     ];
 
-    // Quiz questions data
+    // Quiz questions data - Now with 10 questions
     const quizQuestions = [
       {
         id: 1,
@@ -286,6 +294,27 @@
           { text: "C. Saya membaca buku", correct: false }
         ],
         explanation: "الكُتُبُ (al-kutubu) bermaksud 'buku-buku' (jamak), عَلَى (ala) bermaksud 'di atas', dan الرَّفِّ (al-raffi) bermaksud 'rak'. Jadi terjemahan tepat ialah 'Buku-buku di atas rak'."
+      },
+      // New questions added below
+      {
+        id: 9,
+        question: "9. Manakah pasangan yang BETUL antara dhamir dan contoh penggunaannya?",
+        options: [
+          { text: "A. أَنْتِ - <span class='highlight'>أَنْتِ طَالِبَةٌ</span> (anti talibatun - Awak pelajar perempuan)", correct: true },
+          { text: "B. هِيَ - <span class='highlight'>هِيَ طَالِبٌ</span> (hiya talibun - Dia pelajar lelaki)", correct: false },
+          { text: "C. هُمْ - <span class='highlight'>هُمْ طَالِبَةٌ</span> (hum talibatun - Mereka pelajar perempuan)", correct: false }
+        ],
+        explanation: "Pasangan yang betul ialah أَنْتِ - <span class='highlight'>أَنْتِ طَالِبَةٌ</span>. هِيَ sepatutnya dengan muannath (هِيَ طَالِبَةٌ) dan هُمْ sepatutnya dengan muzakkar (هُمْ طَالِبُونَ)."
+      },
+      {
+        id: 10,
+        question: "10. Dalam ayat: <span class='highlight'>ذَلِكَ بَيْتٌ كَبِيرٌ</span> (zalika baytun kabirun), apakah jenis kata <span class='highlight'>ذَلِكَ</span> (zalika)?",
+        options: [
+          { text: "A. Kata tunjuk (Ism isharah)", correct: true },
+          { text: "B. Kata ganti nama (Dhamir)", correct: false },
+          { text: "C. Kata nama khas (Ism alam)", correct: false }
+        ],
+        explanation: "<span class='highlight'>ذَلِكَ</span> (zalika) bermaksud 'itu' (untuk benda jauh) dan merupakan kata tunjuk (Ism isharah), sejenis kata nama khusus."
       }
     ];
 
@@ -295,6 +324,7 @@
     let score = 0;
     let isTyping = false;
     let typingInterval;
+    let userAnswers = {};
 
     // DOM elements
     const storySection = document.getElementById('story-section');
@@ -387,9 +417,11 @@
         questionEl.innerHTML = `
           <h3 class="font-bold text-lg mb-2">${question.question}</h3>
           <div class="space-y-2">
-            ${question.options.map(option => `
-              <button class="quiz-button w-full text-left bg-gray-100 hover:bg-gray-200 rounded p-3" 
-                onclick="selectAnswer(${question.id}, ${option.correct})">
+            ${question.options.map((option, optIndex) => `
+              <button class="quiz-button answer-btn w-full text-left bg-gray-100 hover:bg-gray-200 rounded p-3" 
+                onclick="selectAnswer(${question.id}, ${optIndex}, ${option.correct})"
+                data-question="${question.id}" 
+                data-option="${optIndex}">
                 ${option.text}
               </button>
             `).join('')}
@@ -447,19 +479,33 @@
     });
 
     // Select answer handler
-    function selectAnswer(questionId, isCorrect) {
+    function selectAnswer(questionId, optionIndex, isCorrect) {
       const question = quizQuestions.find(q => q.id === questionId);
       const resultEl = document.getElementById(`result-${questionId}`);
+      const selectedButton = document.querySelector(`button[data-question="${questionId}"][data-option="${optionIndex}"]`);
+      
+      // Record user answer
+      userAnswers[questionId] = {
+        selectedOption: optionIndex,
+        isCorrect: isCorrect
+      };
       
       // Disable all buttons for this question
-      const buttons = document.querySelectorAll(`#question-${questionId} .quiz-button`);
+      const buttons = document.querySelectorAll(`#question-${questionId} .answer-btn`);
       buttons.forEach(button => {
         button.disabled = true;
         button.classList.remove('hover:bg-gray-200');
       });
       
       // Highlight selected answer
-      event.target.classList.add(isCorrect ? 'bg-green-100 border border-green-500' : 'bg-red-100 border border-red-500');
+      if (isCorrect) {
+        selectedButton.classList.add('correct');
+      } else {
+        selectedButton.classList.add('incorrect');
+        // Also highlight the correct answer
+        const correctIndex = question.options.findIndex(opt => opt.correct);
+        document.querySelector(`button[data-question="${questionId}"][data-option="${correctIndex}"]`).classList.add('correct');
+      }
       
       // Show result
       resultEl.innerHTML = `
@@ -499,11 +545,17 @@
       resultDetails.innerHTML = `
         <p class="font-semibold mb-2">Ringkasan Jawapan:</p>
         <ul class="list-disc pl-5 space-y-1">
-          ${quizQuestions.map(q => `
-            <li class="${getAnswerCorrectness(q) ? 'text-green-600' : 'text-red-600'}">
-              Soalan ${q.id}: ${getAnswerCorrectness(q) ? 'Betul' : 'Salah'} - ${q.explanation}
-            </li>
-          `).join('')}
+          ${quizQuestions.map(q => {
+            const userAnswer = userAnswers[q.id];
+            const isCorrect = userAnswer?.isCorrect || false;
+            const correctOption = q.options.find(opt => opt.correct)?.text.replace(/^[A-Z]\.\s/, '');
+            
+            return `
+              <li class="${isCorrect ? 'text-green-600' : 'text-red-600'}">
+                Soalan ${q.id}: ${isCorrect ? 'Betul' : 'Salah'} - ${q.explanation}
+              </li>
+            `;
+          }).join('')}
         </ul>
       `;
       
@@ -511,32 +563,27 @@
       finalResult.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Helper function to check if question was answered correctly
-    function getAnswerCorrectness(question) {
-      // In this simple implementation, we assume the first correct answer is selected
-      // In a real app, you'd track actual user selections
-      return question.options.find(opt => opt.correct)?.text.startsWith('A');
-    }
-
     // Reset quiz
     function resetQuiz() {
       // Reset game state
       currentQuestion = 0;
       score = 0;
+      userAnswers = {};
       
       // Reset UI
       finalResult.classList.add('hidden');
       quizSection.classList.remove('hidden');
+      storySection.classList.remove('hidden');
       
       // Reset all questions
       quizQuestions.forEach(q => {
         const questionEl = document.getElementById(`question-${q.id}`);
         questionEl.classList.remove('active');
         
-        const buttons = questionEl.querySelectorAll('.quiz-button');
+        const buttons = questionEl.querySelectorAll('.answer-btn');
         buttons.forEach(btn => {
           btn.disabled = false;
-          btn.classList.remove('bg-green-100', 'bg-red-100', 'border', 'border-green-500', 'border-red-500');
+          btn.classList.remove('correct', 'incorrect');
           btn.classList.add('hover:bg-gray-200');
         });
         
@@ -545,9 +592,10 @@
         resultEl.innerHTML = '';
       });
       
-      // Show first question
+      // Show first question and first dialogue
       document.getElementById(`question-${quizQuestions[0].id}`).classList.add('active');
       nextQuestionBtn.classList.add('hidden');
+      showDialogue(0);
       updateProgress();
       
       // Scroll to top

@@ -7,7 +7,11 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background: linear-gradient(to bottom, #f7e7b4, #d4a373);
+      background-image: url('https://arleta.site/interactivelink/1262/Make-an-an-magic-syou-1.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-color: #f7e7b4; /* Fallback gradient if image fails to load */
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -15,67 +19,6 @@
       font-family: 'Arial', sans-serif;
       overflow-x: hidden;
       position: relative;
-    }
-    .desert-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
-    .sand {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 30%;
-      background: linear-gradient(to bottom, #e6c200, #d4a373);
-      border-top-left-radius: 50% 20%;
-      border-top-right-radius: 50% 20%;
-    }
-    .dune {
-      position: absolute;
-      bottom: 20%;
-      width: 300px;
-      height: 100px;
-      background: #d4a373;
-      border-radius: 50% 50% 0 0;
-      opacity: 0.8;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    }
-    .dune:nth-child(2) { left: 20%; bottom: 25%; transform: scale(0.8); }
-    .dune:nth-child(3) { right: 15%; bottom: 15%; transform: scale(1.2); }
-    .sun {
-      position: absolute;
-      top: 10%;
-      right: 10%;
-      width: 80px;
-      height: 80px;
-      background: #ffcc00;
-      border-radius: 50%;
-      box-shadow: 0 0 30px rgba(255, 204, 0, 0.7);
-      animation: sunMove 10s ease-in-out infinite;
-    }
-    @keyframes sunMove {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-    .cloud {
-      position: absolute;
-      top: 15%;
-      width: 100px;
-      height: 40px;
-      background: white;
-      border-radius: 20px;
-      opacity: 0.9;
-      animation: moveCloud 25s linear infinite;
-    }
-    .cloud:nth-child(5) { top: 20%; animation-delay: -5s; width: 120px; }
-    .cloud:nth-child(6) { top: 25%; animation-delay: -10s; width: 80px; }
-    @keyframes moveCloud {
-      0% { transform: translateX(-150px); }
-      100% { transform: translateX(1500px); }
     }
     .character img {
       width: 120px;
@@ -128,16 +71,6 @@
   </style>
 </head>
 <body>
-  <div class="desert-bg">
-    <div class="sand"></div>
-    <div class="dune"></div>
-    <div class="dune"></div>
-    <div class="dune"></div>
-    <div class="sun"></div>
-    <div class="cloud"></div>
-    <div class="cloud"></div>
-    <div class="cloud"></div>
-  </div>
   <div class="container max-w-3xl mx-auto bg-white/90 rounded-2xl shadow-2xl p-6 m-4">
     <h1 class="text-3xl font-bold text-center text-indigo-700 mb-6">Petualangan Bahasa Arab: I'sm</h1>
     <div class="flex justify-center space-x-4 mb-6">
@@ -260,6 +193,36 @@
 
     // Initialize first dialog
     document.getElementById('dialog').innerHTML = dialogs[0];
-  </script>
-</body>
-</html>
+  </script邢
+
+### Penjelasan Penambahan
+1. **Imej Latar Belakang**:
+   - Imej dari URL `https://arleta.site/interactivelink/1262/Make-an-an-magic-syou-1.jpeg` ditetapkan sebagai latar belakang menggunakan CSS `background-image`.
+   - Sifat `background-size: cover` memastikan imej memenuhi skrin tanpa herotan, dan `background-position: center` menyelaraskan imej dengan baik.
+   - `background-attachment: fixed` memastikan latar belakang kekal statik semasa skrol untuk kesan imersif.
+   - Latar belakang sandaran (`background-color: #f7e7b4`) ditetapkan sekiranya imej gagal dimuat.
+2. **Watak dan Animasi**:
+   - Imej watak Ali (`https://img.freepik.com/premium-vector/arab-boy-cartoon-character_1308-150805.jpg`) dan Aisyah (`https://img.freepik.com/premium-vector/arab-girl-cartoon-character_1308-150806.jpg`) kekal sebagai placeholder kartun pakaian tradisional Arab.
+   - Animasi watak (`bounce` dan `wave`) dikekalkan untuk kesan ceria dan dinamik.
+3. **Dialog dan Kuiz**:
+   - Animasi dialog (`slideIn` dan `typing`) dan maklum balas kuiz (`popIn`) dikekalkan untuk pengalaman interaktif.
+   - Kuiz dengan 5 soalan tentang **I'sm** dan **Dhamir** kekal sama, dengan penerangan terperinci dalam maklum balas.
+
+### Cara Bermain
+1. **Pengenalan**: Ali dan Aisyah memperkenalkan **I'sm** dan **Dhamir** dengan dialog animasi (slide-in dan typing) di atas imej latar belakang baru.
+2. **Navigasi**: Klik butang "Teruskan" untuk bergerak melalui dialog, dengan watak bergerak (bounce dan wave).
+3. **Kuiz**: Pemain menjawab 5 soalan kuiz pelbagai pilihan dengan maklum balas pop-in dan penerangan.
+4. **Tamat**: Mesej tahniah muncul selepas semua soalan dijawab, dengan butang kuiz disembunyikan.
+
+### Catatan
+- **Imej Latar Belakang**:
+  - Imej dari URL yang diberikan dianggap sesuai untuk tema padang pasir, tetapi saya tidak dapat memeriksa kandungannya secara langsung. Jika imej tidak sesuai (contohnya, bukan tema padang pasir), anda boleh menggantikannya dengan URL imej lain yang lebih relevan.
+  - Pastikan URL imej boleh diakses dan dimuat dengan cepat. Jika imej gagal dimuat, latar belakang sandaran kuning-coklat akan digunakan.
+- **Imej Watak**:
+  - Imej placeholder Ali dan Aisyah adalah kartun pakaian tradisional Arab. Gantikan dengan imej PNG sebenar (latar belakang lutsinar, 120x120px) untuk kesan lebih autentik jika anda mempunyai sumber imej.
+- **Penambahbaikan Lanjutan**:
+  - Anda boleh menambah kesan bunyi (contohnya, klik butang atau muzik latar) menggunakan `<audio>` HTML5.
+  - Elemen animasi latar belakang seperti awan atau matahari boleh ditambah semula jika dikehendaki.
+  - Untuk topik tatabahasa lain (contohnya, fi'l atau harf), struktur ini boleh digunakan semula dengan dialog dan soalan baru.
+
+Sila cuba kod ini dalam pelayar untuk melihat imej latar belakang baru bersama watak Ali dan Aisyah serta animasi permainan. Jika anda memerlukan penyesuaian lanjut (contohnya, menukar imej latar belakang, menambah animasi, atau topik baru), sila beritahu saya!

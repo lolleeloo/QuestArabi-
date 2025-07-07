@@ -34,6 +34,15 @@
             animation: glow 2s ease-in-out infinite alternate;
         }
 
+        #home-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+        }
+
         #home-page .container {
             text-align: center;
             background: linear-gradient(135deg, rgba(255, 245, 224, 0.9), rgba(255, 228, 181, 0.9));
@@ -42,6 +51,7 @@
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 215, 0, 0.3);
             border: 3px solid #ffd700;
             max-width: 600px;
+            width: 90%;
         }
 
         #home-page p {
@@ -312,7 +322,7 @@
 
         .next-button:hover {
             transform: translateY(-3px);
-            background: linear-gradient(45deg, #e67e22, #d354 moderne);
+            background: linear-gradient(45deg, #e67e22, #d35400);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
         }
 
@@ -494,7 +504,7 @@
             </div>
             <div class="dialog-box" id="dialog-box"></div>
             <div class="subtopic-buttons" id="subtopic-buttons">
-                <button class="subtopic-button" onmouseover="playHoverSound()" onclick="jumpToSubtopic(6)">Bilangan (العدد)</button>
+                <button class="subtopic-button" onmouseover="playHoverSound filosound()" onclick="jumpToSubtopic(6)">Bilangan (العدد)</button>
                 <button class="subtopic-button" onmouseover="playHoverSound()" onclick="jumpToSubtopic(7)">Jantina (الجنس)</button>
                 <button class="subtopic-button" onmouseover="playHoverSound()" onclick="jumpToSubtopic(8)">Spesifik atau Umum (المعرفة أو النكرة)</button>
                 <button class="subtopic-button" onmouseover="playHoverSound()" onclick="jumpToSubtopic(9)">Perubahan Harakat, I'rab, dan Tanwin (الإعراب والتنوين)</button>

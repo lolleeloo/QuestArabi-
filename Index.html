@@ -431,6 +431,14 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
+        .subtopic-content h3 {
+            color: #d35400;
+            font-size: 1.4em;
+            margin: 15px 0 10px;
+            border-bottom: 2px solid #e67e22;
+            padding-bottom: 5px;
+        }
+
         .subtopic-content ul {
             margin: 20px 0;
             padding-left: 30px;
@@ -442,6 +450,20 @@
 
         .subtopic-content strong {
             color: #d35400;
+        }
+
+        .subtopic-content .example {
+            background: rgba(255, 228, 181, 0.3);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #e67e22;
+        }
+
+        .subtopic-content .arabic {
+            font-family: 'Traditional Arabic', 'Arial', sans-serif;
+            font-size: 1.3em;
+            direction: rtl;
         }
 
         /* Quiz Styles */
@@ -934,10 +956,10 @@
             </ul>
             <p>Nota: Ism Ma'rifah boleh dibentuk melalui beberapa cara, seperti menggunakan <strong>Dhamir</strong> (kata ganti), <strong>Isyarah</strong> (kata tunjuk), <strong>Mausul</strong> (kata sambung), atau <strong>Alif Lam</strong> (ال). Pilih butang di bawah untuk meneroka jenis-jenis Ism Ma'rifah ini dengan lebih terperinci!</p>
             <div class="ma-rifah-subtopic-buttons active">
-                <button class="ma-rifah-subtopic-button" onmouseover="playHoverSound()" onclick="showDhamirPage()">Dhamir (ضمير)</button>
-                <button class="ma-rifah-subtopic-button" onmouseover="playHoverSound()" onclick="showIsyarahPage()">Isyarah (إشارة)</button>
-                <button class="ma-rifah-subtopic-button" onmouseover="playHoverSound()" onclick="showMausulPage()">Mausul (موصول)</button>
-                <button class="ma-rifah-subtopic-button" onmouseover="playHoverSound()" onclick="showAlifLamPage()">Alif Lam (ال)</button>
+                <button class="ma-rifah-subtopic-button" onmouseover="playHoverSound()" onclick="showDhamirPage(true)">Dhamir (ضمير)</button>
+                <button class="ma-rifah-subtopic-button" onmouseover="playHoverSound()" onclick="showIsyarahPage(true)">Isyarah (إشارة)</button>
+                <button class="ma-rifah-subtopic-button" onmouseover="playHoverSound()" onclick="showMausulPage(true)">Mausul (موصول)</button>
+                <button class="ma-rifah-subtopic-button" onmouseover="playHoverSound()" onclick="showAlifLamPage(true)">Alif Lam (ال)</button>
             </div>
             <div class="back-to-prev-container">
                 <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showIsmSubtopics()">Back to Previous</button>
@@ -950,58 +972,66 @@
         <h1>Dhamir (ضمير)</h1>
         <div class="subtopic-content">
             <h2>Pengenalan kepada Dhamir</h2>
-            <p>Dhamir ialah kata ganti dalam bahasa Arab yang merujuk kepada entiti tertentu, menjadikannya Ism Ma'rifah. Dhamir digunakan untuk menggantikan kata nama bagi mengelakkan pengulangan dan biasanya merujuk kepada orang, benda, atau konsep yang sudah diketahui dalam konteks. Dhamir terbahagi kepada dua jenis utama:</p>
+            <p>Dhamir ialah kata ganti dalam bahasa Arab yang merujuk kepada entiti tertentu, menjadikannya Ism Ma'rifah. Dhamir digunakan untuk menggantikan kata nama bagi mengelakkan pengulangan dan biasanya merujuk kepada orang, benda, atau konsep yang sudah diketahui dalam konteks.</p>
+            
+            <h3>Jenis-jenis Dhamir</h3>
+            <p>Dhamir terbahagi kepada dua jenis utama:</p>
             <ul>
                 <li><strong>Dhamir Munfasil</strong>: Kata ganti bebas yang berdiri sendiri dalam ayat.</li>
                 <li><strong>Dhamir Muttasil</strong>: Kata ganti yang bersambung dengan kata nama, kata kerja, atau kata tugas.</li>
             </ul>
-            <p>Dhamir dibahagikan mengikut orang (pertama, kedua, ketiga), bilangan (mufrad, tathniyah, jam'), dan jantina (mudhakkar, mu'annath). Berikut adalah senarai lengkap Dhamir Munfasil dan contoh Dhamir Muttasil:</p>
-            <h2>Contoh-contoh</h2>
-            <p><strong>Dhamir Munfasil</strong> (Kata ganti bebas):</p>
+            
+            <h3>Dhamir Munfasil (Kata Ganti Bebas)</h3>
+            <div class="example">
+                <p><strong>Orang Pertama</strong>:</p>
+                <p class="arabic">أنا (ana) - Saya (mufrad)</p>
+                <p class="arabic">نحن (nahnu) - Kami (jam')</p>
+                
+                <p><strong>Orang Kedua</strong>:</p>
+                <p class="arabic">أنتَ (anta) - Kamu (mufrad, mudhakkar)</p>
+                <p class="arabic">أنتِ (anti) - Kamu (mufrad, mu'annath)</p>
+                <p class="arabic">أنتما (antuma) - Kamu berdua (tathniyah)</p>
+                <p class="arabic">أنتم (antum) - Kalian (jam', mudhakkar)</p>
+                <p class="arabic">أنتن (antunna) - Kalian (jam', mu'annath)</p>
+                
+                <p><strong>Orang Ketiga</strong>:</p>
+                <p class="arabic">هو (huwa) - Dia (mufrad, mudhakkar)</p>
+                <p class="arabic">هي (hiya) - Dia (mufrad, mu'annath)</p>
+                <p class="arabic">هما (huma) - Mereka berdua (tathniyah, mudhakkar/mu'annath)</p>
+                <p class="arabic">هم (hum) - Mereka (jam', mudhakkar)</p>
+                <p class="arabic">هن (hunna) - Mereka (jam', mu'annath)</p>
+            </div>
+            
+            <h3>Dhamir Muttasil (Kata Ganti Bersambung)</h3>
+            <div class="example">
+                <p><strong>Dengan Kata Nama (untuk pemilikan)</strong>:</p>
+                <p class="arabic">كتابي (kitabi) - Buku saya</p>
+                <p class="arabic">كتابكَ (kitabuka) - Buku kamu (lelaki)</p>
+                <p class="arabic">كتابكِ (kitabuki) - Buku kamu (perempuan)</p>
+                <p class="arabic">كتابه (kitabuhu) - Bukunya (lelaki)</p>
+                <p class="arabic">كتابها (kitabuha) - Bukunya (perempuan)</p>
+                
+                <p><strong>Dengan Kata Kerja (untuk objek)</strong>:</p>
+                <p class="arabic">رأيتني (ra'aytani) - Dia melihat saya</p>
+                <p class="arabic">رأيتكَ (ra'aytuka) - Saya melihat kamu (lelaki)</p>
+                <p class="arabic">رأيتها (ra'aytuha) - Saya melihatnya (perempuan)</p>
+            </div>
+            
+            <h3>Contoh Ayat</h3>
+            <div class="example">
+                <p class="arabic">أنا أقرأ الكتاب. (Ana aqra' al-kitab) - Saya membaca buku.</p>
+                <p class="arabic">هي ذهبت إلى المدرسة. (Hiya dhahabat ila al-madrasah) - Dia (perempuan) pergi ke sekolah.</p>
+                <p class="arabic">الكتاب كتابي. (Al-kitab kitabi) - Buku itu adalah buku saya.</p>
+                <p class="arabic">أعطاني الأستاذ الكتاب. (A'tani al-ustadh al-kitab) - Guru memberikan saya buku.</p>
+            </div>
+            
+            <h3>Fungsi Dhamir dalam Ayat</h3>
             <ul>
-                <li><strong>Orang Pertama</strong>:
-                    <ul>
-                        <li>أنا (ana) - Saya (mufrad)</li>
-                        <li>نحن (nahnu) - Kami (jam')</li>
-                    </ul>
-                </li>
-                <li><strong>Orang Kedua</strong>:
-                    <ul>
-                        <li>أنتَ (anta) - Kamu (mufrad, mudhakkar)</li>
-                        <li>أنتِ (anti) - Kamu (mufrad, mu'annath)</li>
-                        <li>أنتما (antuma) - Kamu berdua (tathniyah)</li>
-                        <li>أنتم (antum) - Kalian (jam', mudhakkar)</li>
-                        <li>أنتن (antunna) - Kalian (jam', mu'annath)</li>
-                    </ul>
-                </li>
-                <li><strong>Orang Ketiga</strong>:
-                    <ul>
-                        <li>هو (huwa) - Dia (mufrad, mudhakkar)</li>
-                        <li>هي (hiya) - Dia (mufrad, mu'annath)</li>
-                        <li>هما (huma) - Mereka berdua (tathniyah, mudhakkar)</li>
-                        <li>هما (huma) - Mereka berdua (tathniyah, mu'annath)</li>
-                        <li>هم (hum) - Mereka (jam', mudhakkar)</li>
-                        <li>هن (hunna) - Mereka (jam', mu'annath)</li>
-                    </ul>
-                </li>
+                <li><strong>Fa'il</strong> (Subjek): <span class="arabic">هو يقرأ (Huwa yaqra') - Dia membaca</span></li>
+                <li><strong>Maf'ul bih</strong> (Objek): <span class="arabic">رأيته (Ra'aytuhu) - Saya melihatnya</span></li>
+                <li><strong>Mudaf ilaih</strong> (Pemilik): <span class="arabic">كتابه (Kitabuhu) - Bukunya</span></li>
             </ul>
-            <p><strong>Dhamir Muttasil</strong> (Kata ganti bersambung):</p>
-            <ul>
-                <li>ي (ya) - Saya, pada kata nama (cth., كتابي, kitabi - Buku saya)</li>
-                <li>ني (ni) - Saya, pada kata kerja (cth., كتبني, katabani - Dia menulis kepada saya)</li>
-                <li>كَ (ka) - Kamu (mudhakkar), pada kata nama (cth., كتابكَ, kitabuk - Buku kamu)</li>
-                <li>هُ (hu) - Dia (mudhakkar), pada kata kerja (cth., كتبتهُ, katabtuhu - Saya menulisnya)</li>
-                <li>ها (ha) - Dia (mu'annath), pada kata kerja (cth., كتبتها, katabtuha - Saya menulisnya)</li>
-            </ul>
-            <h2>Contoh Ayat</h2>
-            <ul>
-                <li><strong>Munfasil</strong>: أنا أقرأ كتابًا. (Ana aqra' kitaban) - Saya membaca sebuah buku.</li>
-                <li><strong>Munfasil</strong>: أنتم تدرسون في المدرسة. (Antum tadrusuna fil-madrasah) - Kalian belajar di sekolah.</li>
-                <li><strong>Munfasil</strong>: هي تلعب في الحديقة. (Hiya tal'abu fil-hadiqah) - Dia (perempuan) bermain di taman.</li>
-                <li><strong>Muttasil</strong>: الكتابُ كتابي. (Al-kitabu kitabi) - Buku itu adalah buku saya.</li>
-                <li><strong>Muttasil</strong>: كتبتهُ أمس. (Katabtuhu ams) - Saya menulisnya semalam.</li>
-            </ul>
-            <p>Nota: Dhamir Muttasil sering digunakan dalam struktur ayat untuk menunjukkan pemilikan (dengan kata nama) atau objek (dengan kata kerja). Pastikan Dhamir sepadan dengan jantina dan bilangan subjek atau objek yang dirujuk.</p>
+            
             <div class="back-to-prev-container">
                 <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showSpesifikUmumSubtopics()">Back to Previous</button>
             </div>
@@ -1014,24 +1044,56 @@
         <div class="subtopic-content">
             <h2>Pengenalan kepada Isyarah</h2>
             <p>Isyarah ialah kata tunjuk dalam bahasa Arab yang menunjukkan entiti tertentu, menjadikannya Ism Ma'rifah. Kata tunjuk ini digunakan untuk menunjukkan sesuatu yang spesifik berdasarkan jarak (dekat atau jauh), bilangan, dan jantina.</p>
+            
+            <h3>Jenis-jenis Isyarah</h3>
+            <p>Isyarah terbahagi kepada dua jenis utama:</p>
             <ul>
-                <li>Isyarah termasuk kata seperti <strong>هذا</strong> (ini) dan <strong>ذلك</strong> (itu) untuk tunjuk dekat atau jauh.</li>
-                <li>Kata tunjuk menyesuaikan diri dengan jantina (mudhakkar/mu'annath) dan bilangan (mufrad/tathniyah/jam').</li>
+                <li><strong>Isyarah untuk yang dekat</strong> (هذا، هذه، هذان، هاتان)</li>
+                <li><strong>Isyarah untuk yang jauh</strong> (ذلك، تلك، أولئك)</li>
             </ul>
-            <h2>Contoh-contoh</h2>
+            
+            <h3>Isyarah untuk yang Dekat</h3>
+            <div class="example">
+                <p><strong>Mufrad Mudhakkar</strong>:</p>
+                <p class="arabic">هذا كتاب (Hadha kitab) - Ini sebuah buku</p>
+                
+                <p><strong>Mufrad Mu'annath</strong>:</p>
+                <p class="arabic">هذه مدرسة (Hadhihi madrasah) - Ini sebuah sekolah</p>
+                
+                <p><strong>Tathniyah Mudhakkar</strong>:</p>
+                <p class="arabic">هذان كتابان (Hadhani kitaban) - Ini dua buku</p>
+                
+                <p><strong>Tathniyah Mu'annath</strong>:</p>
+                <p class="arabic">هاتان مدرستان (Hatani madrasatan) - Ini dua sekolah</p>
+            </div>
+            
+            <h3>Isyarah untuk yang Jauh</h3>
+            <div class="example">
+                <p><strong>Mufrad Mudhakkar</strong>:</p>
+                <p class="arabic">ذلك كتاب (Dhalika kitab) - Itu sebuah buku</p>
+                
+                <p><strong>Mufrad Mu'annath</strong>:</p>
+                <p class="arabic">تلك مدرسة (Tilka madrasah) - Itu sebuah sekolah</p>
+                
+                <p><strong>Jam'</strong>:</p>
+                <p class="arabic">أولئك طلاب (Ula'ika tullab) - Mereka itu pelajar</p>
+            </div>
+            
+            <h3>Contoh Ayat</h3>
+            <div class="example">
+                <p class="arabic">هذا ولد مجتهد. (Hadha walad mujtahid) - Ini budak lelaki yang rajin.</p>
+                <p class="arabic">تلك معلمة طيبة. (Tilka mu'allimatun tayyibah) - Itu guru perempuan yang baik.</p>
+                <p class="arabic">هذان طالبان جديدان. (Hadhani taliban jadidan) - Ini dua pelajar baru.</p>
+                <p class="arabic">أولئك مهندسون مهرة. (Ula'ika muhandisuna maharatun) - Mereka itu jurutera yang mahir.</p>
+            </div>
+            
+            <h3>Kedudukan Isyarah dalam Ayat</h3>
             <ul>
-                <li><strong>Isyarah</strong>: هذا (hadha) - Ini (lelaki, mufrad)</li>
-                <li><strong>Isyarah</strong>: هذه (hadhihi) - Ini (perempuan, mufrad)</li>
-                <li><strong>Isyarah</strong>: هذان (hadhani) - Ini (lelaki, tathniyah)</li>
-                <li><strong>Isyarah</strong>: ذلك (dhalika) - Itu (lelaki, mufrad)</li>
-                <li><strong>Isyarah</strong>: تلك (tilka) - Itu (perempuan, mufrad)</li>
+                <li><strong>Sebagai Mubtada'</strong>: <span class="arabic">هذا كتاب (Hadha kitab) - Ini sebuah buku</span></li>
+                <li><strong>Sebagai Khabar</strong>: <span class="arabic">الكتاب هذا (Al-kitab hadha) - Buku itu adalah ini</span></li>
+                <li><strong>Sebagai Na'at</strong>: <span class="arabic">رأيت الولد هذا (Ra'aytu al-walad hadha) - Saya melihat budak lelaki ini</span></li>
             </ul>
-            <h2>Contoh Ayat</h2>
-            <ul>
-                <li><strong>Isyarah</strong>: هذا كتابٌ جديدٌ. (Hadha kitabun jadidun) - Ini adalah buku baru.</li>
-                <li><strong>Isyarah</strong>: هذه مدرسةٌ كبيرةٌ. (Hadhihi madrasatun kabiratun) - Ini adalah sekolah besar.</li>
-                <li><strong>Isyarah</strong>: ذلك رجلٌ طويلٌ. (Dhalika rajulun tawilun) - Itu adalah lelaki tinggi.</li>
-            </ul>
+            
             <div class="back-to-prev-container">
                 <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showSpesifikUmumSubtopics()">Back to Previous</button>
             </div>
@@ -1044,23 +1106,59 @@
         <div class="subtopic-content">
             <h2>Pengenalan kepada Mausul</h2>
             <p>Mausul ialah kata sambung dalam bahasa Arab yang menghubungkan kata nama dengan frasa atau ayat yang menerangkannya, menjadikannya Ism Ma'rifah. Kata sambung ini merujuk kepada entiti tertentu yang dijelaskan oleh klausa berikutnya.</p>
+            
+            <h3>Jenis-jenis Mausul</h3>
+            <p>Mausul terbahagi kepada beberapa jenis berdasarkan rujukannya:</p>
             <ul>
-                <li>Mausul merujuk kepada manusia atau bukan manusia, dengan bentuk berbeza berdasarkan bilangan dan jantina.</li>
-                <li>Contoh Mausul termasuk <strong>الذي</strong>, <strong>التي</strong>, dan <strong>الذين</strong>.</li>
+                <li><strong>Untuk manusia</strong>: الذي، التي، اللذان، اللتان، الذين، اللائي</li>
+                <li><strong>Untuk bukan manusia</strong>: ما، الذي</li>
             </ul>
-            <h2>Contoh-contoh</h2>
-            <ul>
-                <li><strong>Mausul</strong>: الذي (alladhi) - Yang (lelaki, mufrad)</li>
-                <li><strong>Mausul</strong>: التي (allati) - Yang (perempuan, mufrad)</li>
-                <li><strong>Mausul</strong>: الذين (alladhina) - Yang (lelaki, jam')</li>
-                <li><strong>Mausul</strong>: اللائي (alla'i) - Yang (perempuan, jam')</li>
-            </ul>
-            <h2>Contoh Ayat</h2>
-            <ul>
-                <li><strong>Mausul</strong>: الطالب الذي يقرأ الكتاب ذكيٌ. (At-talib alladhi yaqra' al-kitab dhakiyyun) - Pelajar yang membaca buku itu pandai.</li>
-                <li><strong>Mausul</strong>: المدرسة التي زرناها جميلةٌ. (Al-madrasah allati zurnaha jamilatun) - Sekolah yang kami lawati itu cantik.</li>
-                <li><strong>Mausul</strong>: الطلاب الذين يدرسون هنا نشيطون. (At-tullab alladhina yadrusuna huna nashituna) - Pelajar-pelajar yang belajar di sini aktif.</li>
-            </ul>
+            
+            <h3>Mausul untuk Manusia</h3>
+            <div class="example">
+                <p><strong>Mufrad Mudhakkar</strong>:</p>
+                <p class="arabic">الطالب الذي نجح (At-talib alladhi najaha) - Pelajar yang berjaya</p>
+                
+                <p><strong>Mufrad Mu'annath</strong>:</p>
+                <p class="arabic">الطالبة التي درست (At-talibat allati darasat) - Pelajar perempuan yang belajar</p>
+                
+                <p><strong>Tathniyah Mudhakkar</strong>:</p>
+                <p class="arabic">الطالبان اللذان نجحا (At-taliban alladhani najaha) - Dua pelajar yang berjaya</p>
+                
+                <p><strong>Tathniyah Mu'annath</strong>:</p>
+                <p class="arabic">الطالبتان اللتان درستا (At-talibatan allatani darasata) - Dua pelajar perempuan yang belajar</p>
+                
+                <p><strong>Jam' Mudhakkar</strong>:</p>
+                <p class="arabic">الطلاب الذين نجحوا (At-tullab alladhina najahu) - Pelajar-pelajar yang berjaya</p>
+                
+                <p><strong>Jam' Mu'annath</strong>:</p>
+                <p class="arabic">الطالبات اللائي درسن (At-talibat allai darasna) - Pelajar-pelajar perempuan yang belajar</p>
+            </div>
+            
+            <h3>Mausul untuk Bukan Manusia</h3>
+            <div class="example">
+                <p><strong>Menggunakan "ما"</strong>:</p>
+                <p class="arabic">قرأت ما كتبت (Qara'tu ma katabta) - Saya membaca apa yang kamu tulis</p>
+                
+                <p><strong>Menggunakan "الذي"</strong>:</p>
+                <p class="arabic">هذا الكتاب الذي اشتريته (Hadha al-kitab alladhi ishtaraytuhu) - Ini buku yang saya beli</p>
+            </div>
+            
+            <h3>Contoh Ayat</h3>
+            <div class="example">
+                <p class="arabic">التلميذ الذي يدرس ينجح. (At-tilmith alladhi yadrusu yanjaḥ) - Pelajar yang belajar akan berjaya.</p>
+                <p class="arabic">الكتاب الذي قرأته مفيد. (Al-kitab alladhi qara'tuhu mufid) - Buku yang saya baca bermanfaat.</p>
+                <p class="arabic">هذه هي السيارة التي اشتريتها. (Hadhihi hiya as-sayyarat allati ishtaraytuha) - Ini kereta yang saya beli.</p>
+                <p class="arabic">الطلاب الذين يدرسون بجد متفوقون. (At-tullab alladhina yadrusuna bijiddin mutafawwiqun) - Pelajar-pelajar yang belajar dengan tekun adalah cemerlang.</p>
+            </div>
+            
+            <h3>Struktur Ayat Mausul</h3>
+            <p>Setiap ayat yang mengandungi Mausul mempunyai dua bahagian:</p>
+            <ol>
+                <li><strong>Ism Mausul</strong>: Kata nama yang dihubungkan</li>
+                <li><strong>Jumlah Silah</strong>: Klausa yang menerangkan kata nama tersebut</li>
+            </ol>
+            
             <div class="back-to-prev-container">
                 <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showSpesifikUmumSubtopics()">Back to Previous</button>
             </div>
@@ -1073,23 +1171,52 @@
         <div class="subtopic-content">
             <h2>Pengenalan kepada Alif Lam</h2>
             <p>Alif Lam (ال) ialah awalan dalam bahasa Arab yang digunakan untuk menjadikan Ism Nakirah kepada Ism Ma'rifah, menunjukkan entiti yang spesifik atau dikenali dalam konteks. Ia sering dikenali sebagai "kata penentu" (definite article).</p>
+            
+            <h3>Jenis-jenis Alif Lam</h3>
+            <p>Terdapat dua jenis Alif Lam:</p>
             <ul>
-                <li>Alif Lam ditambahkan pada permulaan kata nama untuk menjadikannya khusus.</li>
-                <li>Ia boleh digunakan pada kata nama mufrad, tathniyah, atau jam'.</li>
+                <li><strong>Alif Lam Qamariyyah</strong> (القمرية): Diikuti oleh 14 huruf qamariyyah (ء ب ج ح خ ع غ ف ق ك م و هـ ي)</li>
+                <li><strong>Alif Lam Syamsiyyah</strong> (الشمسية): Diikuti oleh 14 huruf syamsiyyah (ت ث د ذ ر ز س ش ص ض ط ظ ل ن)</li>
             </ul>
-            <h2>Contoh-contoh</h2>
+            
+            <h3>Alif Lam Qamariyyah</h3>
+            <div class="example">
+                <p>Alif Lam disebut jelas dan huruf selepasnya tidak diidghamkan:</p>
+                <p class="arabic">الكتاب (Al-kitab) - Buku itu</p>
+                <p class="arabic">البيت (Al-bayt) - Rumah itu</p>
+                <p class="arabic">الولد (Al-walad) - Budak lelaki itu</p>
+            </div>
+            
+            <h3>Alif Lam Syamsiyyah</h3>
+            <div class="example">
+                <p>Alif Lam tidak disebut jelas dan huruf selepasnya diidghamkan (digabungkan):</p>
+                <p class="arabic">التلميذ (At-tilmith) - Pelajar itu</p>
+                <p class="arabic">السيارة (As-sayyarah) - Kereta itu</p>
+                <p class="arabic">الشمس (Ash-shams) - Matahari itu</p>
+            </div>
+            
+            <h3>Fungsi Alif Lam</h3>
             <ul>
-                <li><strong>Alif Lam</strong>: الكتاب (al-kitab) - Buku itu</li>
-                <li><strong>Alif Lam</strong>: الطالبان (at-taliban) - Dua pelajar itu</li>
-                <li><strong>Alif Lam</strong>: الطلاب (at-tullab) - Pelajar-pelajar itu</li>
-                <li><strong>Alif Lam</strong>: المدرسة (al-madrasah) - Sekolah itu</li>
+                <li><strong>Menunjukkan sesuatu yang khusus</strong>: <span class="arabic">الكتاب على الطاولة (Al-kitab 'ala at-tawilah) - Buku itu di atas meja</span></li>
+                <li><strong>Menunjukkan jenis</strong>: <span class="arabic">الأسد حيوان مفترس (Al-asad hayawan muftaris) - Singa adalah haiwan pemangsa</span></li>
+                <li><strong>Menunjukkan sesuatu yang sudah diketahui</strong>: <span class="arabic">ذهبت إلى المدينة (Dhahabtu ila al-madinah) - Saya pergi ke bandar (yang sudah diketahui)</span></li>
             </ul>
-            <h2>Contoh Ayat</h2>
+            
+            <h3>Contoh Ayat</h3>
+            <div class="example">
+                <p class="arabic">الطالب في الفصل. (At-talib fil-fasl) - Pelajar itu di dalam kelas.</p>
+                <p class="arabic">الشمس مشرقة اليوم. (Ash-shams mushriqatun al-yawm) - Matahari itu bersinar hari ini.</p>
+                <p class="arabic">اشتريت الكتاب الجديد. (Ishtaraytu al-kitab al-jadid) - Saya membeli buku yang baru itu.</p>
+                <p class="arabic">الرجل الذي قابلته أمس طبيب. (Ar-rajul alladhi qabaltuhu ams tabib) - Lelaki yang saya temui semalam itu seorang doktor.</p>
+            </div>
+            
+            <h3>Peraturan Khas</h3>
             <ul>
-                <li><strong>Alif Lam</strong>: الكتاب على المكتب جديدٌ. (Al-kitab 'ala al-maktab jadidun) - Buku itu di atas meja adalah baru.</li>
-                <li><strong>Alif Lam</strong>: الطالبان يكتبان الواجب. (At-taliban yaktuban al-wajib) - Dua pelajar itu menulis tugasan.</li>
-                <li><strong>Alif Lam</strong>: الطلاب في الفصل نشيطون. (At-tullab fil-fasl nashituna) - Pelajar-pelajar di kelas itu aktif.</li>
+                <li>Alif Lam tidak digunakan dengan nama orang: <span class="arabic">محمد (Muhammad), bukan المحمد</span></li>
+                <li>Alif Lam tidak digunakan dengan kata ganti: <span class="arabic">كتابي (kitabi), bukan الكتابي</span></li>
+                <li>Alif Lam tidak digunakan dengan kata tunjuk: <span class="arabic">هذا الكتاب (hadha al-kitab), bukan هذا الكتاب</span></li>
             </ul>
+            
             <div class="back-to-prev-container">
                 <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showSpesifikUmumSubtopics()">Back to Previous</button>
             </div>
@@ -1622,7 +1749,7 @@
             playClickSound();
         }
 
-        function showDhamirPage() {
+        function showDhamirPage(scrollToTop = false) {
             document.getElementById('ism-page').style.display = 'none';
             document.getElementById('bilangan-page').style.display = 'none';
             document.getElementById('jantina-page').style.display = 'none';
@@ -1632,10 +1759,13 @@
             document.getElementById('mausul-page').style.display = 'none';
             document.getElementById('alif-lam-page').style.display = 'none';
             document.getElementById('quiz-page').style.display = 'none';
+            if (scrollToTop) {
+                window.scrollTo(0, 0);
+            }
             playClickSound();
         }
 
-        function showIsyarahPage() {
+        function showIsyarahPage(scrollToTop = false) {
             document.getElementById('ism-page').style.display = 'none';
             document.getElementById('bilangan-page').style.display = 'none';
             document.getElementById('jantina-page').style.display = 'none';
@@ -1645,10 +1775,13 @@
             document.getElementById('mausul-page').style.display = 'none';
             document.getElementById('alif-lam-page').style.display = 'none';
             document.getElementById('quiz-page').style.display = 'none';
+            if (scrollToTop) {
+                window.scrollTo(0, 0);
+            }
             playClickSound();
         }
 
-        function showMausulPage() {
+        function showMausulPage(scrollToTop = false) {
             document.getElementById('ism-page').style.display = 'none';
             document.getElementById('bilangan-page').style.display = 'none';
             document.getElementById('jantina-page').style.display = 'none';
@@ -1658,10 +1791,13 @@
             document.getElementById('mausul-page').style.display = 'flex';
             document.getElementById('alif-lam-page').style.display = 'none';
             document.getElementById('quiz-page').style.display = 'none';
+            if (scrollToTop) {
+                window.scrollTo(0, 0);
+            }
             playClickSound();
         }
 
-        function showAlifLamPage() {
+        function showAlifLamPage(scrollToTop = false) {
             document.getElementById('ism-page').style.display = 'none';
             document.getElementById('bilangan-page').style.display = 'none';
             document.getElementById('jantina-page').style.display = 'none';
@@ -1671,6 +1807,9 @@
             document.getElementById('mausul-page').style.display = 'none';
             document.getElementById('alif-lam-page').style.display = 'flex';
             document.getElementById('quiz-page').style.display = 'none';
+            if (scrollToTop) {
+                window.scrollTo(0, 0);
+            }
             playClickSound();
         }
 

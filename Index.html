@@ -1,155 +1,680 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Kembara Bahasa Arab</title>
-<!-- Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
-<!-- Animate.css -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-<style>
-/* Styles as per asal, ditambah untuk enhance quiz dan elemen lain */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kembara Bahasa Arab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Front Page Styles */
+        .front-page {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://arleta.site/interactivelink/1262/Make-an-an-magic-syou-1.jpeg');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
 
-body { font-family: 'Tajawal', sans-serif; background-color: #fefae0; overflow-x: hidden; }
+        .front-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 0;
+        }
 
-.front-page {
-    margin: 0; padding: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-    background-image: url('https://arleta.site/interactivelink/1262/Make-an-an-magic-syou-1.jpeg');
-    background-size: cover; background-position: center; position: relative;
-}
-.front-page::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.3); z-index: 0;
-}
-.front-page h1 {
-    color: #d4a017; font-size: 4em; font-family: 'Georgia', serif; text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 25px #e67e22;
-    margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; text-align: center; position: relative; z-index: 1;
-}
-.front-page .container {
-    text-align: center; background: rgba(255, 245, 224, 0.85); padding: 40px; border-radius: 15px; box-shadow: 0 0 20px rgba(0,0,0,0.3); border: 2px solid #d4a017;
-    position: relative; z-index: 1; animation: fadeInUp 1s ease-out;
-}
-.start-button {
-    padding: 15px 30px; font-size: 1.5em; color: white; background-color: #e67e22; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4); margin-top: 20px;
-}
-.start-button:hover {
-    background-color: #d35400; transform: scale(1.05); box-shadow: 0 6px 20px rgba(230, 126, 34, 0.6);
-}
-.learning-module {
-    background-image: url('https://arleta.site/interactivelink/1262/Make-an-an-magic-syou-1.jpeg');
-    background-size: cover; background-position: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; overflow-x: hidden; font-family: 'Tajawal', sans-serif; position: relative; color: #1f2937; padding: 1rem;
-}
-.character img {
-    width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid transparent; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: all 0.3s ease;
-}
-.character.active img { transform: scale(1.1); border-color: #800000; box-shadow: 0 0 20px rgba(128, 0, 0, 0.5); animation: pulse 1.5s infinite; }
-.dialog-container { width: 100%; max-width: 48rem; margin-bottom: 1.5rem; perspective: 1000px; }
-.dialog {
-    opacity: 0; transform: translateY(20px) rotateX(10deg); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background-color: rgba(249, 250, 251, 0.95); border-radius: 0.75rem; padding: 1.25rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-    display: flex; align-items: flex-start; gap: 1.25rem; width: fit-content; max-width: 100%; min-height: 100px; backdrop-filter: blur(5px); border: 1px solid rgba(0,0,0,0.1);
-}
-.dialog.active { opacity: 1; transform: translateY(0) rotateX(0); }
-.dialog img { width: 70px; height: 70px; border-radius: 50%; flex-shrink: 0; border: 2px solid white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-.dialog-content { flex: 1; min-width: 0; }
-.typing { border-right: 2px solid; animation: blink 0.7s step-start infinite; }
-@keyframes blink { 50% { border-color: transparent; } }
-.btn { transition: all 0.3s ease; font-weight: 500; letter-spacing: 0.5px; position: relative; overflow: hidden; }
-.btn:hover { transform: scale(1.03); }
-.btn:active { transform: scale(0.98); }
-.btn-next { background-color: var(--secondary); color: white; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
-.btn-next:hover { background-color: #059669; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6); }
-.quiz-button {
-    transform: scale(1); transition: all 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 0.5rem;
-}
-.quiz-button:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-.quiz-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: all 0.5s; }
-.quiz-button:hover::before { left: 100%; }
-.quiz-result { opacity: 0; max-height: 0; overflow: hidden; transition: all 0.5s ease; }
-.quiz-result.show { opacity:1; max-height: 500px; }
-.question-container { display: none; background-color: rgba(255,255,255,0.95); border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); backdrop-filter: blur(5px); transition: all 0.5s ease; }
-.question-container.active { display: block; animation: fadeInUp 0.5s ease-out; }
-.progress-bar { height: 8px; transition: width 0.5s ease; border-radius: 4px; background: linear-gradient(90deg, #10b981, #4f46e5); }
-.highlight { background-color: rgba(245, 158, 11, 0.2); padding: 2px 4px; border-radius: 4px; font-weight: 500; }
-.answer-btn.correct { background-color: #d1fae5; border: 2px solid #10b981; color: #065f46; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3); }
-.answer-btn.incorrect { background-color: #fee2e2; border: 2px solid #ef4444; color: #991b1b; box-shadow: 0 2px 5px rgba(239, 68, 68, 0.3); }
-.final-score { font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0.5rem 0; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
-.confetti { position: absolute; width: 10px; height: 10px; background-color: #f59e0b; opacity: 0; animation: confetti-fall 5s linear forwards; z-index: 100; }
-@keyframes confetti-fall {
-    0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-}
-.floating { animation: floating 3s ease-in-out infinite; }
-@keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-.pulse { animation: pulse 2s infinite; }
-@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-.title-text { color: #2e7d32; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); -webkit-text-stroke: 1px #1b5e20; }
-.home-button {
-    background-color: #d4a017; color: white; padding: 10px 20px; border-radius:8px; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(212, 160, 23, 0.3);
-}
-.home-button:hover { background-color: #b8860b; transform: scale(1.03); box-shadow: 0 6px 15px rgba(212, 160, 23, 0.4); }
-</style>
+        .front-page h1 {
+            color: #d4a017;
+            font-size: 4em;
+            font-family: 'Georgia', serif;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5), 0 0 25px #e67e22;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .front-page .container {
+            text-align: center;
+            background: rgba(255, 245, 224, 0.85);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            border: 2px solid #d4a017;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .front-page .container:hover {
+            transform: translateY(-5px) rotateX(5deg);
+        }
+
+        .front-page p {
+            color: #4a2c0b;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .start-button {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            color: white;
+            background-color: #e67e22;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: pulse 2s infinite;
+        }
+
+        .start-button:hover {
+            background-color: #d35400;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.6);
+        }
+
+        .start-button:active {
+            transform: scale(0.95);
+        }
+
+        .start-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg);
+            transition: all 0.5s;
+        }
+
+        .start-button:hover::after {
+            left: 100%;
+        }
+
+        /* Learning Module Styles */
+        :root {
+            --primary: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --desert-green: #2e7d32;
+        }
+        
+        .learning-module {
+            background-image: url('https://arleta.site/interactivelink/1262/Make-an-an-magic-syou-1.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #f7e7b4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Tajawal', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            color: #1f2937;
+        }
+        
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.2em;
+            line-height: 1.8;
+        }
+        
+        .character img {
+            width: 90px;
+            height: 90px;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .character.active img {
+            transform: scale(1.1);
+            border-color: #800000;
+            box-shadow: 0 0 20px rgba(128, 0, 0, 0.5);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .dialog-container {
+            width: 100%;
+            max-width: 48rem;
+            margin-bottom: 1.5rem;
+            perspective: 1000px;
+        }
+        
+        .dialog {
+            opacity: 0;
+            transform: translateY(20px) rotateX(10deg);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background-color: rgba(249, 250, 251, 0.95);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 
+                        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            width: fit-content;
+            max-width: 100%;
+            min-height: 100px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .dialog.active {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+        
+        .dialog img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 2px solid white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dialog-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .typing {
+            border-right: 2px solid;
+            animation: blink 0.7s infinite;
+        }
+        
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        
+        .btn {
+            transform: scale(1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: scale(1.03);
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .btn-next {
+            background-color: var(--secondary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-next:hover {
+            background-color: #059669;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+        
+        .btn-next::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
+            transition: all 0.3s;
+        }
+        
+        .btn-next:hover::after {
+            left: 100%;
+        }
+        
+        .quiz-button {
+            transform: scale(1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quiz-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .quiz-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.5s;
+        }
+        
+        .quiz-button:hover::before {
+            left: 100%;
+        }
+        
+        .quiz-result {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .quiz-result.show {
+            opacity: 1;
+            max-height: 300px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .question-container {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            transform: translateY(10px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-container.active {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            transition: width 0.5s ease;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .highlight {
+            background-color: rgba(245, 158, 11, 0.2);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .answer-btn.correct {
+            background-color: #d1fae5;
+            border: 2px solid #10b981;
+            color: #065f46;
+            box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3);
+        }
+        
+        .answer-btn.incorrect {
+            background-color: #fee2e2;
+            border: 2px solid #ef4444;
+            color: #991b1b;
+            box-shadow: 0 2px 5px rgba(239, 68, 68, 0.3);
+        }
+        
+        .final-score {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0.5rem 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent);
+            opacity: 0;
+            animation: confetti-fall 5s linear forwards;
+            z-index: 100;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .title-text {
+            color: var(--desert-green);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            -webkit-text-stroke: 1px #1b5e20;
+        }
+        
+        .home-button {
+            background-color: #d4a017;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(212, 160, 23, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .home-button:hover {
+            background-color: #b8860b;
+            transform: scale(1.03);
+            box-shadow: 0 6px 15px rgba(212, 160, 23, 0.4);
+        }
+        
+        .home-button:active {
+            transform: scale(0.98);
+        }
+        
+        .home-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
+            transition: all 0.3s;
+        }
+        
+        .home-button:hover::after {
+            left: 100%;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounceIn {
+            from, 20%, 40%, 60%, 80%, to {
+                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+            0% {
+                opacity: 0;
+                transform: scale3d(.3, .3, .3);
+            }
+            20% {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            40% {
+                transform: scale3d(.9, .9, .9);
+            }
+            60% {
+                opacity: 1;
+                transform: scale3d(1.03, 1.03, 1.03);
+            }
+            80% {
+                transform: scale3d(.97, .97, .97);
+            }
+            to {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+            }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 640px) {
+            .character img {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .dialog img {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .dialog {
+                padding: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .front-page h1 {
+                font-size: 2.5em;
+            }
+
+            .front-page .container {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .front-page p {
+                font-size: 1em;
+            }
+
+            .start-button {
+                padding: 10px 20px;
+                font-size: 1.2em;
+            }
+            
+            .home-button {
+                padding: 8px 16px;
+                font-size: 1em;
+            }
+            
+            .title-text {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Hidden class for toggling visibility */
+        .hidden {
+            display: none;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #4f46e5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Difficulty indicators */
+        .difficulty-easy {
+            background-color: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid #10b981;
+        }
+        
+        .difficulty-medium {
+            background-color: #fef3c7;
+            color: #92400e;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .difficulty-hard {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid #ef4444;
+        }
+        
+        .difficulty-label {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        
+        .difficulty-label.easy {
+            background-color: #10b981;
+            color: white;
+        }
+        
+        .difficulty-label.medium {
+            background-color: #f59e0b;
+            color: white;
+        }
+        
+        .difficulty-label.hard {
+            background-color: #ef4444;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-
-<!-- Loading Screen -->
-<div id="loading-screen" class="fixed inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center z-50 transition-opacity duration-500">
-    <div class="spinner mb-4 border-4 border-gray-300 border-t-blue-500 rounded-full w-10 h-10 animate-spin"></div>
-    <p class="text-gray-700 font-medium">Memuatkan Kembara Bahasa Arab...</p>
-</div>
-
-<!-- Front Page -->
-<div id="front-page" class="front-page relative z-10">
-    <h1 class="animate__animated animate__fadeInDown">Kembara Bahasa Arab</h1>
-    <div class="container animate__animated animate__fadeInUp">
-        <p class="mb-4">Selamat datang ke pengembaraan pembelajaran Bahasa Arab yang menyeronokkan! Tekan butang di bawah untuk memulakan.</p>
-        <button class="start-button" onclick="startGame()">Mulakan Kembara</button>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center z-50 transition-opacity duration-500">
+        <div class="spinner mb-4"></div>
+        <p class="text-gray-700 font-medium">Memuatkan Kembara Bahasa Arab...</p>
     </div>
-</div>
 
-<!-- Learning Module (initially hidden) -->
-<div id="learning-module" class="learning-module hidden relative z-0">
-    <!-- Kembali ke muka depan -->
-    <div class="absolute top-4 left-4 z-20">
-        <button class="home-button" onclick="goToHome()">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-            </svg>
-            Kembali ke Muka Depan
-        </button>
-    </div>
-    <!-- Tajuk utama -->
-    <h1 class="text-4xl font-bold text-center title-text mb-6 mt-4 font-[Tajawal] drop-shadow-lg animate__animated animate__fadeIn">
-        <span class="arabic-text">الباب الأول: الاسم</span><br>
-        BAB 1 : I'SM
-    </h1>
-    <!-- Bahagian cerita -->
-    <div id="story-section" class="w-full max-w-3xl mx-auto px-4 mb-8">
-        <div class="flex justify-center space-x-6 mb-8">
-            <div class="character text-center" id="ali-character">
-                <img src="https://arleta.site/interactivelink/1262/IMG_20250705_124642.png" alt="Ali" class="floating">
-                <p class="text-lg font-semibold text-gray-800 mt-2">Ali</p>
-            </div>
-            <div class="character text-center" id="aisyah-character">
-                <img src="https://arleta.site/interactivelink/1262/IMG_20250705_124629.png" alt="Aisyah" class="floating" style="animation-delay: 0.5s;">
-                <p class="text-lg font-semibold text-gray-800 mt-2">Aisyah</p>
-            </div>
-        </div>
-        <!-- Dialogs akan diisi oleh JavaScript -->
-        <div class="dialog-container relative"></div>
-        <div class="text-center mt-6">
-            <button id="next-btn" class="btn btn-next py-3 px-8 rounded-full text-lg font-semibold">Seterusnya</button>
+    <!-- Front Page -->
+    <div id="front-page" class="front-page">
+        <h1>Kembara Bahasa Arab</h1>
+        <div class="container">
+            <p>Selamat datang ke pengembaraan pembelajaran Bahasa Arab yang menyeronokkan! Tekan butang di bawah untuk memulakan.</p>
+            <button class="start-button" onclick="startGame()">Mulakan Kembara</button>
         </div>
     </div>
 
-    <!-- Bahagian kuiz -->
-    <div id="quiz-section" class="hidden w-full max-w-3xl mx-auto px-4">
-        <!-- Kembali ke muka depan -->
-        <div class="absolute top-4 left-4 z-20">
+    <!-- Learning Module (initially hidden) -->
+    <div id="learning-module" class="learning-module hidden">
+        <div class="fixed inset-0 bg-black bg-opacity-10 pointer-events-none"></div>
+        
+        <div class="absolute top-4 left-4">
             <button class="home-button" onclick="goToHome()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
@@ -157,477 +682,1129 @@ body { font-family: 'Tajawal', sans-serif; background-color: #fefae0; overflow-x
                 Kembali ke Muka Depan
             </button>
         </div>
-        <!-- Progress bar -->
-        <div class="flex items-center mb-4">
-            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div id="progress-bar" class="progress-bar h-2.5 rounded-full" style="width:0%"></div>
-            </div>
-            <span id="progress-text" class="ml-3 text-sm font-medium text-gray-700">0/30</span>
-        </div>
-        <!-- Soalan akan diisi oleh JavaScript -->
-        <div id="quiz-questions-container" class="space-y-6"></div>
-        <!-- Butang seterusnya -->
-        <div class="text-center mt-8">
-            <button id="next-question-btn" class="btn btn-next py-3 px-8 rounded-full text-lg font-semibold hidden">Soalan Seterusnya</button>
-        </div>
-    </div>
+        
+        <h1 class="text-4xl font-bold text-center title-text mb-6 mt-4 font-[Tajawal] drop-shadow-lg animate__animated animate__fadeIn">
+            <span class="arabic-text">الباب الأول: الاسم</span><br>
+            BAB 1 : I'SM
+        </h1>
 
-    <!-- Keputusan akhir -->
-    <div id="final-result" class="hidden mt-6 p-6 bg-white rounded-xl shadow-xl w-full max-w-3xl mx-auto backdrop-blur-sm bg-opacity-90 animate__animated animate__fadeInUp relative z-50">
-        <!-- Kembali ke muka depan -->
-        <div class="absolute top-4 left-4 z-20">
-            <button class="home-button" onclick="goToHome()">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+        <!-- Story Section -->
+        <div id="story-section" class="w-full max-w-3xl mx-auto px-4">
+            <div class="flex justify-center space-x-6 mb-8">
+                <div class="character text-center" id="ali-character">
+                    <img src="https://arleta.site/interactivelink/1262/IMG_20250705_124642.png" alt="Ali" class="floating">
+                    <p class="text-lg font-semibold text-gray-800 mt-2">Ali</p>
+                </div>
+                <div class="character text-center" id="aisyah-character">
+                    <img src="https://arleta.site/interactivelink/1262/IMG_20250705_124629.png" alt="Aisyah" class="floating" style="animation-delay: 0.5s;">
+                    <p class="text-lg font-semibold text-gray-800 mt-2">Aisyah</p>
+                </div>
+            </div>
+
+            <div class="dialog-container relative">
+                <!-- Dialogues will be inserted here by JavaScript -->
+            </div>
+
+            <div class="text-center mt-6">
+                <button id="next-btn" class="btn btn-next py-3 px-8 rounded-full text-lg font-semibold">
+                    Seterusnya
+                </button>
+            </div>
+        </div>
+
+        <!-- Quiz Section (initially hidden) -->
+        <div id="quiz-section" class="hidden w-full max-w-3xl mx-auto px-4">
+            <div class="absolute top-4 left-4">
+                <button class="home-button" onclick="goToHome()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                    </svg>
+                    Kembali ke Muka Depan
+                </button>
+            </div>
+            
+            <div class="flex items-center mb-6">
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="progress-bar h-2.5 rounded-full" style="width: 0%"></div>
+                </div>
+                <span id="progress-text" class="ml-3 text-sm font-medium text-gray-700">0/30</span>
+            </div>
+
+            <!-- Question containers will be inserted here by JavaScript -->
+            <div id="quiz-questions-container" class="space-y-6"></div>
+
+            <div class="text-center mt-8">
+                <button id="next-question-btn" class="btn btn-next py-3 px-8 rounded-full text-lg font-semibold hidden">
+                    Soalan Seterusnya
+                </button>
+            </div>
+        </div>
+
+        <div id="final-result" class="hidden mt-6 p-6 bg-white rounded-xl shadow-xl text-center w-full max-w-3xl mx-auto backdrop-blur-sm bg-opacity-90 animate__animated animate__fadeInUp">
+            <div class="absolute top-4 left-4">
+                <button class="home-button" onclick="goToHome()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                    </svg>
+                    Kembali ke Muka Depan
+                </button>
+            </div>
+            
+            <div class="flex justify-center mb-4">
+                <svg id="result-icon" xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Kembali ke Muka Depan
+            </div>
+            <h3 id="result-title" class="font-bold text-2xl text-gray-800"></h3>
+            <div class="final-score" id="score-text"></div>
+            <p id="result-message" class="text-gray-600 mb-4"></p>
+            
+            <div id="result-details" class="mt-6 text-left bg-gray-50 p-4 rounded-lg max-h-64 overflow-y-auto"></div>
+            
+            <button onclick="resetQuiz()" class="btn bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-8 rounded-full mt-6 font-semibold transition-all">
+                Cuba Lagi
             </button>
-        </div>
-        <!-- Hasil -->
-        <div class="flex justify-center mb-4">
-            <svg id="result-icon" class="h-16 w-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"></svg>
-        </div>
-        <h3 id="result-title" class="font-bold text-2xl text-gray-800 text-center mb-2"></h3>
-        <div class="final-score text-center mb-2" id="score-text"></div>
-        <p id="result-message" class="text-center mb-4 text-gray-600"></p>
-        <!-- Perincian jawapan -->
-        <div id="result-details" class="mt-4 bg-gray-50 p-4 rounded-lg max-h-64 overflow-y-auto"></div>
-        <!-- Cuba lagi -->
-        <div class="flex justify-center space-x-4 mt-4">
-            <button onclick="resetQuiz()" class="btn bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-8 rounded-full font-semibold transition">Cuba Lagi</button>
-            <button onclick="shareResult()" class="btn bg-green-500 hover:bg-green-600 text-white py-3 px-8 rounded-full font-semibold transition flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" /></svg>
+            
+            <button onclick="shareResult()" class="btn bg-green-500 hover:bg-green-600 text-white py-3 px-8 rounded-full mt-4 ml-4 font-semibold transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
+                </svg>
                 Kongsi Keputusan
             </button>
         </div>
+
+        <div class="absolute bottom-4 right-4">
+            <button onclick="toggleAudio()" id="audio-btn" class="p-3 bg-white bg-opacity-80 rounded-full shadow-md hover:bg-opacity-100 transition tooltip">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                </svg>
+                <span class="tooltiptext">Togol Audio</span>
+            </button>
+        </div>
+
+        <audio id="bg-music" loop>
+            <source src="https://arleta.site/interactivelink/1262/Middle-Eastern-Music-Instrumental-Palm-Sanctuary.mp3" type="audio/mpeg">
+        </audio>
+
+        <audio id="correct-sound">
+            <source src="https://www.soundjay.com/buttons/sounds/button-09.mp3" type="audio/mpeg">
+        </audio>
+
+        <audio id="wrong-sound">
+            <source src="https://www.soundjay.com/buttons/sounds/button-10.mp3" type="audio/mpeg">
+        </audio>
     </div>
 
-    <!-- Audio controls -->
-    <div class="absolute bottom-4 right-4 z-20">
-        <button onclick="toggleAudio()" id="audio-btn" class="p-3 bg-white bg-opacity-80 rounded-full shadow-md hover:bg-opacity-100 transition tooltip">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-            </svg>
-            <span class="tooltiptext">Togol Audio</span>
-        </button>
-    </div>
+    <script>
+        // Story dialogues data
+        const dialogues = [
+            {
+                speaker: 'Ali',
+                text: 'Assalamualaikum Aisyah! Hari ini kita akan belajar tentang <span class="font-bold text-green-600">I\'sm</span> dalam Bahasa Arab. I\'sm bermaksud kata nama. Ia boleh merujuk kepada orang, tempat, benda, atau konsep.',
+                activeCharacter: 'ali',
+                image: 'https://arleta.site/interactivelink/1262/IMG_20250705_124642.png'
+            },
+            {
+                speaker: 'Aisyah',
+                text: 'Betul Ali! Contoh I\'sm termasuk <span class="arabic-text text-green-600">كِتَابٌ</span> (kitab - buku), <span class="arabic-text text-green-600">مَدْرَسَةٌ</span> (madrasah - sekolah), dan <span class="arabic-text text-green-600">وَلَدٌ</span> (walad - anak lelaki).',
+                activeCharacter: 'aisyah',
+                image: 'https://arleta.site/interactivelink/1262/IMG_20250705_124629.png'
+            },
+            {
+                speaker: 'Ali',
+                text: 'I\'sm juga mempunyai jenis (muzakkar/muannath) dan bilangan (mufrad/tasniyah/jamak). Hari ini kita fokus pada <span class="font-bold text-purple-600">Dhamir</span> (kata ganti nama) yang termasuk dalam I\'sm.',
+                activeCharacter: 'ali',
+                image: 'https://arleta.site/interactivelink/1262/IMG_20250705_124642.png'
+            },
+            {
+                speaker: 'Aisyah',
+                text: 'Dhamir ialah kata ganti yang mewakili kata nama. Contohnya:',
+                list: [
+                    '<span class="arabic-text text-green-600">هُوَ</span> (huwa - dia lelaki)',
+                    '<span class="arabic-text text-green-600">هِيَ</span> (hiya - dia perempuan)',
+                    '<span class="arabic-text text-green-600">نَحْنُ</span> (nahnu - kami)'
+                ],
+                activeCharacter: 'aisyah',
+                image: 'https://arleta.site/interactivelink/1262/IMG_20250705_124629.png'
+            },
+            {
+                speaker: 'Ali',
+                text: 'Mari kita lihat senarai penuh Dhamir:',
+                grid: [
+                    '<span class="arabic-text font-bold text-green-600">أَنَا</span> (ana - saya)',
+                    '<span class="arabic-text font-bold text-green-600">نَحْنُ</span> (nahnu - kami)',
+                    '<span class="arabic-text font-bold text-green-600">أَنْتَ</span> (anta - awak lelaki)',
+                    '<span class="arabic-text font-bold text-green-600">أَنْتِ</span> (anti - awak perempuan)',
+                    '<span class="arabic-text font-bold text-green-600">هُوَ</span> (huwa - dia lelaki)',
+                    '<span class="arabic-text font-bold text-green-600">هِيَ</span> (hiya - dia perempuan)',
+                    '<span class="arabic-text font-bold text-green-600">هُمَا</span> (huma - mereka berdua)',
+                    '<span class="arabic-text font-bold text-green-600">هُمْ</span> (hum - mereka lelaki)',
+                    '<span class="arabic-text font-bold text-green-600">هُنَّ</span> (hunna - mereka perempuan)'
+                ],
+                activeCharacter: 'ali',
+                image: 'https://arleta.site/interactivelink/1262/IMG_20250705_124642.png'
+            },
+            {
+                speaker: 'Aisyah',
+                text: 'Sekarang mari uji pengetahuan kamu dengan kuiz ini! Kami akan tunjukkan contoh ayat dan kamu perlu mengenal pasti I\'sm atau Dhamir dalam ayat tersebut.',
+                activeCharacter: 'aisyah',
+                image: 'https://arleta.site/interactivelink/1262/IMG_20250705_124629.png',
+                isLast: true
+            }
+        ];
 
-    <!-- Audio -->
-    <audio id="bg-music" loop>
-        <source src="https://arleta.site/interactivelink/1262/Middle-Eastern-Music-Instrumental-Palm-Sanctuary.mp3" type="audio/mpeg" />
-    </audio>
-    <audio id="correct-sound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
-    <audio id="wrong-sound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
-</div>
+        // Quiz questions data - 30 questions (10 easy, 10 medium, 10 hard)
+        const quizQuestions = [
+            // Easy questions (1-10)
+            {
+                id: 1,
+                question: "1. Apakah maksud I'sm dalam Bahasa Arab? <span class='difficulty-label easy'>Mudah</span>",
+                options: [
+                    { text: "A. Kata nama", correct: true },
+                    { text: "B. Kata kerja", correct: false },
+                    { text: "C. Kata sifat", correct: false }
+                ],
+                explanation: "I'sm dalam Bahasa Arab bermaksud kata nama yang merujuk kepada orang, tempat, benda, atau konsep.",
+                difficulty: "easy"
+            },
+            {
+                id: 2,
+                question: "2. Manakah berikut yang BUKAN contoh I'sm? <span class='difficulty-label easy'>Mudah</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>كِتَابٌ</span> (kitab)", correct: false },
+                    { text: "B. <span class='arabic-text'>يَكْتُبُ</span> (yaktubu)", correct: true },
+                    { text: "C. <span class='arabic-text'>مَدْرَسَةٌ</span> (madrasah)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>يَكْتُبُ</span> (yaktubu) bermaksud 'dia menulis' dan merupakan kata kerja (fi'il), bukan kata nama (I'sm).",
+                difficulty: "easy"
+            },
+            {
+                id: 3,
+                question: "3. Apakah dhamir untuk 'awak perempuan'? <span class='difficulty-label easy'>Mudah</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>أَنْتَ</span> (anta)", correct: false },
+                    { text: "B. <span class='arabic-text'>أَنْتِ</span> (anti)", correct: true },
+                    { text: "C. <span class='arabic-text'>هِيَ</span> (hiya)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>أَنْتِ</span> (anti) ialah dhamir untuk 'awak perempuan' manakala <span class='arabic-text'>أَنْتَ</span> (anta) untuk lelaki dan <span class='arabic-text'>هِيَ</span> (hiya) untuk 'dia perempuan'.",
+                difficulty: "easy"
+            },
+            {
+                id: 4,
+                question: "4. Dalam ayat: <span class='highlight arabic-text'>هِيَ تَقْرَأُ الكِتَابَ</span> (hiya taqra'u al-kitaba), apakah kata ganti nama (dhamir)? <span class='difficulty-label easy'>Mudah</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>هِيَ</span> (hiya)", correct: true },
+                    { text: "B. <span class='arabic-text'>تَقْرَأُ</span> (taqra'u)", correct: false },
+                    { text: "C. <span class='arabic-text'>الكِتَابَ</span> (al-kitaba)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>هِيَ</span> (hiya) ialah dhamir yang bermaksud 'dia perempuan'. <span class='arabic-text'>تَقْرَأُ</span> (taqra'u) ialah kata kerja 'membaca', dan <span class='arabic-text'>الكِتَابَ</span> (al-kitaba) ialah kata nama 'buku'.",
+                difficulty: "easy"
+            },
+            {
+                id: 5,
+                question: "5. Dalam ayat: <span class='highlight arabic-text'>نَحْنُ نَلْعَبُ فِي الحَدِيقَةِ</span> (nahnu nal'abu fi al-hadiqati), apakah kata nama (I'sm) dalam ayat ini? <span class='difficulty-label easy'>Mudah</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>نَحْنُ</span> (nahnu)", correct: false },
+                    { text: "B. <span class='arabic-text'>نَلْعَبُ</span> (nal'abu)", correct: false },
+                    { text: "C. <span class='arabic-text'>الحَدِيقَةِ</span> (al-hadiqati)", correct: true }
+                ],
+                explanation: "<span class='arabic-text'>الحَدِيقَةِ</span> (al-hadiqati) bermaksud 'taman' dan merupakan kata nama (I'sm). <span class='arabic-text'>نَحْنُ</span> (nahnu) ialah kata ganti nama 'kami', dan <span class='arabic-text'>نَلْعَبُ</span> (nal'abu) ialah kata kerja 'kami bermain'.",
+                difficulty: "easy"
+            },
+            {
+                id: 6,
+                question: "6. Pilih ayat yang mengandungi dhamir <span class='highlight arabic-text'>هُمْ</span> (hum): <span class='difficulty-label easy'>Mudah</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>هُمْ يَذْهَبُونَ إِلَى المَدْرَسَةِ</span> (hum yadhhabuna ila al-madrasati)", correct: true },
+                    { text: "B. <span class='arabic-text'>أَنَا أُحِبُّ القِرَاءَةَ</span> (ana uhibbu al-qira'ata)", correct: false },
+                    { text: "C. <span class='arabic-text'>الكِتَابُ عَلَى الطَّاوِلَةِ</span> (al-kitabu ala al-tawilati)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>هُمْ يَذْهَبُونَ إِلَى المَدْرَسَةِ</span> (hum yadhhabuna ila al-madrasati) bermaksud 'mereka (lelaki) pergi ke sekolah' dan mengandungi dhamir <span class='arabic-text'>هُمْ</span>.",
+                difficulty: "easy"
+            },
+            {
+                id: 7,
+                question: "7. Dalam ayat: <span class='highlight arabic-text'>أَيْنَ أَنْتَ يَا أَحْمَدُ؟</span> (ayna anta ya Ahmadu?), apakah jenis kata <span class='highlight arabic-text'>أَحْمَدُ</span> (Ahmadu)? <span class='difficulty-label easy'>Mudah</span>",
+                options: [
+                    { text: "A. Kata ganti nama (dhamir)", correct: false },
+                    { text: "B. Kata nama khas (I'sm alam)", correct: true },
+                    { text: "C. Kata kerja (fi'il)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>أَحْمَدُ</span> (Ahmadu) ialah nama khas (I'sm alam) untuk orang. <span class='arabic-text'>أَنْتَ</span> (anta) dalam ayat ini ialah kata ganti nama 'awak'.",
+                difficulty: "easy"
+            },
+            {
+                id: 8,
+                question: "8. Pilih terjemahan yang betul untuk: <span class='highlight arabic-text'>الكُتُبُ عَلَى الرَّفِّ</span> (al-kutubu ala al-raffi) <span class='difficulty-label easy'>Mudah</span>",
+                options: [
+                    { text: "A. Buku-buku di atas rak", correct: true },
+                    { text: "B. Buku itu di atas meja", correct: false },
+                    { text: "C. Saya membaca buku", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>الكُتُبُ</span> (al-kutubu) bermaksud 'buku-buku' (jamak), <span class='arabic-text'>عَلَى</span> (ala) bermaksud 'di atas', dan <span class='arabic-text'>الرَّفِّ</span> (al-raffi) bermaksud 'rak'. Jadi terjemahan tepat ialah 'Buku-buku di atas rak'.",
+                difficulty: "easy"
+            },
+            {
+                id: 9,
+                question: "9. Manakah pasangan yang BETUL antara dhamir dan contoh penggunaannya? <span class='difficulty-label easy'>Mudah</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>أَنْتِ</span> - <span class='highlight arabic-text'>أَنْتِ طَالِبَةٌ</span> (anti talibatun - Awak pelajar perempuan)", correct: true },
+                    { text: "B. <span class='arabic-text'>هِيَ</span> - <span class='highlight arabic-text'>هِيَ طَالِبٌ</span> (hiya talibun - Dia pelajar lelaki)", correct: false },
+                    { text: "C. <span class='arabic-text'>هُمْ</span> - <span class='highlight arabic-text'>هُمْ طَالِبَةٌ</span> (hum talibatun - Mereka pelajar perempuan)", correct: false }
+                ],
+                explanation: "Pasangan yang betul ialah <span class='arabic-text'>أَنْتِ</span> - <span class='highlight arabic-text'>أَنْتِ طَالِبَةٌ</span>. <span class='arabic-text'>هِيَ</span> sepatutnya dengan muannath (<span class='arabic-text'>هِيَ طَالِبَةٌ</span>) dan <span class='arabic-text'>هُمْ</span> sepatutnya dengan muzakkar (<span class='arabic-text'>هُمْ طَالِبُونَ</span>).",
+                difficulty: "easy"
+            },
+            {
+                id: 10,
+                question: "10. Dalam ayat: <span class='highlight arabic-text'>ذَلِكَ بَيْتٌ كَبِيرٌ</span> (zalika baytun kabirun), apakah jenis kata <span class='highlight arabic-text'>ذَلِكَ</span> (zalika)? <span class='difficulty-label easy'>Mudah</span>",
+                options: [
+                    { text: "A. Kata tunjuk (Ism isharah)", correct: true },
+                    { text: "B. Kata ganti nama (Dhamir)", correct: false },
+                    { text: "C. Kata nama khas (Ism alam)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>ذَلِكَ</span> (zalika) bermaksud 'itu' (untuk benda jauh) dan merupakan kata tunjuk (Ism isharah), sejenis kata nama khusus.",
+                difficulty: "easy"
+            },
+            // Medium questions (11-20)
+            {
+                id: 11,
+                question: "11. Apakah dhamir untuk 'mereka berdua' (lelaki atau perempuan)? <span class='difficulty-label medium'>Sederhana</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>هُمْ</span> (hum)", correct: false },
+                    { text: "B. <span class='arabic-text'>هُنَّ</span> (hunna)", correct: false },
+                    { text: "C. <span class='arabic-text'>هُمَا</span> (huma)", correct: true }
+                ],
+                explanation: "<span class='arabic-text'>هُمَا</span> (huma) ialah dhamir untuk 'mereka berdua' (lelaki atau perempuan). <span class='arabic-text'>هُمْ</span> (hum) untuk lelaki jamak dan <span class='arabic-text'>هُنَّ</span> (hunna) untuk perempuan jamak.",
+                difficulty: "medium"
+            },
+            {
+                id: 12,
+                question: "12. Dalam ayat: <span class='highlight arabic-text'>هَذَا قَلَمٌ جَدِيدٌ</span> (hatha qalamun jadidun), apakah kata nama (I'sm) dalam ayat ini? <span class='difficulty-label medium'>Sederhana</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>هَذَا</span> (hatha)", correct: false },
+                    { text: "B. <span class='arabic-text'>قَلَمٌ</span> (qalamun)", correct: true },
+                    { text: "C. <span class='arabic-text'>جَدِيدٌ</span> (jadidun)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>قَلَمٌ</span> (qalamun) bermaksud 'pen' dan merupakan kata nama (I'sm). <span class='arabic-text'>هَذَا</span> (hatha) ialah kata tunjuk 'ini', dan <span class='arabic-text'>جَدِيدٌ</span> (jadidun) ialah kata sifat 'baru'.",
+                difficulty: "medium"
+            },
+            {
+                id: 13,
+                question: "13. Manakah berikut yang merupakan kata nama khas (I'sm alam)? <span class='difficulty-label medium'>Sederhana</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>مُحَمَّدٌ</span> (Muhammadun)", correct: true },
+                    { text: "B. <span class='arabic-text'>طَالِبٌ</span> (talibun)", correct: false },
+                    { text: "C. <span class='arabic-text'>كَبِيرٌ</span> (kabirun)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>مُحَمَّدٌ</span> (Muhammadun) ialah nama khas untuk orang. <span class='arabic-text'>طَالِبٌ</span> (talibun) bermaksud 'pelajar' dan <span class='arabic-text'>كَبِيرٌ</span> (kabirun) bermaksud 'besar' yang kedua-duanya bukan nama khas.",
+                difficulty: "medium"
+            },
+            {
+                id: 14,
+                question: "14. Dalam ayat: <span class='highlight arabic-text'>أَيْنَ الكُرْسِيُّ؟</span> (ayna al-kursiyyu?), apakah jenis kata <span class='highlight arabic-text'>الكُرْسِيُّ</span> (al-kursiyyu)? <span class='difficulty-label medium'>Sederhana</span>",
+                options: [
+                    { text: "A. Kata ganti nama (dhamir)", correct: false },
+                    { text: "B. Kata nama (I'sm)", correct: true },
+                    { text: "C. Kata kerja (fi'il)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>الكُرْسِيُّ</span> (al-kursiyyu) bermaksud 'kerusi' dan merupakan kata nama (I'sm).",
+                difficulty: "medium"
+            },
+            {
+                id: 15,
+                question: "15. Pilih ayat yang mengandungi dua kata nama (I'sm): <span class='difficulty-label medium'>Sederhana</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>الوَلَدُ يَلْعَبُ فِي الحَدِيقَةِ</span> (al-waladu yal'abu fi al-hadiqati)", correct: true },
+                    { text: "B. <span class='arabic-text'>هِيَ تَقْرَأُ الكِتَابَ</span> (hiya taqra'u al-kitaba)", correct: false },
+                    { text: "C. <span class='arabic-text'>أَنَا أُحِبُّ القِرَاءَةَ</span> (ana uhibbu al-qira'ata)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>الوَلَدُ يَلْعَبُ فِي الحَدِيقَةِ</span> mengandungi dua kata nama: <span class='arabic-text'>الوَلَدُ</span> (anak lelaki) dan <span class='arabic-text'>الحَدِيقَةِ</span> (taman).",
+                difficulty: "medium"
+            },
+            {
+                id: 16,
+                question: "16. Manakah yang BUKAN kata nama (I'sm)? <span class='difficulty-label medium'>Sederhana</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>بَيْتٌ</span> (baytun - rumah)", correct: false },
+                    { text: "B. <span class='arabic-text'>يَجْلِسُ</span> (yajlisu - dia duduk)", correct: true },
+                    { text: "C. <span class='arabic-text'>مَدِينَةٌ</span> (madinatun - bandar)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>يَجْلِسُ</span> (yajlisu) bermaksud 'dia duduk' dan merupakan kata kerja (fi'il), bukan kata nama (I'sm).",
+                difficulty: "medium"
+            },
+            {
+                id: 17,
+                question: "17. Dalam ayat: <span class='highlight arabic-text'>هَذِهِ طَالِبَةٌ مُجْتَهِدَةٌ</span> (hathihi talibatun mujtahidatun), berapakah bilangan kata nama (I'sm) dalam ayat ini? <span class='difficulty-label medium'>Sederhana</span>",
+                options: [
+                    { text: "A. 1", correct: false },
+                    { text: "B. 2", correct: true },
+                    { text: "C. 3", correct: false }
+                ],
+                explanation: "Terdapat 2 kata nama: <span class='arabic-text'>طَالِبَةٌ</span> (pelajar perempuan) dan <span class='arabic-text'>مُجْتَهِدَةٌ</span> (rajin) yang merupakan kata sifat yang berfungsi sebagai kata nama dalam konteks ini.",
+                difficulty: "medium"
+            },
+            {
+                id: 18,
+                question: "18. Manakah dhamir yang TIDAK sesuai dengan kata nama muzakkar (lelaki)? <span class='difficulty-label medium'>Sederhana</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>هُوَ</span> (huwa)", correct: false },
+                    { text: "B. <span class='arabic-text'>هِيَ</span> (hiya)", correct: true },
+                    { text: "C. <span class='arabic-text'>هُمْ</span> (hum)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>هِيَ</span> (hiya) ialah dhamir untuk perempuan dan tidak sesuai dengan kata nama muzakkar (lelaki).",
+                difficulty: "medium"
+            },
+            {
+                id: 19,
+                question: "19. Apakah terjemahan yang betul untuk: <span class='highlight arabic-text'>أَنَا طَالِبٌ فِي المَدْرَسَةِ</span> (ana talibun fi al-madrasati)? <span class='difficulty-label medium'>Sederhana</span>",
+                options: [
+                    { text: "A. Saya seorang pelajar di sekolah", correct: true },
+                    { text: "B. Dia seorang pelajar perempuan", correct: false },
+                    { text: "C. Kamu seorang guru", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>أَنَا</span> (ana) bermaksud 'saya', <span class='arabic-text'>طَالِبٌ</span> (talibun) bermaksud 'pelajar lelaki', dan <span class='arabic-text'>المَدْرَسَةِ</span> (al-madrasati) bermaksud 'sekolah'.",
+                difficulty: "medium"
+            },
+            {
+                id: 20,
+                question: "20. Manakah yang merupakan kata nama jamak (plural)? <span class='difficulty-label medium'>Sederhana</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>كِتَابٌ</span> (kitabun)", correct: false },
+                    { text: "B. <span class='arabic-text'>كُتُبٌ</span> (kutubun)", correct: true },
+                    { text: "C. <span class='arabic-text'>كَاتِبٌ</span> (katibun)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>كُتُبٌ</span> (kutubun) ialah bentuk jamak bagi <span class='arabic-text'>كِتَابٌ</span> (kitabun) yang bermaksud 'buku-buku'.",
+                difficulty: "medium"
+            },
+            // Hard questions (21-30)
+            {
+                id: 21,
+                question: "21. Dalam ayat: <span class='highlight arabic-text'>هَؤُلَاءِ أَصْدِقَائِي</span> (ha'ula'i asdiqa'i), apakah jenis kata <span class='highlight arabic-text'>هَؤُلَاءِ</span> (ha'ula'i)? <span class='difficulty-label hard'>Sukar</span>",
+                options: [
+                    { text: "A. Kata ganti nama (dhamir)", correct: false },
+                    { text: "B. Kata tunjuk (Ism isharah)", correct: true },
+                    { text: "C. Kata nama khas (Ism alam)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>هَؤُلَاءِ</span> (ha'ula'i) bermaksud 'ini' (untuk orang/benda dekat jamak) dan merupakan kata tunjuk (Ism isharah).",
+                difficulty: "hard"
+            },
+            {
+                id: 22,
+                question: "22. Manakah yang merupakan contoh kata nama muannath (perempuan)? <span class='difficulty-label hard'>Sukar</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>مُدَرِّسٌ</span> (mudarrisun)", correct: false },
+                    { text: "B. <span class='arabic-text'>مُدَرِّسَةٌ</span> (mudarrisatun)", correct: true },
+                    { text: "C. <span class='arabic-text'>مُهَنْدِسٌ</span> (muhandisun)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>مُدَرِّسَةٌ</span> (mudarrisatun) bermaksud 'guru perempuan' dan merupakan kata nama muannath. Akhiran -ah/-at menunjukkan feminin dalam Bahasa Arab.",
+                difficulty: "hard"
+            },
+            {
+                id: 23,
+                question: "23. Dalam ayat: <span class='highlight arabic-text'>ذَانِكَ رَجُلَانِ صَالِحَانِ</span> (danika rajulani salihani), berapakah bilangan kata nama (I'sm) dalam ayat ini? <span class='difficulty-label hard'>Sukar</span>",
+                options: [
+                    { text: "A. 1", correct: false },
+                    { text: "B. 2", correct: false },
+                    { text: "C. 3", correct: true }
+                ],
+                explanation: "Terdapat 3 kata nama: <span class='arabic-text'>ذَانِكَ</span> (kata tunjuk untuk dua), <span class='arabic-text'>رَجُلَانِ</span> (dua lelaki), dan <span class='arabic-text'>صَالِحَانِ</span> (dua yang salih).",
+                difficulty: "hard"
+            },
+            {
+                id: 24,
+                question: "24. Manakah yang merupakan contoh kata nama yang di-marfu'-kan dengan tanda fathah? <span class='difficulty-label hard'>Sukar</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>الوَلَدُ</span> (al-waladu)", correct: true },
+                    { text: "B. <span class='arabic-text'>الوَلَدَ</span> (al-walada)", correct: false },
+                    { text: "C. <span class='arabic-text'>الوَلَدِ</span> (al-waladi)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>الوَلَدُ</span> (al-waladu) mempunyai tanda dhammah yang menunjukkan ia dalam keadaan marfu' (subjek). Fathah biasanya untuk mansub (objek) dan kasrah untuk majrur (setelah huruf jar).",
+                difficulty: "hard"
+            },
+            {
+                id: 25,
+                question: "25. Pilih ayat yang mengandungi kata nama yang di-mansub-kan: <span class='difficulty-label hard'>Sukar</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>رَأَيْتُ الوَلَدَ</span> (ra'aytu al-walada - Saya melihat anak itu)", correct: true },
+                    { text: "B. <span class='arabic-text'>الوَلَدُ فِي المَنْزِلِ</span> (al-waladu fi al-manzili - Anak itu di rumah)", correct: false },
+                    { text: "C. <span class='arabic-text'>ذَهَبَ الوَلَدُ</span> (dhahaba al-waladu - Anak itu telah pergi)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>الوَلَدَ</span> (al-walada) dalam ayat pertama mempunyai tanda fathah yang menunjukkan ia di-mansub-kan sebagai objek (maf'ul bih).",
+                difficulty: "hard"
+            },
+            {
+                id: 26,
+                question: "26. Manakah yang merupakan contoh kata nama yang di-majrur-kan? <span class='difficulty-label hard'>Sukar</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>مِنَ البَيْتِ</span> (mina al-bayti - dari rumah)", correct: true },
+                    { text: "B. <span class='arabic-text'>البَيْتُ كَبِيرٌ</span> (al-baytu kabirun - Rumah itu besar)", correct: false },
+                    { text: "C. <span class='arabic-text'>رَأَيْتُ البَيْتَ</span> (ra'aytu al-bayta - Saya melihat rumah itu)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>البَيْتِ</span> (al-bayti) dalam ayat pertama mempunyai tanda kasrah yang menunjukkan ia di-majrur-kan setelah huruf jar <span class='arabic-text'>مِنْ</span> (min).",
+                difficulty: "hard"
+            },
+            {
+                id: 27,
+                question: "27. Dalam ayat: <span class='highlight arabic-text'>هَذِهِ الفَتَاةُ ذَكِيَّةٌ</span> (hathihi al-fatatu dhakiyyatun), apakah jenis kata <span class='highlight arabic-text'>ذَكِيَّةٌ</span> (dhakiyyatun)? <span class='difficulty-label hard'>Sukar</span>",
+                options: [
+                    { text: "A. Kata sifat yang berfungsi sebagai kata nama (I'sm)", correct: true },
+                    { text: "B. Kata kerja (fi'il)", correct: false },
+                    { text: "C. Kata ganti nama (dhamir)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>ذَكِيَّةٌ</span> (dhakiyyatun) bermaksud 'pandai' dan merupakan kata sifat (sifah) yang berfungsi sebagai kata nama (I'sm) dalam konteks ini.",
+                difficulty: "hard"
+            },
+            {
+                id: 28,
+                question: "28. Manakah yang merupakan contoh kata nama yang di-idhafahkan? <span class='difficulty-label hard'>Sukar</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>كِتَابُ الطَّالِبِ</span> (kitabu al-talibi - buku pelajar)", correct: true },
+                    { text: "B. <span class='arabic-text'>الكِتَابُ جَدِيدٌ</span> (al-kitabu jadidun - Buku itu baru)", correct: false },
+                    { text: "C. <span class='arabic-text'>قَرَأْتُ الكِتَابَ</span> (qara'tu al-kitaba - Saya membaca buku itu)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>كِتَابُ الطَّالِبِ</span> (kitabu al-talibi) merupakan contoh idhafah (kata nama majmuk) di mana <span class='arabic-text'>كِتَابُ</span> (kitabu) di-idhafahkan kepada <span class='arabic-text'>الطَّالِبِ</span> (al-talibi).",
+                difficulty: "hard"
+            },
+            {
+                id: 29,
+                question: "29. Dalam ayat: <span class='highlight arabic-text'>هَذِهِ بِنْتُ أُخْتِي</span> (hathihi bintu ukhti), berapakah bilangan kata nama (I'sm) dalam ayat ini? <span class='difficulty-label hard'>Sukar</span>",
+                options: [
+                    { text: "A. 1", correct: false },
+                    { text: "B. 2", correct: false },
+                    { text: "C. 3", correct: true }
+                ],
+                explanation: "Terdapat 3 kata nama: <span class='arabic-text'>هَذِهِ</span> (kata tunjuk), <span class='arabic-text'>بِنْتُ</span> (anak perempuan), dan <span class='arabic-text'>أُخْتِي</span> (kakak/adik perempuan saya).",
+                difficulty: "hard"
+            },
+            {
+                id: 30,
+                question: "30. Manakah yang merupakan contoh kata nama yang di-tanwin-kan? <span class='difficulty-label hard'>Sukar</span>",
+                options: [
+                    { text: "A. <span class='arabic-text'>كِتَابٌ</span> (kitabun)", correct: true },
+                    { text: "B. <span class='arabic-text'>الكِتَابُ</span> (al-kitabu)", correct: false },
+                    { text: "C. <span class='arabic-text'>كِتَابِي</span> (kitabi)", correct: false }
+                ],
+                explanation: "<span class='arabic-text'>كِتَابٌ</span> (kitabun) mempunyai tanwin (dua dhammah) yang menunjukkan ia kata nama nakirah (tidak tentu).",
+                difficulty: "hard"
+            }
+        ];
 
-<script>
-// Data Dialogs
-const dialogues = [
-    {
-        speaker: 'Ali',
-        text: 'Assalamualaikum Aisyah! Hari ini kita akan belajar tentang <span class="font-bold text-green-600">I\'sm</span> dalam Bahasa Arab. I\'sm bermaksud kata nama. Ia boleh merujuk kepada orang, tempat, benda, atau konsep.',
-        activeCharacter: 'ali',
-        image: 'https://arleta.site/interactivelink/1262/IMG_20250705_124642.png'
-    },
-    {
-        speaker: 'Aisyah',
-        text: 'Betul Ali! Contoh I\'sm termasuk <span class="arabic-text text-green-600">كِتَابٌ</span> (kitab - buku), <span class="arabic-text text-green-600">مَدْرَسَةٌ</span> (madrasah - sekolah), dan <span class="arabic-text text-green-600">وَلَدٌ</span> (walad - anak lelaki).',
-        activeCharacter: 'aisyah',
-        image: 'https://arleta.site/interactivelink/1262/IMG_20250705_124629.png'
-    },
-    {
-        speaker: 'Ali',
-        text: 'I\'sm juga mempunyai jenis (muzakkar/muannath) dan bilangan (mufrad/tasniyah/jamak). Hari ini kita fokus pada <span class="font-bold text-purple-600">Dhamir</span> (kata ganti nama) yang termasuk dalam I\'sm.',
-        activeCharacter: 'ali',
-        image: 'https://arleta.site/interactivelink/1262/IMG_20250705_124642.png'
-    },
-    {
-        speaker: 'Aisyah',
-        text: 'Dhamir ialah kata ganti yang mewakili kata nama. Contohnya:',
-        list: [
-            '<span class="arabic-text text-green-600">هُوَ</span> (huwa - dia lelaki)',
-            '<span class="arabic-text text-green-600">هِيَ</span> (hiya - dia perempuan)',
-            '<span class="arabic-text text-green-600">نَحْنُ</span> (nahnu - kami)'
-        ],
-        activeCharacter: 'aisyah',
-        image: 'https://arleta.site/interactivelink/1262/IMG_20250705_124629.png'
-    },
-    {
-        speaker: 'Ali',
-        text: 'Mari kita lihat senarai penuh Dhamir:',
-        grid: [
-            '<span class="arabic-text font-bold text-green-600">أَنَا</span> (ana - saya)',
-            '<span class="arabic-text font-bold text-green-600">نَحْنُ</span> (nahnu - kami)',
-            '<span class="arabic-text font-bold text-green-600">أَنْتَ</span> (anta - awak lelaki)',
-            '<span class="arabic-text font-bold text-green-600">أَنْتِ</span> (anti - awak perempuan)',
-            '<span class="arabic-text font-bold text-green-600">هُوَ</span> (huwa - dia lelaki)',
-            '<span class="arabic-text font-bold text-green-600">هِيَ</span> (hiya - dia perempuan)',
-            '<span class="arabic-text font-bold text-green-600">هُمَا</span> (huma - mereka berdua)',
-            '<span class="arabic-text font-bold text-green-600">هُمْ</span> (hum - mereka lelaki)',
-            '<span class="arabic-text font-bold text-green-600">هُنَّ</span> (hunna - mereka perempuan)'
-        ],
-        activeCharacter: 'ali',
-        image: 'https://arleta.site/interactivelink/1262/IMG_20250705_124642.png'
-    },
-    {
-        speaker: 'Aisyah',
-        text: 'Sekarang mari uji pengetahuan kamu dengan kuiz ini! Kami akan tunjukkan contoh ayat dan kamu perlu mengenal pasti I\'sm atau Dhamir dalam ayat tersebut.',
-        activeCharacter: 'aisyah',
-        image: 'https://arleta.site/interactivelink/1262/IMG_20250705_124629.png',
-        isLast: true
-    }
-];
+        // Game state
+        let currentDialogue = 0;
+        let currentQuestion = 0;
+        let score = 0;
+        let isTyping = false;
+        let typingInterval;
+        let userAnswers = {};
+        let audioEnabled = false;
 
-// 30 soalan kuiz
-const quizQuestions = [
-    // 10 soalan mudah
-    { id: 1, question: "1. Apakah maksud I'sm dalam Bahasa Arab?", options: [ { text: "A. Kata nama", correct: true }, { text: "B. Kata kerja", correct: false }, { text: "C. Kata sifat", correct: false } ], explanation: "I'sm dalam Bahasa Arab bermaksud kata nama yang merujuk kepada orang, tempat, benda, atau konsep." },
-    { id: 2, question: "2. Manakah berikut yang BUKAN contoh I'sm?", options: [ { text: "A. <span class='arabic-text'>كِتَابٌ</span> (kitab)", correct: false }, { text: "B. <span class='arabic-text'>يَكْتُبُ</span> (yaktubu)", correct: true }, { text: "C. <span class='arabic-text'>مَدْرَسَةٌ</span> (madrasah)", correct: false } ], explanation: "<span class='arabic-text'>يَكْتُبُ</span> (yaktubu) bermaksud 'dia menulis' dan merupakan kata kerja (fi'il), bukan kata nama (I'sm)." },
-    { id: 3, question: "3. Apakah dhamir untuk 'awak perempuan'?", options: [ { text: "A. <span class='arabic-text'>أَنْتَ</span> (anta)", correct: false }, { text: "B. <span class='arabic-text'>أَنْتِ</span> (anti)", correct: true }, { text: "C. <span class='arabic-text'>هِيَ</span> (hiya)", correct: false } ], explanation: "<span class='arabic-text'>أَنْتِ</span> (anti) ialah dhamir untuk 'awak perempuan' manakala <span class='arabic-text'>أَنْتَ</span> (anta) untuk lelaki dan <span class='arabic-text'>هِيَ</span> (hiya) untuk 'dia perempuan'." },
-    { id: 4, question: "4. Dalam ayat: <span class='highlight arabic-text'>هِيَ تَقْرَأُ الكِتَابَ</span> (hiya taqra'u al-kitaba), apakah kata ganti nama (dhamir)?", options: [ { text: "A. <span class='arabic-text'>هِيَ</span> (hiya)", correct: true }, { text: "B. <span class='arabic-text'>تَقْرَأُ</span> (taqra'u)", correct: false }, { text: "C. <span class='arabic-text'>الكِتَابَ</span> (al-kitaba)", correct: false } ], explanation: "<span class='arabic-text'>هِيَ</span> (hiya) ialah dhamir yang bermaksud 'dia perempuan'. <span class='arabic-text'>تَقْرَأُ</span> (taqra'u) ialah kata kerja 'membaca', dan <span class='arabic-text'>الكِتَابَ</span> (al-kitaba) ialah kata nama 'buku'." },
-    { id: 5, question: "5. Dalam ayat: <span class='highlight arabic-text'>نَحْنُ نَلْعَبُ فِي الحَدِيقَةِ</span> (nahnu nal'abu fi al-hadiqati), apakah kata nama (I'sm) dalam ayat ini?", options: [ { text: "A. <span class='arabic-text'>نَحْنُ</span> (nahnu)", correct: false }, { text: "B. <span class='arabic-text'>نَلْعَبُ</span> (nal'abu)", correct: false }, { text: "C. <span class='arabic-text'>الحَدِيقَةِ</span> (al-hadiqati)", correct: true } ], explanation: "<span class='arabic-text'>الحَدِيقَةِ</span> (al-hadiqati) bermaksud 'taman' dan merupakan kata nama (I'sm). <span class='arabic-text'>نَحْنُ</span> (nahnu) ialah kata ganti nama 'kami', dan <span class='arabic-text'>نَلْعَبُ</span> (nal'abu) ialah kata kerja 'kami bermain'." },
-    { id: 6, question: "6. Pilih ayat yang mengandungi dhamir <span class='highlight arabic-text'>هُمْ</span> (hum):", options: [ { text: "A. <span class='arabic-text'>هُمْ يَذْهَبُونَ إِلَى المَدْرَسَةِ</span> (hum yadhhabuna ila al-madrasati)", correct: true }, { text: "B. <span class='arabic-text'>أَنَا أُحِبُّ القِرَاءَةَ</span> (ana uhibbu al-qira'ata)", correct: false }, { text: "C. <span class='arabic-text'>الكِتَابُ عَلَى الطَّاوِلَةِ</span> (al-kitabu ala al-tawilati)", correct: false } ], explanation: "<span class='arabic-text'>هُمْ يَذْهَبُونَ إِلَى المَدْرَسَةِ</span> (hum yadhhabuna ila al-madrasati) bermaksud 'mereka (lelaki) pergi ke sekolah' dan mengandungi dhamir <span class='arabic-text'>هُمْ</span>." },
-    { id: 7, question: "7. Dalam ayat: <span class='highlight arabic-text'>أَيْنَ أَنْتَ يَا أَحْمَدُ؟</span> (ayna anta ya Ahmadu?), apakah jenis kata <span class='highlight arabic-text'>أَحْمَدُ</span> (Ahmadu)?", options: [ { text: "A. Kata ganti nama (dhamir)", correct: false }, { text: "B. Kata nama khas (I'sm alam)", correct: true }, { text: "C. Kata kerja (fi'il)", correct: false } ], explanation: "<span class='arabic-text'>أَحْمَدُ</span> (Ahmadu) ialah nama khas (I'sm alam) untuk orang. <span class='arabic-text'>أَنْتَ</span> (anta) dalam ayat ini ialah kata ganti nama 'awak'." },
-    { id: 8, question: "8. Pilih terjemahan yang betul untuk: <span class='highlight arabic-text'>الكُتُبُ عَلَى الرَّفِّ</span> (al-kutubu ala al-raffi)", options: [ { text: "A. Buku-buku di atas rak", correct: true }, { text: "B. Buku itu di atas meja", correct: false }, { text: "C. Saya membaca buku", correct: false } ], explanation: "<span class='arabic-text'>الكُتُبُ</span> (al-kutubu) bermaksud 'buku-buku' (jamak), <span class='arabic-text'>عَلَى</span> (ala) bermaksud 'di atas', dan <span class='arabic-text'>الرَّفِّ</span> (al-raffi) bermaksud 'rak'. Jadi terjemahan tepat ialah 'Buku-buku di atas rak'." },
-    { id: 9, question: "9. Manakah pasangan yang BETUL antara dhamir dan contoh penggunaannya?", options: [ { text: "A. <span class='arabic-text'>أَنْتِ</span> - <span class='highlight arabic-text'>أَنْتِ طَالِبَةٌ</span> (anti talibatun - Awak pelajar perempuan)", correct: true }, { text: "B. <span class='arabic-text'>هِيَ</span> - <span class='highlight arabic-text'>هِيَ طَالِبٌ</span> (hiya talibun - Dia pelajar lelaki)", correct: false }, { text: "C. <span class='arabic-text'>هُمْ</span> - <span class='highlight arabic-text'>هُمْ طَالِبَةٌ</span> (hum talibatun - Mereka pelajar perempuan)", correct: false } ], explanation: "Pasangan yang betul ialah <span class='arabic-text'>أَنْتِ</span> - <span class='highlight arabic-text'>أَنْتِ طَالِبَةٌ</span>. <span class='arabic-text'>هِيَ</span> sepatutnya dengan muannath (<span class='arabic-text'>هِيَ طَالِبَةٌ</span>) dan <span class='arabic-text'>هُمْ</span> sepatutnya dengan muzakkar (<span class='arabic-text'>هُمْ طَالِبُونَ</span>)." },
-    { id: 10, question: "10. Dalam ayat: <span class='highlight arabic-text'>ذَلِكَ بَيْتٌ كَبِيرٌ</span> (zalika baytun kabirun), apakah jenis kata <span class='highlight arabic-text'>ذَلِكَ</span> (zalika)?", options: [ { text: "A. Kata tunjuk (Ism isharah)", correct: true }, { text: "B. Kata ganti nama (Dhamir)", correct: false }, { text: "C. Kata nama khas (Ism alam)", correct: false } ], explanation: "<span class='arabic-text'>ذَلِكَ</span> (zalika) bermaksud 'itu' (untuk benda jauh) dan merupakan kata tunjuk (Ism isharah), sejenis kata nama khusus." },
+        // DOM elements
+        const frontPage = document.getElementById('front-page');
+        const learningModule = document.getElementById('learning-module');
+        const storySection = document.getElementById('story-section');
+        const quizSection = document.getElementById('quiz-section');
+        const dialogContainer = document.querySelector('.dialog-container');
+        const nextBtn = document.getElementById('next-btn');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const quizQuestionsContainer = document.getElementById('quiz-questions-container');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const finalResult = document.getElementById('final-result');
+        const scoreText = document.getElementById('score-text');
+        const resultDetails = document.getElementById('result-details');
+        const aliCharacter = document.getElementById('ali-character');
+        const aisyahCharacter = document.getElementById('aisyah-character');
+        const bgMusic = document.getElementById('bg-music');
+        const correctSound = document.getElementById('correct-sound');
+        const wrongSound = document.getElementById('wrong-sound');
+        const audioBtn = document.getElementById('audio-btn');
+        const resultIcon = document.getElementById('result-icon');
+        const resultTitle = document.getElementById('result-title');
+        const resultMessage = document.getElementById('result-message');
+        const loadingScreen = document.getElementById('loading-screen');
 
-    // 10 soalan sederhana
-    { id: 11, question: "11. Apakah fungsi utama I'sm dalam ayat?", options: [ { text: "A. Menunjukkan kata kerja", correct: false }, { text: "B. Menunjukkan nama atau identiti", correct: true }, { text: "C. Menunjukkan keadaan", correct: false } ], explanation: "I'sm berfungsi sebagai kata nama yang menunjukkan identiti, orang, tempat atau benda." },
-    { id: 12, question: "12. Dalam ayat: <span class='arabic-text'>هُوَ فَاعِلٌ</span> (huwa fa'ilun), apa fungsi <span class='arabic-text'>هُوَ</span>?", options: [ { text: "A. Kata kerja", correct: false }, { text: "B. Dhamir (kata ganti)", correct: true }, { text: "C. Kata nama", correct: false } ], explanation: "<span class='arabic-text'>هُوَ</span> ialah dhamir yang bermaksud 'dia' (lelaki)." },
-    { id: 13, question: "13. Dalam konteks Dhamir, 'Huwa' merujuk kepada:", options: [ { text: "A. Dia perempuan", correct: false }, { text: "B. Dia lelaki", correct: true }, { text: "C. Mereka berdua", correct: false } ], explanation: "'Huwa' adalah dhamir untuk 'dia' lelaki." },
-    { id: 14, question: "14. Apakah maksud 'Muannath' dalam bahasa Arab?", options: [ { text: "A. Kata nama lelaki", correct: false }, { text: "B. Kata nama perempuan", correct: true }, { text: "C. Kata kerja", correct: false } ], explanation: "Muannath merujuk kepada kata nama perempuan." },
-    { id: 15, question: "15. Dalam ayat: <span class='arabic-text'>هُمَا يَذْهَبَانِ</span> (humā yadhhabāni), apa makna <span class='arabic-text'>هُمَا</span>?", options: [ { text: "A. Mereka berdua (lelaki)", correct: true }, { text: "B. Mereka berdua (perempuan)", correct: false }, { text: "C. Mereka (lelaki)", correct: false } ], explanation: "<span class='arabic-text'>هُمَا</span> bermaksud 'mereka berdua' untuk lelaki atau perempuan." },
-    { id: 16, question: "16. Ayat: <span class='highlight arabic-text'>الْكِتَابُ لِلْمُعَلِّمِ</span> bermaksud:", options: [ { text: "A. Buku itu milik guru", correct: true }, { text: "B. Buku itu di atas meja", correct: false }, { text: "C. Guru membaca buku", correct: false } ], explanation: "الكتاب bermaksud 'buku', dan لِلْمُعَلِّمِ menunjukkan milik/pemilikan." },
-    { id: 17, question: "17. Bagaimana untuk mengenal pasti I'sm dalam ayat?", options: [ { text: "A. Ia biasanya kata kerja", correct: false }, { text: "B. Ia biasanya kata nama atau nama khas", correct: true }, { text: "C. Ia biasanya kata sifat", correct: false } ], explanation: "I'sm adalah kata nama, orang, tempat, atau benda." },
-    { id: 18, question: "18. Dalam ayat: <span class='arabic-text'>مَا أَحْسَنَ الْعَصْفُورَةَ</span> (ma aḥsana al-ʿaṣfūrah), apa maksud <span class='arabic-text'>مَا</span>?", options: [ { text: "A. Kata tanya", correct: false }, { text: "B. Kata nama", correct: false }, { text: "C. Kata penguat atau 'betapa'", correct: true } ], explanation: "<span class='arabic-text'>مَا</span> dalam konteks ini bermaksud 'betapa' atau 'berapa'." },
-    { id: 19, question: "19. Dalam ayat: <span class='highlight arabic-text'>هَذَا الْكِتَابُ</span> (hādhā al-kitāb), apa makna <span class='highlight arabic-text'>هَذَا</span>?", options: [ { text: "A. Kata tunjuk (Ism isharah)", correct: true }, { text: "B. Kata ganti", correct: false }, { text: "C. Kata nama khas", correct: false } ], explanation: "<span class='arabic-text'>هَذَا</span> bermaksud 'ini', menunjuk kepada sesuatu dekat." },
-    { id: 20, question: "20. Dalam ayat: <span class='arabic-text'>الْمَطَرُ غَزِيرٌ</span> (al-mataru ghazīr), apa maksud <span class='arabic-text'>غَزِيرٌ</span>?", options: [ { text: "A. Hujan yang lebat", correct: true }, { text: "B. Hujan yang ringan", correct: false }, { text: "C. Hujan yang kecil", correct: false } ], explanation: "الغَزِيرٌ bermaksud 'lebat' atau 'deras'." },
+        // Initialize the application
+        function initApp() {
+            // Hide loading screen after everything is loaded
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 1500);
+            
+            // Set up event listeners
+            setupEventListeners();
+        }
 
-    // 10 soalan sukar
-    { id: 21, question: "21. Dalam konteks Dhamir, apakah maksud <span class='arabic-text'>هُمَا</span>?", options: [ { text: "A. Mereka berdua", correct: true }, { text: "B. Mereka lelaki", correct: false }, { text: "C. Mereka perempuan", correct: false } ], explanation: "<span class='arabic-text'>هُمَا</span> bermaksud 'mereka berdua' sama ada lelaki atau perempuan." },
-    { id: 22, question: "22. Dalam ayat: <span class='highlight arabic-text'>أَنْتَ تَكْتُبُ الدَّرسَ</span> (anta taktubu ad-darsa), apa fungsi <span class='highlight arabic-text'>أَنْتَ</span>?", options: [ { text: "A. Kata nama", correct: false }, { text: "B. Dhamir (kata ganti)", correct: true }, { text: "C. Kata kerja", correct: false } ], explanation: "<span class='arabic-text'>أَنْتَ</span> adalah dhamir untuk 'kamu' lelaki." },
-    { id: 23, question: "23. Apakah ciri utama kata nama dalam Bahasa Arab?", options: [ { text: "A. Ia selalu diikuti oleh kata kerja", correct: false }, { text: "B. Ia merujuk kepada orang, tempat, benda", correct: true }, { text: "C. Ia selalu berbentuk jamak", correct: false } ], explanation: "Kata nama biasanya merujuk kepada orang, tempat, benda, atau konsep." },
-    { id: 24, question: "24. Dalam ayat: <span class='highlight arabic-text'>البَيْتُ جَمِيلٌ</span> (al-baytu jameel), apa maksud <span class='highlight arabic-text'>جَمِيلٌ</span>?", options: [ { text: "A. Indah", correct: true }, { text: "B. Buruk", correct: false }, { text: "C. Panjang", correct: false } ], explanation: "جَمِيلٌ bermaksud 'cantik' atau 'indah'." },
-    { id: 25, question: "25. Dalam ayat: <span class='highlight arabic-text'>قَالَ الرَّجُلُ الْحَقِيقَةَ</span> (qaala ar-rajulu al-haqiqah), apakah maksud <span class='highlight arabic-text'>الرَّجُلُ</span>?", options: [ { text: "A. Kata nama khas (nama lelaki)", correct: true }, { text: "B. Kata ganti", correct: false }, { text: "C. Kata kerja", correct: false } ], explanation: "<span class='arabic-text'>الرَّجُلُ</span> bermaksud 'lelaki' dan merupakan kata nama khas." },
-    { id: 26, question: "26. Dalam konteks ayat: <span class='highlight arabic-text'>الْمَدْرَسَةُ قَرِيبَةٌ</span> (al-madrasatu qarībah), apa makna <span class='highlight arabic-text'>قَرِيبَةٌ</span>?", options: [ { text: "A. Jauh", correct: false }, { text: "B. Dekat", correct: true }, { text: "C. Panjang", correct: false } ], explanation: "قَرِيبَةٌ bermaksud 'dekat'." },
-    { id: 27, question: "27. Apakah ciri-ciri kata nama muannath dalam bahasa Arab?", options: [ { text: "A. Ia berakhir dengan huruf ta marbuta (ة)", correct: true }, { text: "B. Ia berakhir dengan huruf alif (ا)", correct: false }, { text: "C. Ia berakhir dengan huruf lam (ل)", correct: false } ], explanation: "Kata nama muannath biasanya berakhir dengan huruf 'ta marbuta' (ة)." },
-    { id: 28, question: "28. Dalam ayat: <span class='highlight arabic-text'>الْقَلَمُ لَطِيفٌ</span> (al-qalamu latīf), apa maksud <span class='highlight arabic-text'>لَطِيفٌ</span>?", options: [ { text: "A. Kasar", correct: false }, { text: "B. Halus, lembut", correct: true }, { text: "C. Panjang", correct: false } ], explanation: "لَطِيفٌ bermaksud 'lembut' atau 'halus'." },
-    { id: 29, question: "29. Dalam ayat: <span class='highlight arabic-text'>الْكِتَابُ جَدِيدٌ</span> (al-kitābu jadīd), apa maksud <span class='highlight arabic-text'>جَدِيدٌ</span>?", options: [ { text: "A. Lama", correct: false }, { text: "B. Baru", correct: true }, { text: "C. Panjang", correct: false } ], explanation: "جَدِيدٌ bermaksud 'baru'." },
-    { id: 30, question: "30. Dalam ayat: <span class='highlight arabic-text'>السَّمَاءُ زَرْقَاءُ</span> (as-samā'u zarqā'), apa makna <span class='highlight arabic-text'>زَرْقَاءُ</span>?", options: [ { text: "A. Merah", correct: false }, { text: "B. Biru", correct: true }, { text: "C. Kuning", correct: false } ], explanation: "زَرْقَاءُ bermaksud 'biru'." }
-];
+        // Set up event listeners
+        function setupEventListeners() {
+            nextBtn.addEventListener('click', handleNextButton);
+            nextQuestionBtn.addEventListener('click', handleNextQuestion);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    if (!learningModule.classList.contains('hidden') && !quizSection.classList.contains('hidden')) {
+                        if (!nextQuestionBtn.classList.contains('hidden') && nextQuestionBtn.offsetParent !== null) {
+                            handleNextQuestion();
+                        }
+                    } else if (!learningModule.classList.contains('hidden') && !storySection.classList.contains('hidden')) {
+                        handleNextButton();
+                    }
+                }
+            });
+            
+            // Audio button tooltip
+            audioBtn.addEventListener('mouseenter', () => {
+                const tooltip = audioBtn.querySelector('.tooltiptext');
+                tooltip.style.visibility = 'visible';
+                tooltip.style.opacity = '1';
+            });
+            
+            audioBtn.addEventListener('mouseleave', () => {
+                const tooltip = audioBtn.querySelector('.tooltiptext');
+                tooltip.style.visibility = 'hidden';
+                tooltip.style.opacity = '0';
+            });
+        }
 
-// Game state
-let currentDialogue = 0;
-let currentQuestion = 0;
-let score = 0;
-let totalQuestions = quizQuestions.length;
-let answeredQuestions = 0;
-let isTyping = false;
-let typingInterval;
-let userAnswers = {};
-let audioEnabled = false;
+        // Go to home page function
+        function goToHome() {
+            // Reset game state
+            currentDialogue = 0;
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = {};
+            
+            // Reset UI
+            learningModule.classList.add('hidden');
+            quizSection.classList.add('hidden');
+            finalResult.classList.add('hidden');
+            storySection.classList.remove('hidden');
+            frontPage.classList.remove('hidden');
+            
+            // Reset all questions
+            quizQuestions.forEach(q => {
+                const questionEl = document.getElementById(`question-${q.id}`);
+                if (questionEl) {
+                    questionEl.classList.remove('active');
 
-// DOM elements
-const frontPage = document.getElementById('front-page');
-const learningModule = document.getElementById('learning-module');
-const storySection = document.getElementById('story-section');
-const quizSection = document.getElementById('quiz-section');
-const dialogContainer = document.querySelector('.dialog-container');
-const nextBtn = document.getElementById('next-btn');
-const nextQuestionBtn = document.getElementById('next-question-btn');
-const quizQuestionsContainer = document.getElementById('quiz-questions-container');
-const progressBar = document.getElementById('progress-bar');
-const progressText = document.getElementById('progress-text');
-const finalResult = document.getElementById('final-result');
-const scoreText = document.getElementById('score-text');
-const resultDetails = document.getElementById('result-details');
-const aliCharacter = document.getElementById('ali-character');
-const aisyahCharacter = document.getElementById('aisyah-character');
-const bgMusic = document.getElementById('bg-music');
-const correctSound = document.getElementById('correct-sound');
-const wrongSound = document.getElementById('wrong-sound');
-const audioBtn = document.getElementById('audio-btn');
-const resultIcon = document.getElementById('result-icon');
-const resultTitle = document.getElementById('result-title');
-const resultMessage = document.getElementById('result-message');
-const loadingScreen = document.getElementById('loading-screen');
+                    const buttons = questionEl.querySelectorAll('.answer-btn');
+                    buttons.forEach(btn => {
+                        btn.disabled = false;
+                        btn.classList.remove('correct', 'incorrect');
+                        btn.classList.add('hover:bg-gray-100');
+                    });
 
-// Initialize app
-function initApp() {
-    setTimeout(() => {
-        loadingScreen.style.opacity = '0';
-        setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
-    }, 1500);
-    setupEventListeners();
-    createQuizQuestions();
-}
+                    const resultEl = document.getElementById(`result-${q.id}`);
+                    if (resultEl) {
+                        resultEl.classList.remove('show');
+                        resultEl.innerHTML = '';
+                    }
+                }
+            });
 
-// Setup event listeners
-function setupEventListeners() {
-    document.getElementById('next-btn').addEventListener('click', handleNextButton);
-    document.getElementById('next-question-btn').addEventListener('click', handleNextQuestion);
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            if (!learningModule.classList.contains('hidden') && !quizSection.classList.contains('hidden')) {
-                if (!nextQuestionBtn.classList.contains('hidden')) handleNextQuestion();
-                else handleNextButton();
+            // Reset progress
+            progressBar.style.width = '0%';
+            progressText.textContent = '0/30';
+            nextBtn.textContent = 'Seterusnya';
+            nextBtn.classList.remove('pulse');
+            nextQuestionBtn.classList.add('hidden');
+            
+            // Stop background music
+            if (audioEnabled) {
+                bgMusic.pause();
+                audioEnabled = false;
+                audioBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                    </svg>
+                `;
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Start game function - switches from front page to learning module
+        function startGame() {
+            frontPage.classList.add('hidden');
+            learningModule.classList.remove('hidden');
+            initStory();
+        }
+
+        // Initialize the story
+        function initStory() {
+            showDialogue(0);
+            createQuizQuestions();
+            
+            // Try to autoplay music (may not work due to browser restrictions)
+            const playAudio = () => {
+                bgMusic.volume = 0.3;
+                bgMusic.play().catch(e => console.log("Autoplay prevented:", e));
+            };
+            
+            // Try to play after user interaction
+            document.addEventListener('click', () => {
+                playAudio();
+                document.removeEventListener('click', playAudio);
+            }, { once: true });
+        }
+
+        // Show dialogue with typing effect
+        function showDialogue(index) {
+            if (index >= dialogues.length) return;
+
+            const dialogue = dialogues[index];
+            const isAli = dialogue.activeCharacter === 'ali';
+
+            // Highlight active character
+            aliCharacter.classList.toggle('active', isAli);
+            aisyahCharacter.classList.toggle('active', !isAli);
+
+            // Create dialogue element
+            const dialogEl = document.createElement('div');
+            dialogEl.className = 'dialog';
+            dialogEl.innerHTML = `
+                <img src="${dialogue.image}" alt="${dialogue.speaker}" />
+                <div class="dialog-content">
+                    <p class="text-gray-800">
+                        <span class="font-bold ${isAli ? 'text-blue-600' : 'text-pink-600'}">${dialogue.speaker}:</span> 
+                        <span id="dialogue-text"></span>
+                    </p>
+                    ${dialogue.list ? `<ul class="list-disc pl-6 mt-2 space-y-1">${dialogue.list.map(item => `<li class="arabic-text">${item}</li>`).join('')}</ul>` : ''}
+                    ${dialogue.grid ? `<div class="grid grid-cols-2 gap-3 mt-3">${dialogue.grid.map(item => `<div class="bg-white p-3 rounded-lg border border-gray-200 shadow-sm arabic-text text-center">${item}</div>`).join('')}</div>` : ''}
+                </div>
+            `;
+
+            // Clear container and add new dialogue
+            dialogContainer.innerHTML = '';
+            dialogContainer.appendChild(dialogEl);
+
+            // Start typing effect
+            const textEl = dialogEl.querySelector('#dialogue-text');
+            const fullText = dialogue.text;
+            let charIndex = 0;
+
+            isTyping = true;
+            textEl.classList.add('typing');
+
+            typingInterval = setInterval(() => {
+                if (charIndex < fullText.length) {
+                    textEl.innerHTML = fullText.substring(0, charIndex + 1);
+                    charIndex++;
+                    // Scroll to bottom
+                    dialogContainer.scrollTop = dialogContainer.scrollHeight;
+                } else {
+                    clearInterval(typingInterval);
+                    textEl.classList.remove('typing');
+                    isTyping = false;
+
+                    // Update next button if last dialogue
+                    if (dialogue.isLast) {
+                        nextBtn.textContent = 'Mulakan Kuiz';
+                        nextBtn.classList.add('pulse');
+                    }
+                }
+            }, 20);
+
+            // Show the dialogue
+            setTimeout(() => {
+                dialogEl.classList.add('active');
+            }, 100);
+
+            currentDialogue = index;
+        }
+
+        // Create quiz questions
+        function createQuizQuestions() {
+            quizQuestions.forEach((question, index) => {
+                const questionEl = document.createElement('div');
+                questionEl.className = `question-container bg-white rounded-lg shadow-lg p-6 ${index === 0 ? 'active' : ''}`;
+                questionEl.id = `question-${question.id}`;
+                
+                // Add difficulty class based on question difficulty
+                const difficultyClass = `difficulty-${question.difficulty}`;
+                
+                questionEl.innerHTML = `
+                    <div class="${difficultyClass} p-4 -m-4 mb-4 rounded-t-lg">
+                        <h3 class="font-bold text-lg mb-4 text-gray-800">${question.question}</h3>
+                    </div>
+                    <div class="space-y-3">
+                        ${question.options.map((option, optIndex) => `
+                            <button class="quiz-button answer-btn w-full text-left bg-gray-50 hover:bg-gray-100 rounded-lg p-4 border border-gray-200 transition-all"
+                                onclick="selectAnswer(${question.id}, ${optIndex}, ${option.correct})"
+                                data-question="${question.id}" 
+                                data-option="${optIndex}">
+                                <span class="flex items-center">
+                                    <span class="mr-3 font-semibold">${option.text.split('.')[0]}.</span>
+                                    <span>${option.text.split('.').slice(1).join('.')}</span>
+                                </span>
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div id="result-${question.id}" class="quiz-result mt-4"></div>
+                `;
+                quizQuestionsContainer.appendChild(questionEl);
+            });
+        }
+
+        // Next button handler
+        function handleNextButton() {
+            if (isTyping) {
+                // Finish typing immediately
+                clearInterval(typingInterval);
+                const textEl = document.querySelector('#dialogue-text');
+                textEl.innerHTML = dialogues[currentDialogue].text;
+                textEl.classList.remove('typing');
+                isTyping = false;
+
+                if (dialogues[currentDialogue]?.isLast) {
+                    nextBtn.textContent = 'Mulakan Kuiz';
+                    nextBtn.classList.add('pulse');
+                }
+                return;
+            }
+
+            if (dialogues[currentDialogue]?.isLast) {
+                // Start quiz
+                storySection.classList.add('hidden');
+                quizSection.classList.remove('hidden');
+                updateProgress();
+                
+                // Scroll to first question
+                document.getElementById(`question-${quizQuestions[0].id}`).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                return;
+            }
+
+            showDialogue(currentDialogue + 1);
+        }
+
+        // Next question button handler
+        function handleNextQuestion() {
+            if (currentQuestion < quizQuestions.length - 1) {
+                document.getElementById(`question-${quizQuestions[currentQuestion].id}`).classList.remove('active');
+                currentQuestion++;
+                document.getElementById(`question-${quizQuestions[currentQuestion].id}`).classList.add('active');
+                nextQuestionBtn.classList.add('hidden');
+                updateProgress();
+
+                // Scroll to question
+                document.getElementById(`question-${quizQuestions[currentQuestion].id}`).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            } else {
+                showFinalResult();
             }
         }
-    });
-    document.querySelectorAll('.tooltip').forEach(tip => {
-        tip.addEventListener('mouseenter', ()=> {
-            tip.querySelector('.tooltiptext').style.visibility='visible'; tip.querySelector('.tooltiptext').style.opacity='1';
-        });
-        tip.addEventListener('mouseleave', ()=> {
-            tip.querySelector('.tooltiptext').style.visibility='hidden'; tip.querySelector('.tooltiptext').style.opacity='0';
-        });
-    });
-}
 
-// Mulai permainan
-function startGame() {
-    frontPage.classList.add('hidden');
-    learningModule.classList.remove('hidden');
-    initStory();
-}
+        // Select answer handler
+        function selectAnswer(questionId, optionIndex, isCorrect) {
+            const question = quizQuestions.find(q => q.id === questionId);
+            const resultEl = document.getElementById(`result-${questionId}`);
+            const selectedButton = document.querySelector(`button[data-question="${questionId}"][data-option="${optionIndex}"]`);
 
-// Kembali ke muka depan
-function goToHome() {
-    // Reset semua
-    currentDialogue=0; currentQuestion=0; score=0; answeredQuestions=0; userAnswers={};
-    // Reset UI
-    learningModule.classList.add('hidden');
-    quizSection.classList.add('hidden');
-    finalResult.classList.add('hidden');
-    storySection.classList.remove('hidden');
-    frontPage.classList.remove('hidden');
-    // Reset semua soalan
-    document.querySelectorAll('.question-container').forEach(q => {
-        q.classList.remove('active');
-        q.querySelectorAll('.answer-btn').forEach(b => { b.disabled=false; b.classList.remove('correct','incorrect'); b.classList.add('hover:bg-gray-100'); });
-        document.getElementById('result-' + q.dataset.id)?.classList.remove('show');
-        document.getElementById('result-' + q.dataset.id)?.innerHTML='';
-    });
-    // Reset progress
-    progressBar.style.width='0%'; progressText.textContent='0/30';
-    nextBtn.textContent='Seterusnya'; nextBtn.classList.remove('pulse');
-    nextQuestionBtn.classList.add('hidden');
-    // Matikan audio
-    if(audioEnabled){ toggleAudio(); }
-    window.scrollTo({ top:0, behavior:'smooth' });
-}
+            // Play sound effect
+            if (audioEnabled) {
+                if (isCorrect) {
+                    correctSound.currentTime = 0;
+                    correctSound.play();
+                } else {
+                    wrongSound.currentTime = 0;
+                    wrongSound.play();
+                }
+            }
 
-// Inisiasi cerita
-function initStory() {
-    showDialogue(0);
-    // Autoplay muzik (jika dibenarkan)
-    const playAudio=()=>{ bgMusic.volume=0.3; bgMusic.play().catch(()=>{}); }
-    document.addEventListener('click', ()=>{ playAudio(); document.removeEventListener('click', arguments.callee); }, {once:true});
-}
+            // Record user answer
+            userAnswers[questionId] = {
+                selectedOption: optionIndex,
+                isCorrect: isCorrect,
+                question: question.question,
+                explanation: question.explanation,
+                difficulty: question.difficulty
+            };
 
-// Paparkan dialog
-function showDialogue(index) {
-    if(index>=dialogues.length) return;
-    const dlg=dialogues[index];
-    const isAli=dlg.activeCharacter==='ali';
+            // Disable all buttons for this question
+            const buttons = document.querySelectorAll(`#question-${questionId} .answer-btn`);
+            buttons.forEach(button => {
+                button.disabled = true;
+                button.classList.remove('hover:bg-gray-100');
+            });
 
-    // Highlight karakter
-    aliCharacter.classList.toggle('active', isAli);
-    aisyahCharacter.classList.toggle('active', !isAli);
+            // Highlight selected answer
+            if (isCorrect) {
+                selectedButton.classList.add('correct');
+            } else {
+                selectedButton.classList.add('incorrect');
+                // Also highlight the correct answer
+                const correctIndex = question.options.findIndex(opt => opt.correct);
+                document.querySelector(`button[data-question="${questionId}"][data-option="${correctIndex}"]`).classList.add('correct');
+            }
 
-    // Buat element dialog
-    const dlgEl=document.createElement('div');
-    dlgEl.className='dialog';
-    dlgEl.innerHTML=`
-        <img src="${dlg.image}" />
-        <div class="dialog-content">
-            <p class="text-gray-800"><span class="font-bold ${isAli?'text-blue-600':'text-pink-600'}">${dlg.speaker}:</span> <span id="dialogue-text"></span></p>
-            ${dlg.list ? `<ul class="list-disc pl-6 mt-2 space-y-1">${dlg.list.map(item=>`<li class="arabic-text">${item}</li>`).join('')}</ul>` : ''}
-            ${dlg.grid ? `<div class="grid grid-cols-2 gap-3 mt-3">${dlg.grid.map(item=>`<div class="bg-white p-3 rounded-lg border border-gray-200 shadow-sm arabic-text text-center">${item}</div>`).join('')}</div>` : ''}
-        </div>
-    `;
-    document.querySelector('.dialog-container').innerHTML='';
-    document.querySelector('.dialog-container').appendChild(dlgEl);
-    // Typing effect
-    const txtEl=document.getElementById('dialogue-text');
-    const fullText=dlg.text;
-    let idx=0;
-    isTyping=true; txtEl.classList.add('typing');
-    clearInterval(typingInterval);
-    typingInterval=setInterval(()=>{
-        if(idx<fullText.length){ txtEl.innerHTML+=fullText.charAt(idx); idx++; document.querySelector('.dialog-container').scrollTop=document.querySelector('.dialog-container').scrollHeight; }
-        else{ clearInterval(typingInterval); txtEl.classList.remove('typing'); isTyping=false; if(dlg.isLast){ nextBtn.textContent='Mulakan Kuiz'; nextBtn.classList.add('pulse'); } }
-    },20);
-    setTimeout(()=>{ document.querySelector('.dialog').classList.add('active'); },100);
-    currentDialogue=index;
-}
+            // Show result
+            resultEl.innerHTML = `
+                <div class="${isCorrect ? 'bg-green-50 text-green-800 border-green-200' : 'bg-red-50 text-red-800 border-red-200'} p-4 rounded-lg border">
+                    ${isCorrect ? 
+                        '<div class="flex items-center font-bold"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>Betul!</div>' : 
+                        '<div class="flex items-center font-bold"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>Kurang tepat.</div>'} 
+                    <div class="mt-1">${question.explanation}</div>
+                </div>
+            `;
+            resultEl.classList.add('show');
 
-// Buat soalan kuiz
-function createQuizQuestions() {
-    quizQuestions.forEach((q,i)=>{
-        const qEl=document.createElement('div');
-        qEl.className=`question-container ${i===0?'active':''}`;
-        qEl.dataset.id=q.id;
-        // buat soalan
-        qEl.innerHTML=`
-            <h3 class="font-bold text-lg mb-4 text-gray-800">${q.question}</h3>
-            <div class="space-y-3">
-                ${q.options.map((opt,idx)=>`<button class="quiz-button answer-btn w-full bg-gray-50 hover:bg-gray-100 rounded-lg p-4 border border-gray-200 transition-all" onclick="selectAnswer(${q.id},${idx},${opt.correct})" data-question="${q.id}" data-option="${idx}">${opt.text}</button>`).join('')}
-            </div>
-            <div id="result-${q.id}" class="quiz-result mt-4"></div>
-        `;
-        document.getElementById('quiz-questions-container').appendChild(qEl);
-    });
-}
+            // Update score
+            if (isCorrect) {
+                score++;
+            }
 
-// Pilih jawapan
-function selectAnswer(qid, optIdx, isCorrect) {
-    const q=quizQuestions.find(q=>q.id===qid);
-    const resEl=document.getElementById('result-'+qid);
-    const btns=document.querySelectorAll(`button[data-question="${qid}"]`);
-    // Matikan bunyi
-    if(audioEnabled){ isCorrect? correctSound.currentTime=0; correctSound.play() : wrongSound.currentTime=0; wrongSound.play(); }
-    // Simpan jawapan
-    userAnswers[qid]={ selectedIndex:optIdx, isCorrect:isCorrect };
-    answeredQuestions++;
-    // Tutup semua butang
-    btns.forEach(b=>{ b.disabled=true; b.classList.remove('hover:bg-gray-100'); });
-    // Highlight jawapan
-    if(isCorrect){ document.querySelector(`button[data-question="${qid}"][data-option="${optIdx}"]`).classList.add('correct'); }
-    else{
-        document.querySelector(`button[data-question="${qid}"][data-option="${optIdx}"]`).classList.add('incorrect');
-        // Highlight jawapan betul
-        const correctIdx=q.options.findIndex(opt=>opt.correct);
-        document.querySelector(`button[data-question="${qid}"][data-option="${correctIdx}"]`).classList.add('correct');
-    }
-    // Tampilkan maklum balas
-    resEl.innerHTML=`
-        <div class="${isCorrect?'bg-green-50 text-green-800 border-green-200':'bg-red-50 text-red-800 border-red-200'} p-4 rounded-lg border">
-            ${isCorrect?'<div class="flex items-center font-bold"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>Betul!</div>' : '<div class="flex items-center font-bold"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>Kurang tepat.</div>'}
-            <div class="mt-1">${q.explanation}</div>
-        </div>`;
-    resEl.classList.add('show');
-    // Kira markah
-    if(isCorrect){ score++; }
-    // Tunjukkan butang seterusnya
-    document.getElementById('next-question-btn').classList.remove('hidden');
-    updateProgress();
-}
+            // Show next question button
+            nextQuestionBtn.classList.remove('hidden');
 
-// Kemaskini progres
-function updateProgress() {
-    const progress=(answeredQuestions/totalQuestions)*100;
-    progressBar.style.width=`${progress}%`;
-    progressText.textContent=`${answeredQuestions}/${totalQuestions}`;
-}
+            // Update progress
+            updateProgress();
+        }
 
-// Paparkan keputusan akhir
-function showFinal() {
-    quizSection.classList.add('hidden');
-    finalResult.classList.remove('hidden');
-    const perc=Math.round((score/totalQuestions)*100);
-    scoreText.innerHTML=`${score}<span class="text-2xl">/${totalQuestions}</span>`;
-    // Tentukan icon dan mesej
-    if(perc>=70){
-        resultIcon.innerHTML=`<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />`;
-        resultIcon.setAttribute('stroke','currentColor');
-        resultIcon.setAttribute('fill','none');
-        resultIcon.setAttribute('viewBox','0 0 24 24');
-        resultIcon.className='h-16 w-16 text-yellow-500';
-        resultTitle.textContent='Tahniah!';
-        resultMessage.textContent='Anda telah berjaya menamatkan kuiz ini dengan cemerlang ('+perc+'%)!';
-        createConfetti();
-    }else if(perc>=50){
-        resultIcon.innerHTML=`<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />`;
-        resultIcon.className='h-16 w-16 text-blue-500';
-        resultTitle.textContent='Baik!';
-        resultMessage.textContent='Anda telah menamatkan kuiz ini dengan baik ('+perc+'%). Teruskan berusaha!';
-    }else{
-        resultIcon.innerHTML=`<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />`;
-        resultIcon.className='h-16 w-16 text-red-500';
-        resultTitle.textContent='Teruskan Berusaha!';
-        resultMessage.textContent='Anda telah menamatkan kuiz ini dengan skor '+perc+'%. Jangan putus asa, teruskan mencuba!';
-    }
-    // Perincian jawapan
-    resultDetails.innerHTML=quizQuestions.map(q=>{
-        const ans=userAnswers[q.id];
-        const correctIdx=q.options.findIndex(opt=>opt.correct);
-        const isCorrect=ans?.isCorrect;
-        const selectedIdx=ans?.selectedIndex;
-        const selectedText=q.options[selectedIdx]?.text || 'Tiada jawapan';
-        const correctText=q.options[correctIdx]?.text;
-        return `
-        <div class="${isCorrect?'bg-green-50':'bg-red-50'} p-3 rounded-lg mb-2">
-            <div class="font-semibold ${isCorrect?'text-green-700':'text-red-700'}">Soalan ${q.id}: ${isCorrect?'Betul':'Salah'}</div>
-            ${!isCorrect?`<div class="text-sm mt-1">Jawapan anda: ${selectedText}</div>`:''}
-            <div class="text-sm mt-1">${q.explanation}</div>
-        </div>`;
-    }).join('');
-    finalResult.scrollIntoView({behavior:'smooth'});
-}
+        // Update progress bar and text
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            progressText.textContent = `${currentQuestion + 1}/${quizQuestions.length}`;
+        }
 
-// Buat confetti
-function createConfetti() {
-    const colors=['#4f46e5','#10b981','#f59e0b','#ef4444','#8b5cf6'];
-    for(let i=0;i<100;i++){
-        const confetti=document.createElement('div');
-        confetti.className='confetti';
-        confetti.style.left=Math.random()*100+'vw';
-        confetti.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
-        confetti.style.width=5+Math.random()*5+'px';
-        confetti.style.height=confetti.style.width;
-        confetti.style.animationDuration=3+Math.random()*2+'s';
-        confetti.style.animationDelay=Math.random()*2+'s';
-        document.body.appendChild(confetti);
-        setTimeout(()=>{ confetti.remove(); },5000);
-    }
-}
+        // Show final result
+        function showFinalResult() {
+            quizSection.classList.add('hidden');
+            finalResult.classList.remove('hidden');
 
-// Toggle audio
-function toggleAudio() {
-    audioEnabled=!audioEnabled;
-    if(audioEnabled){
-        bgMusic.play();
-        document.getElementById('audio-btn').innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>`;
-    }else{
-        bgMusic.pause();
-        document.getElementById('audio-btn').innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>`;
-    }
-}
+            const percentage = Math.round((score / quizQuestions.length) * 100);
+            scoreText.innerHTML = `${score}<span class="text-2xl">/${quizQuestions.length}</span>`;
+            
+            // Calculate scores by difficulty
+            const easyQuestions = quizQuestions.filter(q => q.difficulty === 'easy');
+            const mediumQuestions = quizQuestions.filter(q => q.difficulty === 'medium');
+            const hardQuestions = quizQuestions.filter(q => q.difficulty === 'hard');
+            
+            const easyScore = easyQuestions.filter(q => userAnswers[q.id]?.isCorrect).length;
+            const mediumScore = mediumQuestions.filter(q => userAnswers[q.id]?.isCorrect).length;
+            const hardScore = hardQuestions.filter(q => userAnswers[q.id]?.isCorrect).length;
+            
+            // Update result based on score
+            if (percentage >= 70) {
+                resultIcon.className = 'h-16 w-16 text-yellow-500';
+                resultIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                `;
+                resultTitle.textContent = 'Tahniah!';
+                resultMessage.textContent = `Anda telah berjaya menamatkan kuiz ini dengan cemerlang (${percentage}%)!`;
+                
+                // Create confetti if score > 15 (half of questions)
+                if (score > 15) {
+                    createConfetti();
+                }
+            } else if (percentage >= 50) {
+                resultIcon.className = 'h-16 w-16 text-blue-500';
+                resultIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                `;
+                resultTitle.textContent = 'Baik!';
+                resultMessage.textContent = `Anda telah menamatkan kuiz ini dengan baik (${percentage}%). Teruskan berusaha!`;
+            } else {
+                resultIcon.className = 'h-16 w-16 text-red-500';
+                resultIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                `;
+                resultTitle.textContent = 'Teruskan Berusaha!';
+                resultMessage.textContent = `Anda telah menamatkan kuiz ini dengan skor ${percentage}%. Jangan putus asa, teruskan mencuba!`;
+            }
 
-// Kongsi keputusan
-function shareResult() {
-    const perc=Math.round((score/totalQuestions)*100);
-    const text='Saya telah berjaya menjawab '+score+' daripada '+totalQuestions+' soalan ('+perc+'%) dalam Kuiz Bahasa Arab: I\'sm!';
-    if(navigator.share){ navigator.share({title:'Keputusan Kuiz', text, url:window.location.href}).catch(()=>{ copyToClipboard(text); }); }
-    else{ copyToClipboard(text); }
-}
-function copyToClipboard(text){ navigator.clipboard.writeText(text).then(()=>{ alert('Keputusan telah disalin ke clipboard!'); }); }
+            // Show result details with difficulty breakdown
+            resultDetails.innerHTML = `
+                <div class="mb-6">
+                    <p class="font-semibold mb-3 text-gray-700">Prestasi Mengikut Tahap Kesukaran:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <div class="font-medium text-green-700 flex items-center">
+                                <span>Mudah</span>
+                                <span class="difficulty-label easy ml-2">${easyScore}/${easyQuestions.length}</span>
+                            </div>
+                            <div class="text-sm mt-1">${Math.round((easyScore / easyQuestions.length) * 100)}% betul</div>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <div class="font-medium text-yellow-700 flex items-center">
+                                <span>Sederhana</span>
+                                <span class="difficulty-label medium ml-2">${mediumScore}/${mediumQuestions.length}</span>
+                            </div>
+                            <div class="text-sm mt-1">${Math.round((mediumScore / mediumQuestions.length) * 100}% betul</div>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <div class="font-medium text-red-700 flex items-center">
+                                <span>Sukar</span>
+                                <span class="difficulty-label hard ml-2">${hardScore}/${hardQuestions.length}</span>
+                            </div>
+                            <div class="text-sm mt-1">${Math.round((hardScore / hardQuestions.length) * 100}% betul</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="font-semibold mb-3 text-gray-700">Ringkasan Jawapan:</p>
+                <div class="space-y-3">
+                    ${quizQuestions.map(q => {
+                        const userAnswer = userAnswers[q.id];
+                        const isCorrect = userAnswer?.isCorrect || false;
+                        const selectedOption = q.options[userAnswer?.selectedOption]?.text || 'Tiada jawapan';
+                        const correctOption = q.options.find(opt => opt.correct)?.text;
 
-// Reset kuiz
-function resetQuiz() {
-    currentQuestion=0; score=0; answeredQuestions=0; userAnswers={};
-    document.querySelectorAll('.question-container').forEach(q=>{ q.classList.remove('active'); });
-    document.querySelectorAll('.answer-btn').forEach(b=>{ b.disabled=false; b.classList.remove('correct','incorrect'); b.classList.add('hover:bg-gray-100'); });
-    document.querySelectorAll('.quiz-result').forEach(r=>{ r.classList.remove('show'); r.innerHTML=''; });
-    // Paparkan soalan pertama
-    document.querySelector(`.question-container[data-id="${quizQuestions[0].id}"]`).classList.add('active');
-    // Reset progres
-    progressBar.style.width='0%'; progressText.textContent='0/30';
-    nextQuestionBtn.classList.add('hidden');
-    nextBtn.classList.remove('pulse');
-    nextBtn.textContent='Seterusnya';
-    // Paparkan dialog lagi
-    showDialogue(0);
-    // Semak muzik
-    if(audioEnabled){ toggleAudio(); }
-    window.scrollTo({ top:0, behavior:'smooth' });
-}
+                        return `
+                            <div class="${isCorrect ? 'bg-green-50' : 'bg-red-50'} p-3 rounded-lg">
+                                <div class="font-medium ${isCorrect ? 'text-green-700' : 'text-red-700'} flex justify-between">
+                                    <span>Soalan ${q.id}: ${isCorrect ? 'Betul' : 'Salah'}</span>
+                                    <span class="difficulty-label ${q.difficulty}">${q.difficulty === 'easy' ? 'Mudah' : q.difficulty === 'medium' ? 'Sederhana' : 'Sukar'}</span>
+                                </div>
+                                ${!isCorrect ? `
+                                    <div class="text-sm mt-1">Jawapan anda: ${selectedOption.split('.')[0]}.${selectedOption.split('.').slice(1).join('.')}</div>
+                                    <div class="text-sm mt-1">Jawapan betul: ${correctOption.split('.')[0]}.${correctOption.split('.').slice(1).join('.')}</div>
+                                ` : ''}
+                                <div class="text-sm mt-1">${q.explanation}</div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
 
-// Sediakan semua
-document.addEventListener('DOMContentLoaded', ()=>{ initApp(); });
-</script>
+            // Scroll to result
+            finalResult.scrollIntoView({ behavior: 'smooth' });
+        }
 
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#4f46e5', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+            
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        // Toggle audio
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            
+            if (audioEnabled) {
+                bgMusic.play();
+                audioBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                    </svg>
+                `;
+            } else {
+                bgMusic.pause();
+                audioBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                    </svg>
+                `;
+            }
+        }
+
+        // Share result
+        function shareResult() {
+            const percentage = Math.round((score / quizQuestions.length) * 100);
+            const shareText = `Saya telah berjaya menjawab ${score} daripada ${quizQuestions.length} soalan (${percentage}%) dalam Kuiz Bahasa Arab: I'sm!`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Keputusan Kuiz Bahasa Arab',
+                    text: shareText,
+                    url: window.location.href
+                }).catch(err => {
+                    console.log('Error sharing:', err);
+                    copyToClipboard(shareText);
+                });
+            } else {
+                copyToClipboard(shareText);
+            }
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Keputusan telah disalin ke clipboard!\n' + text);
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        }
+
+        // Reset quiz
+        function resetQuiz() {
+            // Reset game state
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = {};
+
+            // Reset UI
+            finalResult.classList.add('hidden');
+            quizSection.classList.remove('hidden');
+            storySection.classList.remove('hidden');
+
+            // Reset all questions
+            quizQuestions.forEach(q => {
+                const questionEl = document.getElementById(`question-${q.id}`);
+                questionEl.classList.remove('active');
+
+                const buttons = questionEl.querySelectorAll('.answer-btn');
+                buttons.forEach(btn => {
+                    btn.disabled = false;
+                    btn.classList.remove('correct', 'incorrect');
+                    btn.classList.add('hover:bg-gray-100');
+                });
+
+                const resultEl = document.getElementById(`result-${q.id}`);
+                resultEl.classList.remove('show');
+                resultEl.innerHTML = '';
+            });
+
+            // Show first question and first dialogue
+            document.getElementById(`question-${quizQuestions[0].id}`).classList.add('active');
+            nextQuestionBtn.classList.add('hidden');
+            nextBtn.classList.remove('pulse');
+            nextBtn.textContent = 'Seterusnya';
+            showDialogue(0);
+            updateProgress();
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initApp);
+
+        // Make functions available globally for HTML onclick
+        window.selectAnswer = selectAnswer;
+        window.resetQuiz = resetQuiz;
+        window.toggleAudio = toggleAudio;
+        window.shareResult = shareResult;
+        window.startGame = startGame;
+        window.goToHome = goToHome;
+    </script>
 </body>
 </html>

@@ -647,13 +647,6 @@
             line-height: 1.6;
         }
 
-        .completion-message {
-            font-size: 1.2em;
-            color: #3c2005;
-            margin: 20px 0;
-            font-style: italic;
-        }
-
         .celebration {
             font-size: 1.5em;
             color: #4e8975;
@@ -1285,12 +1278,10 @@
         </div>
         
         <div class="result-container" id="result-container">
-            <div class="result-title">Keputusan Kuiz Anda</div>
             <div class="result-score" id="result-score"></div>
             <div class="result-message">
                 <div class="celebration" id="celebration"></div>
                 <div class="encouragement" id="encouragement"></div>
-                <div class="completion-message">Anda telah selesai menjawab semua soalan yang telah diberikan</div>
             </div>
             <button class="restart-btn" onmouseover="playHoverSound()" onclick="restartQuiz()">Ambil Kuiz Lagi</button>
         </div>
@@ -1876,6 +1867,8 @@
             const nextBtn = document.getElementById('next-btn');
             const feedbackContainer = document.getElementById('feedback-container');
             
+            // Update progress
+            quizProgress.textContent = `Soalan ${currentQuestion + 1} daripada ${questions.length}`;
             
             // Load question
             const currentQ = questions[currentQuestion];

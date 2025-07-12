@@ -364,6 +364,21 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
+        .home-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
         .back-to-prev-button {
             padding: 12px 25px;
             font-size: 1.2em;
@@ -382,13 +397,13 @@
             margin-top: 20px;
         }
 
-        .back-button:hover, .back-to-prev-button:hover {
+        .back-button:hover, .back-to-prev-button:hover, .home-button:hover {
             transform: translateY(-3px);
             background: linear-gradient(45deg, #e67e22, #d35400);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
         }
 
-        .back-button:active, .back-to-prev-button:active {
+        .back-button:active, .back-to-prev-button:active, .home-button:active {
             transform: translateY(0);
         }
 
@@ -675,7 +690,21 @@
             margin-top: 20px;
         }
 
-        .restart-btn:hover {
+        .topic-btn {
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+
+        .restart-btn:hover, .topic-btn:hover {
             transform: translateY(-3px);
             background: linear-gradient(45deg, #e67e22, #d35400);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
@@ -801,7 +830,7 @@
                 font-size: 1.5em;
             }
 
-            .back-button, .back-to-prev-button {
+            .back-button, .back-to-prev-button, .home-button {
                 font-size: 1em;
                 padding: 10px 20px;
             }
@@ -869,6 +898,7 @@
 
     <div id="ism-page">
         <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
         <h1>Tahap 1: Ism</h1>
         <div class="dialog-container">
             <div class="character-container">
@@ -897,6 +927,7 @@
 
     <div id="bilangan-page">
         <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
         <h1>Bilangan (العدد)</h1>
         <div class="subtopic-content">
             <h2>Pengenalan kepada Bilangan</h2>
@@ -930,6 +961,7 @@
 
     <div id="jantina-page">
         <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
         <h1>Jantina (الجنس)</h1>
         <div class="subtopic-content">
             <h2>Pengenalan kepada Jantina</h2>
@@ -962,6 +994,7 @@
 
     <div id="spesifik-umum-page">
         <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
         <h1>Spesifik atau Umum (المعرفة أو النكرة)</h1>
         <div class="subtopic-content">
             <h2>Pengenalan kepada Spesifik atau Umum</h2>
@@ -1000,6 +1033,7 @@
 
     <div id="dhamir-page">
         <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
         <h1>Dhamir (ضمير)</h1>
         <div class="subtopic-content">
             <h2>Pengenalan kepada Dhamir</h2>
@@ -1071,6 +1105,7 @@
 
     <div id="isyarah-page">
         <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
         <h1>Isyarah (إشارة)</h1>
         <div class="subtopic-content">
             <h2>Pengenalan kepada Isyarah</h2>
@@ -1133,6 +1168,7 @@
 
     <div id="mausul-page">
         <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
         <h1>Mausul (موصول)</h1>
         <div class="subtopic-content">
             <h2>Pengenalan kepada Mausul</h2>
@@ -1198,6 +1234,7 @@
 
     <div id="alif-lam-page">
         <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
         <h1>Alif Lam (ال)</h1>
         <div class="subtopic-content">
             <h2>Pengenalan kepada Alif Lam</h2>
@@ -1257,10 +1294,10 @@
     <!-- Quiz Page -->
     <div id="quiz-page">
         <button class="back-button" onmouseover="playHoverSound()" onclick="showIsmPage()">Back</button>
-        <div class="quiz-container">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <div class="quiz-container" id="quiz-container">
             <div class="quiz-header">
                 <h2>Kuiz Bahasa Arab - Ism</h2>
-                <h2>Tamat</h2>
                 <div class="quiz-progress" id="quiz-progress">Soalan 1 daripada 30</div>
             </div>
             
@@ -1279,6 +1316,10 @@
         </div>
         
         <div class="result-container" id="result-container">
+        </div>
+        <button class="topic-btn" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topik</button>
+    </div>
+    <div class="result-title">Keputusan Kuiz Anda</div>
             <div class="result-score" id="result-score"></div>
             <div class="result-message">
                 <div class="celebration" id="celebration"></div>
@@ -1851,6 +1892,7 @@
             document.getElementById('quiz-page').style.display = 'flex';
             document.getElementById('question-container').style.display = 'block';
             document.getElementById('result-container').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
             
             currentQuestion = 0;
             score = 0;
@@ -1870,6 +1912,9 @@
             
             // Update progress
             quizProgress.textContent = `Soalan ${currentQuestion + 1} daripada ${questions.length}`;
+            
+            // Update next button text
+            nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Selesai' : 'Seterusnya';
             
             // Load question
             const currentQ = questions[currentQuestion];
@@ -1967,7 +2012,7 @@
         }
 
         function showResults() {
-            document.getElementById('question-container').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'none';
             document.getElementById('result-container').style.display = 'block';
             
             const resultScore = document.getElementById('result-score');

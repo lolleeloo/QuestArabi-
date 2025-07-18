@@ -723,23 +723,8 @@ h1 {
             background-color: #f00;
             opacity: 0.8;
             animation: confetti-fall 5s linear forwards;
-}
-
-
-@keyframes confetti-fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
         }
-
-@keyframes glow {
-            0% { text-shadow: 0 0 15px #ff8c00, 0 0 30px #e67e22; }
-            100% { text-shadow: 0 0 20px #ff8c0/* Music Player Styles */
+/* Music Player Styles */
         .music-container {
             position: fixed;
             bottom: 20px;
@@ -830,7 +815,22 @@ h1 {
         /* Font Awesome Icons */
         .fa-music {
             font-size: 20px;
-        }0, 0 0 40px #e67e22; }
+        }
+        
+@keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+@keyframes glow {
+            0% { text-shadow: 0 0 15px #ff8c00, 0 0 30px #e67e22; }
+            100% { text-shadow: 0 0 20px #ff8c00, 0 0 40px #e67e22; }
         }
 
 @keyframes bounce {
@@ -946,19 +946,13 @@ h1 {
 .result-score {
                 font-size: 2.5em;
             }
-    .music-player {
-                bottom: 10px;
-                right: 10px;
-                padding: 8px;
-            }
         }
     </style>
-
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-         <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   <!-- Music Player -->
+    <!-- Music Player -->
     <div class="music-container">
         <button class="music-btn" id="music-toggle">
             <i class="fas fa-music"></i>
@@ -980,6 +974,8 @@ h1 {
         </div>
     </div>
     
+</head>
+<body>
     <div id="home-page">
         <h1>Kembara Bahasa Arab</h1>
         <div class="container">
@@ -1789,62 +1785,6 @@ h1 {
     <div id="confetti-container" class="confetti-container"></div>
 
 <script>
-// Background Music Setup
-        const bgMusic = new Audio('https://arleta.site/interactivelink/1262/Middle-Eastern-Music-Instrumental-Palm-Sanctuary-AudioTrimmer.com_.mp3');
-        bgMusic.loop = true;
-        bgMusic.volume = 0.5;
-
-        // Music Controls
-        const musicToggle = document.getElementById('music-toggle');
-        const musicMenu = document.getElementById('music-menu');
-        const playBtn = document.getElementById('play-btn');
-        const pauseBtn = document.getElementById('pause-btn');
-        const stopBtn = document.getElementById('stop-btn');
-        const volumeControl = document.getElementById('volume-control');
-
-        // Toggle music menu
-        musicToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            musicMenu.classList.toggle('active');
-            playClickSound();
-        });
-
-        // Close menu when clicking elsewhere
-        document.addEventListener('click', () => {
-            musicMenu.classList.remove('active');
-        });
-
-        // Music control functions
-        playBtn.addEventListener('click', () => {
-            bgMusic.play();
-            playClickSound();
-            musicMenu.classList.remove('active');
-        });
-
-        pauseBtn.addEventListener('click', () => {
-            bgMusic.pause();
-            playClickSound();
-            musicMenu.classList.remove('active');
-        });
-
-        stopBtn.addEventListener('click', () => {
-            bgMusic.pause();
-            bgMusic.currentTime = 0;
-            playClickSound();
-            musicMenu.classList.remove('active');
-        });
-
-        volumeControl.addEventListener('input', (e) => {
-            bgMusic.volume = e.target.value;
-        });
-
-        // Start playing music when page loads (with user interaction)
-        document.addEventListener('click', () => {
-            // Try to play music (will work only after user interaction)
-            bgMusic.play().catch(e => console.log("Auto-play prevented:", e));
-        }, { once: true });
-
-    
         // Ism Dialogs
         const ismDialogs = [
             {
@@ -3368,6 +3308,28 @@ confettiContainer.appendChild(confetti);
                 }, animationDuration * 1000);
             }
         }
+                bgMusic.pause();
+            playClickSound();
+            musicMenu.classList.remove('active');
+        });
+
+        stopBtn.addEventListener('click', () => {
+            bgMusic.pause();
+            bgMusic.currentTime = 0;
+            playClickSound();
+            musicMenu.classList.remove('active');
+        });
+
+        volumeControl.addEventListener('input', (e) => {
+            bgMusic.volume = e.target.value;
+        });
+
+        // Start playing music when page loads (with user interaction)
+        document.addEventListener('click', () => {
+            // Try to play music (will work only after user interaction)
+            bgMusic.play().catch(e => console.log("Auto-play prevented:", e));
+        }, { once: true });
+    
     </script>
 </body>
 </html>

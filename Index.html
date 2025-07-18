@@ -99,29 +99,735 @@ h1 {
 .start-button:active {
             transform: translateY(0) scale(0.95);
         }
-music-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
+
+#checkpoint-page {
+            display: none;
+            flex-direction: column;
             align-items: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 30px;
+            margin: 20px;
+        }
+
+.checkpoint-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding: 30px;
+            position: relative;
+        }
+
+.checkpoint {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, #f4e4bc, #d4a017);
+            color: #3c2005;
+            border-radius: 50%;
+            display: flex;
             justify-content: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            align-items: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 215, 0, 0.3);
+            border: 3px solid #ffd700;
+            position: relative;
+            animation: bounce 1.5s infinite;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
-        
-        .music-control:hover {
-            background-color: rgba(0, 0, 0, 0.9);
+
+.checkpoint:hover {
+            transform: scale(1.15);
+            background: radial-gradient(circle at 30% 30%, #ffd700, #e67e22);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 20px #ffd700;
         }
-        
+
+.checkpoint:active {
+            transform: scale(0.95);
+        }
+
+.checkpoint.completed {
+            background: radial-gradient(circle at 30% 30%, #27ae60, #2ecc71);
+            color: white;
+        }
+
+.checkpoint.locked {
+            background: radial-gradient(circle at 30% 30%, #7f8c8d, #95a5a6);
+            color: #4a2c0b;
+            cursor: not-allowed;
+        }
+
+.checkpoint-label {
+            position: absolute;
+            bottom: -35px;
+            color: #ffd700;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+.stars {
+            position: absolute;
+            top: -30px;
+            display: flex;
+            gap: 5px;
+        }
+
+.star {
+            color: #ffd700;
+            font-size: 1em;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+.path {
+            width: 6px;
+            height: 60px;
+            background: linear-gradient(#ffd700, #d4a017);
+            margin: 10px 0;
+            position: relative;
+            animation: path-glow 2s infinite alternate;
+        }
+
+.path::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -3px;
+            width: 12px;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent);
+        }
+
+#ism-page, #bilangan-page, #jantina-page, #spesifik-umum-page, #dhamir-page, #isyarah-page, #mausul-page, #alif-lam-page, #quiz-page, #fiil-page, #fiil-mazi-page, #fiil-mudari-page, #fiil-amr-page, #fiil-ahwal-page, #fiil-quiz-page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 30px;
+            margin: 20px;
+        }
+
+.dialog-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 20px;
+        }
+
+.character-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 700px;
+            margin-bottom: 20px;
+        }
+
+.character {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 45%;
+        }
+
+.character img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #800000;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            animation: character-bounce 2s infinite;
+        }
+
+.character-name {
+            color: #ffd700;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+.dialog-box {
+            background: rgba(255, 245, 224, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #e67e22;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            text-align: left;
+            color: #3c2005;
+            font-size: 1.1em;
+            position: relative;
+            animation: fade-in 0.5s ease;
+        }
+
+.dialog-box.active {
+            animation: dialog-pop 0.3s ease;
+        }
+
+.subtopic-buttons, .ma-rifah-subtopic-buttons, .fiil-subtopic-buttons {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            max-width: 600px;
+        }
+
+.subtopic-buttons.active, .ma-rifah-subtopic-buttons.active, .fiil-subtopic-buttons.active {
+            display: flex;
+        }
+
+.subtopic-button {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+.ma-rifah-subtopic-button, .fiil-subtopic-button {
+            padding: 8px 16px;
+            font-size: 1em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+.subtopic-button:hover, .ma-rifah-subtopic-button:hover, .fiil-subtopic-button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+.subtopic-button:active, .ma-rifah-subtopic-button:active, .fiil-subtopic-button:active {
+            transform: translateY(0);
+        }
+
+.dialog-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+.next-button, .prev-button {
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+.next-button:hover, .prev-button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+.next-button:active, .prev-button:active {
+            transform: translateY(0);
+        }
+
+.back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px; /* Changed from left to right */
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+.home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px; /* Changed from right to left */
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+.topic-button {
+            position: absolute;
+            top: 20px;
+            left: 150px;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+.back-to-prev-button {
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+.back-to-prev-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+.back-button:hover, .back-to-prev-button:hover, .home-button:hover, .topic-button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+.back-button:active, .back-to-prev-button:active, .home-button:active, .topic-button:active {
+            transform: translateY(0);
+        }
+
+.progress-bar {
+            width: 100%;
+            max-width: 600px;
+            height: 20px;
+            background: #3c2005;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+.progress-fill {
+            width: 33%;
+            height: 100%;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            transition: width 0.5s ease;
+        }
+
+.subtopic-content {
+            background: rgba(255, 245, 224, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #e67e22;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 700px;
+            text-align: left;
+            color: #3c2005;
+            font-size: 1.1em;
+            animation: fade-in 0.5s ease;
+            line-height: 1.6;
+        }
+
+.subtopic-content h2 {
+            color: #3c2005;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+.subtopic-content h3 {
+            color: #d35400;
+            font-size: 1.4em;
+            margin: 15px 0 10px;
+            border-bottom: 2px solid #e67e22;
+            padding-bottom: 5px;
+        }
+
+.subtopic-content ul {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+.subtopic-content li {
+            margin-bottom: 10px;
+        }
+
+.subtopic-content strong {
+            color: #d35400;
+        }
+
+.subtopic-content .example {
+            background: rgba(255, 228, 181, 0.3);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #e67e22;
+        }
+
+.subtopic-content .arabic {
+            font-family: 'Traditional Arabic', 'Arial', sans-serif;
+            font-size: 1.3em;
+            direction: rtl;
+        }
+
+/* Quiz Styles */
+        .quiz-container {
+            background: rgba(255, 245, 224, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #e67e22;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 700px;
+            text-align: left;
+            color: #3c2005;
+            font-size: 1.1em;
+            animation: fade-in 0.5s ease;
+            line-height: 1.6;
+            width: 100%;
+        }
+
+.quiz-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+.quiz-header h2 {
+            color: #3c2005;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+.quiz-progress {
+            font-size: 1.2em;
+            color: #d35400;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+.question-container {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255, 228, 181, 0.5);
+            border-radius: 10px;
+            border-left: 4px solid #e67e22;
+        }
+
+.question-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #3c2005;
+        }
+
+.options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+.option-btn {
+            padding: 10px 15px;
+            background: linear-gradient(45deg, #f8d49c, #f0b76e);
+            border: 1px solid #e67e22;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-size: 1em;
+        }
+
+.option-btn:hover {
+            background: linear-gradient(45deg, #f0b76e, #e67e22);
+            transform: translateX(5px);
+        }
+
+.option-btn.selected {
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            color: white;
+            font-weight: bold;
+            border-color: #d35400;
+        }
+
+.option-btn.correct {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            font-weight: bold;
+            border-color: #27ae60;
+        }
+
+.option-btn.incorrect {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            font-weight: bold;
+            border-color: #c0392b;
+        }
+
+.feedback-container {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+
+.correct-feedback {
+            background-color: rgba(46, 204, 113, 0.2);
+            border-left: 4px solid #27ae60;
+        }
+
+.incorrect-feedback {
+            background-color: rgba(231, 76, 60, 0.2);
+            border-left: 4px solid #c0392b;
+        }
+
+.feedback-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+.explanation {
+            font-style: italic;
+        }
+
+.quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+.quiz-btn {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+.quiz-btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+.quiz-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+.result-container {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 245, 224, 0.95);
+            border-radius: 15px;
+            border: 2px solid #e67e22;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 700px;
+            display: none;
+        }
+
+.result-title {
+            font-size: 2em;
+            color: #3c2005;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+.result-score {
+            font-size: 3em;
+            font-weight: bold;
+            color: #d35400;
+            margin-bottom: 20px;
+        }
+
+.result-message {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+.celebration {
+            font-size: 1.5em;
+            color: #4e8975;
+            text-shadow: 0 0 10px #ff8c00;
+            animation: glow 1s infinite alternate;
+            margin-bottom: 20px;
+        }
+
+.encouragement {
+            font-size: 1.2em;
+            color: #3c2005;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+.restart-btn {
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+
+/* Confetti styles */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+.confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0.8;
+            animation: confetti-fall 5s linear forwards;
+        }
+
+Pengenalan Bahasa Arab dengan Tema Ism
+salin semula code ini. Kekalkan semua element asal code ini Dan tambahkan music ini https://arleta.site/interactivelink/1262/Middle-Eastern-Music-Instrumental-Palm-Sanctuary-AudioTrimmer.com_.mp3 sebagai background music. Sila gabungkan code menggunakan HTML, CSS Dan JavaScript. <!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kembara Bahasa Arab</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://arleta.site/interactivelink/1262/Make-an-an-magic-syou-1.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Arial', sans-serif;
+            overflow: auto;
+            position: relative;
+        }
+
+h1 {
+            color: #ffd700;
+            font-size: 4.5em;
+            font-family: 'Georgia', serif;
+            text-shadow: 0 0 15px #ff8c00, 0 0 30px #e67e22, 0 0 45px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+#home-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+#home-page .container {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 245, 224, 0.9), rgba(255, 228, 181, 0.9));
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 215, 0, 0.3);
+            border: 3px solid #ffd700;
+            max-width: 600px;
+            width: 90%;
+        }
+
+#home-page p {
+            color: #3c2005;
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+.start-button {
+            padding: 20px 40px;
+            font-size: 1.8em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+.start-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+.start-button:hover::before {
+            left: 100%;
+        }
+
+.start-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+.start-button:active {
+            transform: translateY(0) scale(0.95);
+        }
+
 #checkpoint-page {
             display: none;
             flex-direction: column;
@@ -887,81 +1593,3254 @@ music-control {
             <button class="start-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Mulakan Kembara</button>
         </div>
     </div>
-    
-<!-- Tombol kontrol musik -->
-    <button id="musicBtn" class="music-control">🔇</button>
-    
-    <!-- Audio element -->
-    <audio id="bgMusic" loop>
-        <source src="https://arleta.site/interactivelink/1262/Middle-Eastern-Music-Instrumental-Palm-Sanctuary-AudioTrimmer.com_.mp3" type="audio/mpeg">
-    </audio>
 
-    <script>
-        // Variabel untuk melacak status musik
-        let musicInitialized = false;
-        let musicPlaying = false;
-        const bgMusic = document.getElementById('bgMusic');
-        const musicBtn = document.getElementById('musicBtn');
-        
-        // Elemen halaman
-        const pages = document.querySelectorAll('.page');
-        const nextBtn = document.getElementById('nextBtn');
-        let currentPage = 0;
-        
-        // Fungsi untuk menginisialisasi musik
-        function initMusic() {
-            if (!musicInitialized) {
-                musicInitialized = true;
-                
-                // Coba memainkan musik (browser mungkin memblokir autoplay)
-                bgMusic.volume = 0.5;
-                const playPromise = bgMusic.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                        musicPlaying = true;
-                        musicBtn.textContent = '🔊';
-                    })
-                    .catch(error => {
-                        musicPlaying = false;
-                        musicBtn.textContent = '🔇';
-                        console.log("Autoplay prevented. User needs to interact first.");
-                    });
+<div id="checkpoint-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showHomePage()">Back</button>
+        <h1>Pilih Tahap</h1>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="checkpoint-container">
+            <div class="checkpoint completed" onmouseover="playHoverSound()" onclick="showIsmPage()">
+                <span>1</span>
+                <span class="checkpoint-label">Ism</span>
+                <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+            </div>
+            <div class="path"></div>
+            <div class="checkpoint" onmouseover="playHoverSound()" onclick="showFiilPage()">
+                <span>2</span>
+                <span class="checkpoint-label">Fi'il</span>
+                <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+            </div>
+            <div class="path"></div>
+            <div class="checkpoint locked" onmouseover="playHoverSound()" onclick="alertLocked()">
+                <span>3</span>
+                <span class="checkpoint-label">Harf</span>
+                <div class="stars">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="ism-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Tahap 1: Ism</h1>
+        <div class="dialog-container">
+            <div class="character-container">
+                <div class="character">
+                    <img src="https://arleta.site/interactivelink/1262/IMG_20250707_142649.png" alt="Ali">
+                    <div class="character-name">Ali</div>
+                </div>
+                <div class="character">
+                    <img src="https://arleta.site/interactivelink/1262/IMG_20250707_142342.png" alt="Aisyah">
+                    <div class="character-name">Aisyah</div>
+                </div>
+            </div>
+            <div class="dialog-box" id="dialog-box"></div>
+            <div class="subtopic-buttons" id="subtopic-buttons">
+                <button class="subtopic-button" onmouseover="playHoverSound()" onclick="showBilanganPage()">Bilangan (العدد)</button>
+                <button class="subtopic-button" onmouseover="playHoverSound()" onclick="showJantinaPage()">Jantina (الجنس)</button>
+                <button class="subtopic-button" onmouseover="playHoverSound()" onclick="showSpesifikUmumPage()">Spesifik atau Umum (المعرفة أو النكرة)</button>
+                <button class="subtopic-button" onmouseover="playHoverSound()" onclick="startQuiz()">Kuiz Interaktif</button>
+            </div>
+            <div class="dialog-buttons">
+                <button class="prev-button" onmouseover="playHoverSound()" onclick="prevDialog()">Previous</button>
+                <button class="next-button" onmouseover="playHoverSound()" onclick="nextDialog()">Next</button>
+            </div>
+        </div>
+    </div>
+
+<div id="bilangan-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Bilangan (العدد)</h1>
+        <div class="subtopic-content">
+            <h2>Pengenalan kepada Bilangan</h2>
+            <p>Dalam bahasa Arab, Ism (kata nama) boleh diklasifikasikan berdasarkan bilangan, iaitu jumlah entiti yang dirujuk. Terdapat tiga kategori utama:</p>
+            <ul>
+                <li><strong>Ism Mufrad (اسم مفرد)</strong>: Merujuk kepada satu entiti, seperti seorang manusia, satu benda, atau satu tempat.</li>
+                <li><strong>Ism Tathniyah (اسم تثنية)</strong>: Merujuk kepada dua entiti, biasanya ditunjukkan dengan tambahan akhiran khusus.</li>
+                <li><strong>Ism Jam' (اسم جمع)</strong>: Merujuk kepada lebih daripada dua entiti, iaitu bentuk jamak.</li>
+            </ul>
+            <h2>Contoh-contoh</h2>
+            <ul>
+                <li><strong>Mufrad</strong>: كتاب (kitab) - Sebuah buku</li>
+                <li><strong>Tathniyah</strong>: كتابان (kitaban) - Dua buku</li>
+                <li><strong>Jam'</strong>: كتب (kutub) - Buku-buku</li>
+                <li><strong>Mufrad</strong>: طالب (talib) - Seorang pelajar</li>
+                <li><strong>Tathniyah</strong>: طالبان (taliban) - Dua pelajar</li>
+                <li><strong>Jam'</strong>: طلاب (tullab) - Pelajar-pelajar</li>
+            </ul>
+            <h2>Contoh Ayat</h2>
+            <ul>
+                <li><strong>Mufrad</strong>: طالبٌ يقرأ كتابًا. (Talibun yaqra' kitaban) - Seorang pelajar membaca sebuah buku.</li>
+                <li><strong>Tathniyah</strong>: طالبان يكتبان مذكرةً. (Taliban yaktuban mudhakkaratan) - Dua pelajar menulis nota.</li>
+                <li><strong>Jam'</strong>: طلابٌ يدرسون في المكتبة. (Tullabun yadrusuna fil-maktabah) - Pelajar-pelajar belajar di perpustakaan.</li>
+            </ul>
+            <p>Nota: Bentuk jamak dalam bahasa Arab boleh terbahagi kepada <strong>Jam' Mudhakkar Salim</strong> (jamak lelaki yang tetap, seperti طلاب), <strong>Jam' Mu'annath Salim</strong> (jamak perempuan yang tetap, seperti طالبات), dan <strong>Jam' Taksir</strong> (jamak tidak tetap, seperti كتب).</p>
+            <div class="back-to-prev-container">
+                <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showIsmSubtopics()">Back to Previous</button>
+            </div>
+        </div>
+    </div>
+
+<div id="jantina-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Jantina (الجنس)</h1>
+        <div class="subtopic-content">
+            <h2>Pengenalan kepada Jantina</h2>
+            <p>Dalam bahasa Arab, setiap Ism diklasifikasikan mengikut jantina, iaitu maskulin atau feminin. Jantina ini mempengaruhi kata sifat, kata kerja, dan kata ganti yang berkaitan dengannya.</p>
+            <ul>
+                <li><strong>Ism Mudhakkar (اسم مذكر)</strong>: Kata nama maskulin, biasanya untuk lelaki atau benda tanpa tanda feminin.</li>
+                <li><strong>Ism Mu'annath (اسم مؤنث)</strong>: Kata nama feminin, biasanya untuk perempuan atau benda dengan tanda feminin seperti akhiran ة (ta' marbutah).</li>
+            </ul>
+            <h2>Contoh-contoh</h2>
+            <ul>
+                <li><strong>Mudhakkar</strong>: رجل (rajul) - Lelaki</li>
+                <li><strong>Mu'annath</strong>: امرأة (imra'ah) - Perempuan</li>
+                <li><strong>Mudhakkar</strong>: قلم (qalam) - Pen</li>
+                <li><strong>Mu'annath</strong>: مدرسة (madrasah) - Sekolah (dengan ta' marbutah)</li>
+                <li><strong>Mudhakkar</strong>: كلب (kalb) - Anjing jantan</li>
+                <li><strong>Mu'annath</strong>: قطة (qittah) - Kucing betina</li>
+            </ul>
+            <h2>Contoh Ayat</h2>
+            <ul>
+                <li><strong>Mudhakkar</strong>: رجلٌ طويلٌ يمشي في الحديقة. (Rajulun tawilun yamshi fil-hadiqah) - Lelaki tinggi itu berjalan di taman.</li>
+                <li><strong>Mu'annath</strong>: مدرسةٌ كبيرةٌ تقع في المدينة. (Madrasatun kabiratun taqa'u fil-madinah) - Sekolah besar itu terletak di bandar.</li>
+                <li><strong>Mu'annath</strong>: قطةٌ جميلةٌ تلعب في الفناء. (Qittatun jamilatun tal'abu fil-fina') - Kucing betina yang cantik bermain di halaman.</li>
+            </ul>
+            <p>Nota: Sesetengah Ism Mu'annath tidak mempunyai ta' marbutah, seperti شمس (syams) - Matahari, yang dianggap feminin secara semula jadi.</p>
+            <div class="back-to-prev-container">
+                <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showIsmSubtopics()">Back to Previous</button>
+            </div>
+        </div>
+    </div>
+
+<div id="spesifik-umum-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Spesifik atau Umum (المعرفة أو النكرة)</h1>
+        <div class="subtopic-content">
+            <h2>Pengenalan kepada Spesifik atau Umum</h2>
+            <p>Dalam bahasa Arab, Ism boleh menjadi khusus (ma'rifah) atau umum (nakirah). Ini menentukan sama ada kata nama merujuk kepada sesuatu yang spesifik atau umum.</p>
+            <ul>
+                <li><strong>Ism Ma'rifah (اسم معرفة)</strong>: Kata nama yang merujuk kepada entiti tertentu, seperti nama seseorang atau sesuatu yang ditentukan dengan 'ال' (alif lam).</li>
+                <li><strong>Ism Nakirah (اسم نكرة)</strong>: Kata nama yang merujuk kepada entiti secara umum, tanpa penentu khusus.</li>
+            </ul>
+            <h2>Contoh-contoh</h2>
+            <ul>
+                <li><strong>Ma'rifah</strong>: أحمد (Ahmad) - Nama seseorang (spesifik)</li>
+                <li><strong>Nakirah</strong>: رجل (rajul) - Seorang lelaki (umum)</li>
+                <li><strong>Ma'rifah</strong>: الكتاب (al-kitab) - Buku itu</li>
+                <li><strong>Nakirah</strong>: كتاب (kitab) - Sebuah buku</li>
+                <li><strong>Ma'rifah</strong>: المدينة (al-madinah) - Bandar itu</li>
+                <li><strong>Nakirah</strong>: مدينة (madinah) - Sebuah bandar</li>
+            </ul>
+            <h2>Contoh Ayat</h2>
+            <ul>
+                <li><strong>Ma'rifah</strong>: الكتاب على المكتب. (Al-kitab 'ala al-maktab) - Buku itu di atas meja.</li>
+                <li><strong>Nakirah</strong>: كتابٌ سقط من الرف. (Kitabun saqata min ar-raf) - Sebuah buku jatuh dari rak.</li>
+                <li><strong>Ma'rifah</strong>: أحمد يدرس في الجامعة. (Ahmad yadrusu fil-jami'ah) - Ahmad belajar di universiti.</li>
+            </ul>
+            <p>Nota: Ism Ma'rifah boleh dibentuk melalui beberapa cara, seperti menggunakan <strong>Dhamir</strong> (kata ganti), <strong>Isyarah</strong> (kata tunjuk), <strong>Mausul</strong> (kata sambung), atau <strong>Alif Lam</strong> (ال). Pilih butang di bawah untuk meneroka jenis-jenis Ism Ma'rifah ini dengan lebih terperinci!</p>
+            <div class="ma-rifah-subtopic-buttons active">
+                <button class="ma-rifah-subtopic-button" onmouseover="playHoverSound()" onclick="showDhamirPage(true)">Dhamir (ضمير)</button>
+                <button class="ma-rifah-subtopic-button" onmouseover="playHoverSound()" onclick="showIsyarahPage(true)">Isyarah (إشارة)</button>
+                <button class="ma-rifah-subtopic-button" onmouseover="playHoverSound()" onclick="showMausulPage(true)">Mausul (موصول)</button>
+                <button class="ma-rifah-subtopic-button" onmouseover="playHoverSound()" onclick="showAlifLamPage(true)">Alif Lam (ال)</button>
+            </div>
+            <div class="back-to-prev-container">
+                <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showIsmSubtopics()">Back to Previous</button>
+            </div>
+        </div>
+    </div>
+
+<div id="dhamir-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Dhamir (ضمير)</h1>
+        <div class="subtopic-content">
+            <h2>Pengenalan kepada Dhamir</h2>
+            <p>Dhamir ialah kata ganti dalam bahasa Arab yang merujuk kepada entiti tertentu, menjadikannya Ism Ma'rifah. Dhamir digunakan untuk menggantikan kata nama bagi mengelakkan pengulangan dan biasanya merujuk kepada orang, benda, atau konsep yang sudah diketahui dalam konteks.</p>
+
+<h3>Jenis-jenis Dhamir</h3>
+            <p>Dhamir terbahagi kepada dua jenis utama:</p>
+            <ul>
+                <li><strong>Dhamir Munfasil</strong>: Kata ganti bebas yang berdiri sendiri dalam ayat.</li>
+                <li><strong>Dhamir Muttasil</strong>: Kata ganti yang bersambung dengan kata nama, kata kerja, atau kata tugas.</li>
+            </ul>
+
+<h3>Dhamir Munfasil (Kata Ganti Bebas)</h3>
+            <div class="example">
+                <p><strong>Orang Pertama</strong>:</p>
+                <p class="arabic">أنا (ana) - Saya (mufrad)</p>
+                <p class="arabic">نحن (nahnu) - Kami (jam')</p>
+
+<p><strong>Orang Kedua</strong>:</p>
+                <p class="arabic">أنتَ (anta) - Kamu (mufrad, mudhakkar)</p>
+                <p class="arabic">أنتِ (anti) - Kamu (mufrad, mu'annath)</p>
+                <p class="arabic">أنتما (antuma) - Kamu berdua (tathniyah)</p>
+                <p class="arabic">أنتم (antum) - Kalian (jam', mudhakkar)</p>
+                <p class="arabic">أنتن (antunna) - Kalian (jam', mu'annath)</p>
+
+<p><strong>Orang Ketiga</strong>:</p>
+                <p class="arabic">هو (huwa) - Dia (mufrad, mudhakkar)</p>
+                <p class="arabic">هي (hiya) - Dia (mufrad, mu'annath)</p>
+                <p class="arabic">هما (huma) - Mereka berdua (tathniyah, mudhakkar/mu'annath)</p>
+                <p class="arabic">هم (hum) - Mereka (jam', mudhakkar)</p>
+                <p class="arabic">هن (hunna) - Mereka (jam', mu'annath)</p>
+            </div>
+
+<h3>Dhamir Muttasil (Kata Ganti Bersambung)</h3>
+            <div class="example">
+                <p><strong>Dengan Kata Nama (untuk pemilikan)</strong>:</p>
+                <p class="arabic">كتابي (kitabi) - Buku saya</p>
+                <p class="arabic">كتابكَ (kitabuka) - Buku kamu (lelaki)</p>
+                <p class="arabic">كتابكِ (kitabuki) - Buku kamu (perempuan)</p>
+                <p class="arabic">كتابه (kitabuhu) - Bukunya (lelaki)</p>
+                <p class="arabic">كتابها (kitabuha) - Bukunya (perempuan)</p>
+
+<p><strong>Dengan Kata Kerja (untuk objek)</strong>:</p>
+                <p class="arabic">رأيتني (ra'aytani) - Dia melihat saya</p>
+                <p class="arabic">رأيتكَ (ra'aytuka) - Saya melihat kamu (lelaki)</p>
+                <p class="arabic">رأيتها (ra'aytuha) - Saya melihatnya (perempuan)</p>
+            </div>
+
+<h3>Contoh Ayat</h3>
+            <div class="example">
+                <p class="arabic">أنا أقرأ الكتاب. (Ana aqra' al-kitab) - Saya membaca buku.</p>
+                <p class="arabic">هي ذهبت إلى المدرسة. (Hiya dhahabat ila al-madrasah) - Dia (perempuan) pergi ke sekolah.</p>
+                <p class="arabic">الكتاب كتابي. (Al-kitab kitabi) - Buku itu adalah buku saya.</p>
+                <p class="arabic">أعطاني الأستاذ الكتاب. (A'tani al-ustadh al-kitab) - Guru memberikan saya buku.</p>
+            </div>
+
+<h3>Fungsi Dhamir dalam Ayat</h3>
+            <ul>
+                <li><strong>Fa'il</strong> (Subjek): <span class="arabic">هو يقرأ (Huwa yaqra') - Dia membaca</span></li>
+                <li><strong>Maf'ul bih</strong> (Objek): <span class="arabic">رأيته (Ra'aytuhu) - Saya melihatnya</span></li>
+                <li><strong>Mudaf ilaih</strong> (Pemilik): <span class="arabic">كتابه (Kitabuhu) - Bukunya</span></li>
+            </ul>
+
+<div class="back-to-prev-container">
+                <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showSpesifikUmumSubtopics()">Back to Previous</button>
+            </div>
+        </div>
+    </div>
+
+<div id="isyarah-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Isyarah (إشارة)</h1>
+        <div class="subtopic-content">
+            <h2>Pengenalan kepada Isyarah</h2>
+            <p>Isyarah ialah kata tunjuk dalam bahasa Arab yang menunjukkan entiti tertentu, menjadikannya Ism Ma'rifah. Kata tunjuk ini digunakan untuk menunjukkan sesuatu yang spesifik berdasarkan jarak (dekat atau jauh), bilangan, dan jantina.</p>
+
+<h3>Jenis-jenis Isyarah</h3>
+            <p>Isyarah terbahagi kepada dua jenis utama:</p>
+            <ul>
+                <li><strong>Isyarah untuk yang dekat</strong> (هذا، هذه، هذان، هاتان)</li>
+                <li><strong>Isyarah untuk yang jauh</strong> (ذلك، تلك، أولئك)</li>
+            </ul>
+
+<h3>Isyarah untuk yang Dekat</h3>
+            <div class="example">
+                <p><strong>Mufrad Mudhakkar</strong>:</p>
+                <p class="arabic">هذا كتاب (Hadha kitab) - Ini sebuah buku</p>
+
+<p><strong>Mufrad Mu'annath</strong>:</p>
+                <p class="arabic">هذه مدرسة (Hadhihi madrasah) - Ini sebuah sekolah</p>
+
+<p><strong>Tathniyah Mudhakkar</strong>:</p>
+                <p class="arabic">هذان كتابان (Hadhani kitaban) - Ini dua buku</p>
+
+<p><strong>Tathniyah Mu'annath</strong>:</p>
+                <p class="arabic">هاتان مدرستان (Hatani madrasatan) - Ini dua sekolah</p>
+            </div>
+
+<h3>Isyarah untuk yang Jauh</h3>
+            <div class="example">
+                <p><strong>Mufrad Mudhakkar</strong>:</p>
+                <p class="arabic">ذلك كتاب (Dhalika kitab) - Itu sebuah buku</p>
+
+<p><strong>Mufrad Mu'annath</strong>:</p>
+                <p class="arabic">تلك مدرسة (Tilka madrasah) - Itu sebuah sekolah</p>
+
+<p><strong>Jam'</strong>:</p>
+                <p class="arabic">أولئك طلاب (Ula'ika tullab) - Mereka itu pelajar</p>
+            </div>
+
+<h3>Contoh Ayat</h3>
+            <div class="example">
+                <p class="arabic">هذا ولد مجتهد. (Hadha walad mujtahid) - Ini budak lelaki yang rajin.</p>
+                <p class="arabic">تلك معلمة طيبة. (Tilka mu'allimatun tayyibah) - Itu guru perempuan yang baik.</p>
+                <p class="arabic">هذان طالبان جديدان. (Hadhani taliban jadidan) - Ini dua pelajar baru.</p>
+                <p class="arabic">أولئك مهندسون مهرة. (Ula'ika muhandisuna maharatun) - Mereka itu jurutera yang mahir.</p>
+            </div>
+
+<h3>Kedudukan Isyarah dalam Ayat</h3>
+            <ul>
+                <li><strong>Sebagai Mubtada'</strong>: <span class="arabic">هذا كتاب (Hadha kitab) - Ini sebuah buku</span></li>
+                <li><strong>Sebagai Khabar</strong>: <span class="arabic">الكتاب هذا (Al-kitab hadha) - Buku itu adalah ini</span></li>
+                <li><strong>Sebagai Na'at</strong>: <span class="arabic">رأيت الولد هذا (Ra'aytu al-walad hadha) - Saya melihat budak lelaki ini</span></li>
+            </ul>
+
+<div class="back-to-prev-container">
+                <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showSpesifikUmumSubtopics()">Back to Previous</button>
+            </div>
+        </div>
+    </div>
+
+<div id="mausul-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Mausul (موصول)</h1>
+        <div class="subtopic-content">
+            <h2>Pengenalan kepada Mausul</h2>
+            <p>Mausul ialah kata sambung dalam bahasa Arab yang menghubungkan kata nama dengan frasa atau ayat yang menerangkannya, menjadikannya Ism Ma'rifah. Kata sambung ini merujuk kepada entiti tertentu yang dijelaskan oleh klausa berikutnya.</p>
+
+<h3>Jenis-jenis Mausul</h3>
+            <p>Mausul terbahagi kepada beberapa jenis berdasarkan rujukannya:</p>
+            <ul>
+                <li><strong>Untuk manusia</strong>: الذي، التي، اللذان، اللتان، الذين، اللائي</li>
+                <li><strong>Untuk bukan manusia</strong>: ما، الذي</li>
+            </ul>
+
+<h3>Mausul untuk Manusia</h3>
+            <div class="example">
+                <p><strong>Mufrad Mudhakkar</strong>:</p>
+                <p class="arabic">الطالب الذي نجح (At-talib alladhi najaha) - Pelajar yang berjaya</p>
+
+<p><strong>Mufrad Mu'annath</strong>:</p>
+                <p class="arabic">الطالبة التي درست (At-talibat allati darasat) - Pelajar perempuan yang belajar</p>
+
+<p><strong>Tathniyah Mudhakkar</strong>:</p>
+                <p class="arabic">الطالبان اللذان نجحا (At-taliban alladhani najaha) - Dua pelajar yang berjaya</p>
+
+<p><strong>Tathniyah Mu'annath</strong>:</p>
+                <p class="arabic">الطالبتان اللتان درستا (At-talibatan allatani darasata) - Dua pelajar perempuan yang belajar</p>
+
+<p><strong>Jam' Mudhakkar</strong>:</p>
+                <p class="arabic">الطلاب الذين نجحوا (At-tullab alladhina najahu) - Pelajar-pelajar yang berjaya</p>
+
+<p><strong>Jam' Mu'annath</strong>:</p>
+                <p class="arabic">الطالبات اللائي درسن (At-talibat allai darasna) - Pelajar-pelajar perempuan yang belajar</p>
+            </div>
+
+<h3>Mausul untuk Bukan Manusia</h3>
+            <div class="example">
+                <p><strong>Menggunakan "ما"</strong>:</p>
+                <p class="arabic">قرأت ما كتبت (Qara'tu ma katabta) - Saya membaca apa yang kamu tulis</p>
+
+<p><strong>Menggunakan "الذي"</strong>:</p>
+                <p class="arabic">هذا الكتاب الذي اشتريته (Hadha al-kitab alladhi ishtaraytuhu) - Ini buku yang saya beli</p>
+            </div>
+
+<h3>Contoh Ayat</h3>
+            <div class="example">
+                <p class="arabic">التلميذ الذي يدرس ينجح. (At-tilmith alladhi yadrusu yanjaḥ) - Pelajar yang belajar akan berjaya.</p>
+                <p class="arabic">الكتاب الذي قرأته مفيد. (Al-kitab alladhi qara'tuhu mufid) - Buku yang saya baca bermanfaat.</p>
+                <p class="arabic">هذه هي السيارة التي اشتريتها. (Hadhihi hiya as-sayyarat allati ishtaraytuha) - Ini kereta yang saya beli.</p>
+                <p class="arabic">الطلاب الذين يدرسون بجد متفوقون. (At-tullab alladhina yadrusuna bijiddin mutafawwiqun) - Pelajar-pelajar yang belajar dengan tekun adalah cemerlang.</p>
+            </div>
+
+<h3>Struktur Ayat Mausul</h3>
+            <p>Setiap ayat yang mengandungi Mausul mempunyai dua bahagian:</p>
+            <ol>
+                <li><strong>Ism Mausul</strong>: Kata nama yang dihubungkan</li>
+                <li><strong>Jumlah Silah</strong>: Klausa yang menerangkan kata nama tersebut</li>
+            </ol>
+
+<div class="back-to-prev-container">
+                <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showSpesifikUmumSubtopics()">Back to Previous</button>
+            </div>
+        </div>
+    </div>
+
+<div id="alif-lam-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Alif Lam (ال)</h1>
+        <div class="subtopic-content">
+            <h2>Pengenalan kepada Alif Lam</h2>
+            <p>Alif Lam (ال) ialah awalan dalam bahasa Arab yang digunakan untuk menjadikan Ism Nakirah kepada Ism Ma'rifah, menunjukkan entiti yang spesifik atau dikenali dalam konteks. Ia sering dikenali sebagai "kata penentu" (definite article).</p>
+
+<h3>Jenis-jenis Alif Lam</h3>
+            <p>Terdapat dua jenis Alif Lam:</p>
+            <ul>
+                <li><strong>Alif Lam Qamariyyah</strong> (القمرية): Diikuti oleh 14 huruf qamariyyah (ء ب ج ح خ ع غ ف ق ك م و هـ ي)</li>
+                <li><strong>Alif Lam Syamsiyyah</strong> (الشمسية): Diikuti oleh 14 huruf syamsiyyah (ت ث د ذ ر ز س ش ص ض ط ظ ل ن)</li>
+            </ul>
+
+<h3>Alif Lam Qamariyyah</h3>
+            <div class="example">
+                <p>Alif Lam disebut jelas dan huruf selepasnya tidak diidghamkan:</p>
+                <p class="arabic">الكتاب (Al-kitab) - Buku itu</p>
+                <p class="arabic">البيت (Al-bayt) - Rumah itu</p>
+                <p class="arabic">الولد (Al-walad) - Budak lelaki itu</p>
+            </div>
+
+<h3>Alif Lam Syamsiyyah</h3>
+            <div class="example">
+                <p>Alif Lam tidak disebut jelas dan huruf selepasnya diidghamkan (digabungkan):</p>
+                <p class="arabic">التلميذ (At-tilmith) - Pelajar itu</p>
+                <p class="arabic">السيارة (As-sayyarah) - Kereta itu</p>
+                <p class="arabic">الشمس (Ash-shams) - Matahari itu</p>
+            </div>
+
+<h3>Fungsi Alif Lam</h3>
+            <ul>
+                <li><strong>Menunjukkan sesuatu yang khusus</strong>: <span class="arabic">الكتاب على الطاولة (Al-kitab 'ala at-tawilah) - Buku itu di atas meja</span></li>
+                <li><strong>Menunjukkan jenis</strong>: <span class="arabic">الأسد حيوان مفترس (Al-asad hayawan muftaris) - Singa adalah haiwan pemangsa</span></li>
+                <li><strong>Menunjukkan sesuatu yang sudah diketahui</strong>: <span class="arabic">ذهبت إلى المدينة (Dhahabtu ila al-madinah) - Saya pergi ke bandar (yang sudah diketahui)</span></li>
+            </ul>
+
+<h3>Contoh Ayat</h3>
+            <div class="example">
+                <p class="arabic">الطالب في الفصل. (At-talib fil-fasl) - Pelajar itu di dalam kelas.</p>
+                <p class="arabic">الشمس مشرقة اليوم. (Ash-shams mushriqatun al-yawm) - Matahari itu bersinar hari ini.</p>
+                <p class="arabic">اشتريت الكتاب الجديد. (Ishtaraytu al-kitab al-jadid) - Saya membeli buku yang baru itu.</p>
+                <p class="arabic">الرجل الذي قابلته أمس طبيب. (Ar-rajul alladhi qabaltuhu ams tabib) - Lelaki yang saya temui semalam itu seorang doktor.</p>
+            </div>
+
+<h3>Peraturan Khas</h3>
+            <ul>
+                <li>Alif Lam tidak digunakan dengan nama orang: <span class="arabic">محمد (Muhammad), bukan المحمد</span></li>
+                <li>Alif Lam tidak digunakan dengan kata ganti: <span class="arabic">كتابي (kitabi), bukan الكتابي</span></li>
+                <li>Alif Lam tidak digunakan dengan kata tunjuk: <span class="arabic">هذا الكتاب (hadha al-kitab), bukan هذا الكتاب</span></li>
+            </ul>
+
+<div class="back-to-prev-container">
+                <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showSpesifikUmumSubtopics()">Back to Previous</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Quiz Page -->
+    <div id="quiz-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showIsmPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <div class="quiz-container" id="quiz-container">
+            <div class="quiz-header">
+                <h2>Kuiz Bahasa Arab - Ism</h2>
+                <div class="quiz-progress" id="quiz-progress">Soalan 1 daripada 30</div>
+            </div>
+
+<div id="question-container">
+                <div class="question-text" id="question-text"></div>
+                <div class="options-container" id="options-container"></div>
+                <div class="feedback-container" id="feedback-container">
+                    <div class="feedback-title" id="feedback-title"></div>
+                    <div class="explanation" id="explanation"></div>
+                </div>
+            </div>
+
+<div class="quiz-navigation">
+                <button class="quiz-btn" id="next-btn" onmouseover="playHoverSound()" onclick="nextQuestion()">Seterusnya</button>
+            </div>
+        </div>
+
+<div class="result-container" id="result-container">
+            <div class="result-title">Keputusan Kuiz Anda</div>
+            <div class="result-score" id="result-score"></div>
+            <div class="result-message">
+                <div class="celebration" id="celebration"></div>
+                <div class="encouragement" id="encouragement"></div>
+            </div>
+            <button class="restart-btn" onmouseover="playHoverSound()" onclick="restartQuiz()">Ambil Kuiz Lagi</button>
+        </div>
+    </div>
+
+<!-- Fi'il Page -->
+    <div id="fiil-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Tahap 2: Fi'il</h1>
+        <div class="dialog-container">
+            <div class="character-container">
+                <div class="character">
+                    <img src="https://arleta.site/interactivelink/1262/IMG_20250707_142649.png" alt="Ali">
+                    <div class="character-name">Ali</div>
+                </div>
+                <div class="character">
+                    <img src="https://arleta.site/interactivelink/1262/IMG_20250707_142342.png" alt="Aisyah">
+                    <div class="character-name">Aisyah</div>
+                </div>
+            </div>
+            <div class="dialog-box" id="fiil-dialog-box"></div>
+            <div class="fiil-subtopic-buttons" id="fiil-subtopic-buttons">
+                <button class="fiil-subtopic-button" onmouseover="playHoverSound()" onclick="showFiilMaziPage()">Fi'il Mazi (الفعل الماضي)</button>
+                <button class="fiil-subtopic-button" onmouseover="playHoverSound()" onclick="showFiilMudariPage()">Fi'il Mudari' (الفعل المضارع)</button>
+                <button class="fiil-subtopic-button" onmouseover="playHoverSound()" onclick="showFiilAmrPage()">Fi'il Amr (فعل الأمر)</button>
+                <button class="fiil-subtopic-button" onmouseover="playHoverSound()" onclick="showFiilAhwalPage()">Ahwal Fi'il (أحوال الفعل)</button>
+                <button class="fiil-subtopic-button" onmouseover="playHoverSound()" onclick="startFiilQuiz()">Kuiz Interaktif</button>
+            </div>
+            <div class="dialog-buttons">
+                <button class="prev-button" onmouseover="playHoverSound()" onclick="prevFiilDialog()">Previous</button>
+                <button class="next-button" onmouseover="playHoverSound()" onclick="nextFiilDialog()">Next</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Fi'il Mazi Page -->
+    <div id="fiil-mazi-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Fi'il Mazi (الفعل الماضي)</h1>
+        <div class="subtopic-content">
+            <h2>Pengenalan kepada Fi'il Mazi</h2>
+            <p>Fi'il Mazi ialah kata kerja yang menunjukkan perbuatan yang telah berlaku pada masa lampau. Dalam bahasa Arab, Fi'il Mazi mempunyai ciri-ciri khusus dari segi bentuk dan struktur.</p>
+
+<h3>Ciri-ciri Fi'il Mazi</h3>
+            <ul>
+                <li>Menunjukkan perbuatan yang telah selesai</li>
+                <li>Boleh menerima tanda-tanda khusus seperti ta' fa'il (تاء الفاعل) dan nun taukid (نون التوكيد)</li>
+                <li>Boleh didahului dengan qad (قد) untuk menunjukkan kepastian</li>
+                <li>Boleh menerima dhomir yang bersambung (dhomir muttasil)</li>
+            </ul>
+
+<h3>Contoh-contoh Fi'il Mazi</h3>
+            <div class="example">
+                <p><strong>Bentuk Asas</strong>:</p>
+                <p class="arabic">كَتَبَ (kataba) - Dia telah menulis</p>
+                <p class="arabic">ذَهَبَ (dhahaba) - Dia telah pergi</p>
+                <p class="arabic">قَرَأَ (qara'a) - Dia telah membaca</p>
+
+<p><strong>Dengan Dhomir</strong>:</p>
+                <p class="arabic">كَتَبْتُ (katabtu) - Saya telah menulis</p>
+                <p class="arabic">كَتَبْتَ (katabta) - Kamu (lelaki) telah menulis</p>
+                <p class="arabic">كَتَبَتْ (katabat) - Dia (perempuan) telah menulis</p>
+
+<p><strong>Dengan Qad</strong>:</p>
+                <p class="arabic">قَدْ كَتَبَ (qad kataba) - Sesungguhnya dia telah menulis</p>
+                <p class="arabic">قَدْ ذَهَبُوا (qad dhahabu) - Sesungguhnya mereka telah pergi</p>
+            </div>
+
+<h3>Pola Fi'il Mazi</h3>
+            <p>Fi'il Mazi mempunyai pola asas yang terdiri daripada tiga huruf (fi'il mujarrad) atau lebih (fi'il mazid):</p>
+            <div class="example">
+                <p><strong>Fi'il Mujarrad</strong> (3 huruf):</p>
+                <p class="arabic">فَعَلَ (fa'ala) - Dia telah melakukan</p>
+                <p class="arabic">ضَرَبَ (daraba) - Dia telah memukul</p>
+
+<p><strong>Fi'il Mazid</strong> (lebih dari 3 huruf):</p>
+                <p class="arabic">أَكْرَمَ (akrama) - Dia telah memuliakan</p>
+                <p class="arabic">تَعَلَّمَ (ta'allama) - Dia telah belajar</p>
+                <p class="arabic">اسْتَخْرَجَ (istakhraja) - Dia telah mengeluarkan</p>
+            </div>
+
+<h3>Contoh Ayat</h3>
+            <div class="example">
+                <p class="arabic">كَتَبَ الطَّالِبُ الدَّرْسَ. (Kataba at-talibu ad-darsa) - Pelajar itu telah menulis pelajaran.</p>
+                <p class="arabic">ذَهَبَتِ الفَتَاةُ إِلَى المَدْرَسَةِ. (Dhahabati al-fatatu ila al-madrasati) - Gadis itu telah pergi ke sekolah.</p>
+                <p class="arabic">قَدْ فَهِمْتُ الشَّرْحَ. (Qad fahimtu ash-sharha) - Sesungguhnya saya telah memahami penjelasan.</p>
+                <p class="arabic">أَكَلَ الوَلَدُ التُّفَّاحَةَ. (Akala al-waladu at-tuffahata) - Budak lelaki itu telah memakan epal.</p>
+            </div>
+
+<div class="back-to-prev-container">
+                <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showFiilSubtopics()">Back to Previous</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Fi'il Mudari' Page -->
+    <div id="fiil-mudari-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Fi'il Mudari' (الفعل المضارع)</h1>
+        <div class="subtopic-content">
+            <h2>Pengenalan kepada Fi'il Mudari'</h2>
+            <p>Fi'il Mudari' ialah kata kerja yang menunjukkan perbuatan yang sedang berlaku atau akan berlaku pada masa kini atau masa depan. Fi'il Mudari' boleh berubah mengikut subjek dan keadaan.</p>
+
+<h3>Ciri-ciri Fi'il Mudari'</h3>
+            <ul>
+                <li>Bermula dengan salah satu huruf mudara'ah (أ، ن، ي، ت)</li>
+                <li>Boleh menunjukkan masa kini atau masa depan</li>
+                <li>Boleh diubah dengan huruf nafi (لا، لم، لن) dan amr (lam amr)</li>
+                <li>Mempunyai tanda i'rab yang berbeza (raf', nasb, jazm)</li>
+            </ul>
+
+<h3>Contoh-contoh Fi'il Mudari'</h3>
+            <div class="example">
+                <p><strong>Bentuk Asas</strong>:</p>
+                <p class="arabic">يَكْتُبُ (yaktubu) - Dia (lelaki) sedang/akan menulis</p>
+                <p class="arabic">تَكْتُبُ (taktubu) - Kamu (lelaki)/Dia (perempuan) sedang/akan menulis</p>
+                <p class="arabic">أَكْتُبُ (aktubu) - Saya sedang/akan menulis</p>
+                <p class="arabic">نَكْتُبُ (naktubu) - Kami sedang/akan menulis</p>
+
+<p><strong>Dengan Huruf Nafi</strong>:</p>
+                <p class="arabic">لا يَكْتُبُ (la yaktubu) - Dia tidak menulis</p>
+                <p class="arabic">لَمْ يَكْتُبْ (lam yaktub) - Dia tidak menulis (lampau)</p>
+                <p class="arabic">لَنْ يَكْتُبَ (lan yaktuba) - Dia tidak akan menulis</p>
+
+<p><strong>Dengan Lam Amr</strong>:</p>
+                <p class="arabic">لِيَكْتُبْ (liyaktub) - Hendaklah dia menulis</p>
+            </div>
+
+<h3>Pola Fi'il Mudari'</h3>
+            <p>Fi'il Mudari' mempunyai pola yang berbeza mengikut wazan fi'il asalnya:</p>
+            <div class="example">
+                <p><strong>Berasal dari Fi'il Mazi 3 huruf</strong>:</p>
+                <p class="arabic">يَفْعُلُ (yaf'ulu) atau يَفْعِلُ (yaf'ilu) atau يَفْعَلُ (yaf'alu)</p>
+
+<p><strong>Berasal dari Fi'il Mazi lebih dari 3 huruf</strong>:</p>
+                <p class="arabic">يُفَعِّلُ (yufa''ilu) - Untuk fi'il mazid dengan tambahan tasydid</p>
+                <p class="arabic">يُفَاعِلُ (yufa'ilu) - Untuk fi'il mazid dengan tambahan alif</p>
+                <p class="arabic">يَسْتَفْعِلُ (yastaf'ilu) - Untuk fi'il mazid dengan tambahan istif'al</p>
+            </div>
+
+<h3>Contoh Ayat</h3>
+            <div class="example">
+                <p class="arabic">يَقْرَأُ الطَّالِبُ الكِتَابَ. (Yaqra'u at-talibu al-kitaba) - Pelajar itu sedang membaca buku.</p>
+                <p class="arabic">سَأَذْهَبُ إِلَى المَدْرَسَةِ غَدًا. (Sa-adhhabu ila al-madrasati ghada) - Saya akan pergi ke sekolah esok.</p>
+                <p class="arabic">لَنْ يَنْجَحَ الكَسُولُ. (Lan yanjuha al-kasulu) - Orang yang malas tidak akan berjaya.</p>
+                <p class="arabic">تُحَافِظُ الفَتَاةُ عَلَى الوَاجِبِ. (Tuhafizu al-fatatu 'ala al-wajibi) - Gadis itu menjaga tugasnya.</p>
+            </div>
+
+<div class="back-to-prev-container">
+                <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showFiilSubtopics()">Back to Previous</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Fi'il Amr Page -->
+    <div id="fiil-amr-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Fi'il Amr (فعل الأمر)</h1>
+        <div class="subtopic-content">
+            <h2>Pengenalan kepada Fi'il Amr</h2>
+            <p>Fi'il Amr ialah kata kerja perintah yang digunakan untuk memerintah atau meminta seseorang melakukan sesuatu. Fi'il Amr diambil dari Fi'il Mudari' dengan beberapa perubahan.</p>
+
+<h3>Ciri-ciri Fi'il Amr</h3>
+            <ul>
+                <li>Digunakan untuk memerintah, meminta, atau menasihati</li>
+                <li>Biasanya untuk orang kedua (kamu)</li>
+                <li>Boleh menerima nun taukid (نون التوكيد)</li>
+                <li>Boleh menerima ya' mukhatabah (ياء المخاطبة) untuk perempuan</li>
+                <li>Selalu dalam keadaan jazm</li>
+            </ul>
+
+<h3>Contoh-contoh Fi'il Amr</h3>
+            <div class="example">
+                <p><strong>Untuk Lelaki Tunggal</strong>:</p>
+                <p class="arabic">اُكْتُبْ (uktub) - Tulislah!</p>
+                <p class="arabic">اِقْرَأْ (iqra') - Bacalah!</p>
+                <p class="arabic">اِجْلِسْ (ijlisi) - Duduklah!</p>
+
+<p><strong>Untuk Perempuan Tunggal</strong>:</p>
+                <p class="arabic">اُكْتُبِي (uktubi) - Tulislah! (untuk perempuan)</p>
+                <p class="arabic">اِقْرَئِي (iqra'i) - Bacalah! (untuk perempuan)</p>
+
+<p><strong>Untuk Jamak</strong>:</p>
+                <p class="arabic">اُكْتُبُوا (uktubu) - Tulislah! (untuk ramai)</p>
+                <p class="arabic">اِجْلِسُوا (ijlisu) - Duduklah! (untuk ramai)</p>
+
+<p><strong>Dengan Nun Taukid</strong>:</p>
+                <p class="arabic">اُكْتُبَنَّ (uktubanna) - Tulislah sungguh-sungguh!</p>
+                <p class="arabic">اِجْلِسَنَّ (ijlisanna) - Duduklah sungguh-sungguh!</p>
+            </div>
+
+<h3>Pembentukan Fi'il Amr</h3>
+            <p>Fi'il Amr dibentuk dari Fi'il Mudari' dengan:</p>
+            <ol>
+                <li>Membuang huruf mudara'ah</li>
+                <li>Menukar harakat huruf pertama menjadi sukun</li>
+                <li>Menambah hamzah wasal di awal jika perlu</li>
+            </ol>
+
+<h3>Contoh Ayat</h3>
+            <div class="example">
+                <p class="arabic">اُكْتُبِ الدَّرْسَ. (Uktubi ad-darsa) - Tulislah pelajaran itu.</p>
+                <p class="arabic">اِسْتَمِعُوا إِلَى المُعَلِّمِ. (Istami'u ila al-mu'allimi) - Dengarlah guru itu.</p>
+                <p class="arabic">اِجْلِسِي هُنَا يَا فَاطِمَةُ. (Ijlisī hunā yā Fāṭimah) - Duduklah di sini wahai Fatimah.</p>
+                <p class="arabic">اُدْرُسُوا جَيِّدًا لِلِامْتِحَانِ. (Udrusū jayyidan lil-imtiḥān) - Belajarlah bersungguh-sungguh untuk peperiksaan.</p>
+            </div>
+
+<div class="back-to-prev-container">
+                <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showFiilSubtopics()">Back to Previous</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Ahwal Fi'il Page -->
+    <div id="fiil-ahwal-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <h1>Ahwal Fi'il (أحوال الفعل)</h1>
+        <div class="subtopic-content">
+            <h2>Pengenalan kepada Ahwal Fi'il</h2>
+            <p>Ahwal Fi'il merujuk kepada keadaan atau sifat-sifat yang boleh dimiliki oleh Fi'il, seperti transitif (mutaddi) atau intransitif (lazim), sahih atau mu'tal, dan lain-lain.</p>
+
+<h3>Jenis-jenis Ahwal Fi'il</h3>
+            <ul>
+                <li><strong>Fi'il Mutaddi (متعدي)</strong>: Kata kerja transitif yang memerlukan objek</li>
+                <li><strong>Fi'il Lazim (لازم)</strong>: Kata kerja intransitif yang tidak memerlukan objek</li>
+                <li><strong>Fi'il Sahih (صحيح)</strong>: Kata kerja yang tidak mengandungi huruf sakit (ا، و، ي)</li>
+                <li><strong>Fi'il Mu'tal (معتل)</strong>: Kata kerja yang mengandungi huruf sakit</li>
+                <li><strong>Fi'il Majhul (مجهول)</strong>: Kata kerja pasif</li>
+                <li><strong>Fi'il Ma'lum (معلوم)</strong>: Kata kerja aktif</li>
+            </ul>
+
+<h3>Contoh-contoh</h3>
+            <div class="example">
+                <p><strong>Fi'il Mutaddi</strong>:</p>
+                <p class="arabic">ضَرَبَ (daraba) - Dia telah memukul (sesuatu)</p>
+                <p class="arabic">أَكَلَ (akala) - Dia telah makan (sesuatu)</p>
+
+<p><strong>Fi'il Lazim</strong>:</p>
+                <p class="arabic">ذَهَبَ (dhahaba) - Dia telah pergi</p>
+                <p class="arabic">جَلَسَ (jalasa) - Dia telah duduk</p>
+
+<p><strong>Fi'il Sahih</strong>:</p>
+                <p class="arabic">كَتَبَ (kataba) - Dia telah menulis</p>
+                <p class="arabic">ضَرَبَ (daraba) - Dia telah memukul</p>
+
+<p><strong>Fi'il Mu'tal</strong>:</p>
+                <p class="arabic">قَالَ (qala) - Dia telah berkata</p>
+                <p class="arabic">بَاعَ (ba'a) - Dia telah menjual</p>
+
+<p><strong>Fi'il Majhul</strong>:</p>
+                <p class="arabic">كُتِبَ (kutiba) - Telah ditulis</p>
+                <p class="arabic">ضُرِبَ (duriba) - Telah dipukul</p>
+            </div>
+
+<h3>Perubahan Makna</h3>
+            <p>Ahwal Fi'il boleh mengubah makna ayat:</p>
+            <div class="example">
+                <p class="arabic">ضَرَبَ زَيْدٌ عَمْرًا. (Daraba Zaydun 'Amran) - Zaid telah memukul Amr (ma'lum/mutaddi)</p>
+                <p class="arabic">ضُرِبَ عَمْرٌ. (Duriba 'Amrun) - Amr telah dipukul (majhul)</p>
+                <p class="arabic">ذَهَبَ زَيْدٌ. (Dhahaba Zaydun) - Zaid telah pergi (lazim)</p>
+            </div>
+
+<h3>Kegunaan dalam Ayat</h3>
+            <p>Memahami Ahwal Fi'il penting untuk:</p>
+            <ul>
+                <li>Mengetahui sama ada ayat memerlukan maf'ul bih (objek) atau tidak</li>
+                <li>Memahami struktur ayat yang betul</li>
+                <li>Mengubah ayat aktif kepada pasif dan sebaliknya</li>
+                <li>Menggunakan kata kerja yang sesuai dalam konteks</li>
+            </ul>
+
+<div class="back-to-prev-container">
+                <button class="back-to-prev-button" onmouseover="playHoverSound()" onclick="showFiilSubtopics()">Back to Previous</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Fi'il Quiz Page -->
+    <div id="fiil-quiz-page">
+        <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
+        <button class="back-button" onmouseover="playHoverSound()" onclick="showFiilPage()">Back</button>
+        <button class="topic-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Topic</button>
+        <div class="quiz-container" id="fiil-quiz-container">
+            <div class="quiz-header">
+                <h2>Kuiz Bahasa Arab - Fi'il</h2>
+                <div class="quiz-progress" id="fiil-quiz-progress">Soalan 1 daripada 30</div>
+            </div>
+
+<div id="fiil-question-container">
+                <div class="question-text" id="fiil-question-text"></div>
+                <div class="options-container" id="fiil-options-container"></div>
+                <div class="feedback-container" id="fiil-feedback-container">
+                    <div class="feedback-title" id="fiil-feedback-title"></div>
+                    <div class="explanation" id="fiil-explanation"></div>
+                </div>
+            </div>
+
+<div class="quiz-navigation">
+                <button class="quiz-btn" id="fiil-next-btn" onmouseover="playHoverSound()" onclick="nextFiilQuestion()">Seterusnya</button>
+            </div>
+        </div>
+
+<div class="result-container" id="fiil-result-container">
+            <div class="result-title">Keputusan Kuiz Anda</div>
+            <div class="result-score" id="fiil-result-score"></div>
+            <div class="result-message">
+                <div class="celebration" id="fiil-celebration"></div>
+                <div class="encouragement" id="fiil-encouragement"></div>
+            </div>
+            <button class="restart-btn" onmouseover="playHoverSound()" onclick="restartFiilQuiz()">Ambil Kuiz Lagi</button>
+        </div>
+    </div>
+
+<!-- Confetti container -->
+    <div id="confetti-container" class="confetti-container"></div>
+
+<script>
+        // Ism Dialogs
+        const ismDialogs = [
+            {
+                character: "Ali",
+                text: "Assalamualaikum, Aisyah! Jom mulakan pengembaraan kita dengan 'Ism'. Tahukah kamu apa itu Ism?"
+            },
+            {
+                character: "Aisyah",
+                text: "Waalaikumussalam, Ali! Ism ialah kata nama dalam bahasa Arab, kan? Ia merujuk kepada orang, benda, tempat, atau konsep. Betul tak?"
+            },
+            {
+                character: "Ali",
+                text: "Betul, Aisyah! Ism berbeza daripada Fi'il (kata kerja) seperti 'كتب' (menulis), dan Harf (kata tugas) seperti 'من' (daripada). Ism boleh jadi benda konkrit seperti 'مكتب' (meja) atau abstrak seperti 'حب' (cinta)."
+            },
+            {
+                character: "Aisyah",
+                text: "Wow, menarik! Apakah ciri-ciri utama Ism yang perlu saya tahu?"
+            },
+            {
+                character: "Ali",
+                text: "Ism punya ciri istimewa, dengar ni: <br>• Menerima tanda i'rab seperti fathah (ــَــ), kasrah (ـــِــ), dammah (ـــُــ).<br>• Boleh ditambah 'ال' untuk jadi khusus, seperti 'الكتاب' (buku itu).<br>• Boleh jadi subjek atau objek dalam ayat.<br>• Tidak terikat masa, tak macam Fi'il!"
+            },
+            {
+                character: "Aisyah",
+                text: "Faham! Tapi, adakah Ism ada jenis-jenis yang berbeza? Ceritakan dengan penuh semangat, Ali!"
+            },
+            {
+                character: "Ali",
+                text: "Oh, pasti! Ism ada pelbagai jenis, diklasifikasi mengikut beberapa kriteria seronok! Pilih butang di bawah untuk meneroka setiap jenis dengan lebih terperinci!"
+            }
+        ];
+
+// Fi'il Dialogs
+        const fiilDialogs = [
+            {
+                character: "Aisyah",
+                text: "Ali, sekarang kita sudah mempelajari Ism. Jom kita beralih kepada Fi'il! Boleh terangkan apa itu Fi'il?"
+            },
+            {
+                character: "Ali",
+                text: "Waalaikumussalam, Aisyah! Fi'il ialah kata kerja dalam bahasa Arab yang menunjukkan perbuatan atau kejadian. Berbeza dengan Ism, Fi'il mempunyai ciri masa - sama ada telah berlaku, sedang berlaku atau akan berlaku."
+            },
+            {
+                character: "Aisyah",
+                text: "Oh, menarik! Jadi Fi'il ada kaitan dengan masa ya? Boleh beri contoh?"
+            },
+            {
+                character: "Ali",
+                text: "Ya betul! Contohnya:<br>• 'كَتَبَ' (kataba) - dia telah menulis (lampau)<br>• 'يَكْتُبُ' (yaktubu) - dia sedang/akan menulis (kini/masa depan)<br>• 'اُكْتُبْ' (uktub) - tulislah! (perintah)"
+            },
+            {
+                character: "Aisyah",
+                text: "Faham! Ada lagi ciri-ciri Fi'il yang penting?"
+            },
+            {
+                character: "Ali",
+                text: "Ya! Fi'il juga mempunyai:<br>• Subjek (fa'il) yang melakukan perbuatan<br>• Boleh ada objek (maf'ul bih) yang menerima perbuatan<br>• Boleh diubah bentuknya menjadi aktif atau pasif<br>• Mempunyai pola tertentu mengikut jenisnya"
+            },
+            {
+                character: "Aisyah",
+                text: "Hebatnya! Jadi, apakah jenis-jenis Fi'il yang perlu kita tahu?"
+            },
+            {
+                character: "Ali",
+                text: "Fi'il boleh diklasifikasikan mengikut masa, bentuk dan ciri-ciri lain. Mari kita terokai satu persatu dengan memilih butang di bawah!"
+            }
+        ];
+
+// Quiz Questions
+        const questions = [
+            // Easy Questions (1-10)
+            {
+                question: "Apakah maksud 'Ism' dalam Bahasa Arab?",
+                options: [
+                    "Kata kerja",
+                    "Kata nama",
+                    "Kata tugas",
+                    "Kata sifat"
+                ],
+                answer: 1,
+                explanation: "Ism dalam Bahasa Arab bermaksud 'kata nama' yang merujuk kepada orang, benda, tempat atau konsep."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Ism?",
+                options: [
+                    "كَتَبَ (menulis)",
+                    "مِنْ (dari)",
+                    "كِتَابٌ (buku)",
+                    "جَمِيلٌ (cantik)"
+                ],
+                answer: 2,
+                explanation: "'كِتَابٌ' (buku) adalah Ism (kata nama), manakala 'كَتَبَ' adalah Fi'il (kata kerja), 'مِنْ' adalah Harf (kata tugas), dan 'جَمِيلٌ' adalah Sifat (kata sifat)."
+            },
+            {
+                question: "Apakah bentuk jamak bagi 'طَالِبٌ' (pelajar)?",
+                options: [
+                    "طَالِبَانِ",
+                    "طَالِبَاتٌ",
+                    "طُلَّابٌ",
+                    "طَالِبُونَ"
+                ],
+                answer: 2,
+                explanation: "Bentuk jamak bagi 'طَالِبٌ' (pelajar lelaki) adalah 'طُلَّابٌ' (jamak mudhakkar salim). 'طَالِبَانِ' adalah bentuk dual, 'طَالِبَاتٌ' adalah jamak untuk perempuan, dan 'طَالِبُونَ' adalah bentuk lain yang juga betul."
+            },
+            {
+                question: "Manakah antara berikut adalah Ism Mu'annath (feminin)?",
+                options: [
+                    "رَجُلٌ (lelaki)",
+                    "كَلْبٌ (anjing)",
+                    "مُدَرِّسَةٌ (guru perempuan)",
+                    "بَيْتٌ (rumah)"
+                ],
+                answer: 2,
+                explanation: "'مُدَرِّسَةٌ' (guru perempuan) adalah Ism Mu'annath kerana mempunyai ta' marbutah (ـة) di akhir kata yang menunjukkan feminin."
+            },
+            {
+                question: "Apakah maksud 'الْكِتَابُ' berbanding 'كِتَابٌ'?",
+                options: [
+                    "Buku tertentu",
+                    "Banyak buku",
+                    "Dua buku",
+                    "Buku kecil"
+                ],
+                answer: 0,
+                explanation: "'الْكِتَابُ' bermaksud 'buku tertentu' (ma'rifah) dengan penambahan alif lam (ال), manakala 'كِتَابٌ' bermaksud 'sebuah buku' (nakirah) secara umum."
+            },
+            {
+                question: "Manakah antara berikut adalah kata ganti diri pertama?",
+                options: [
+                    "هُوَ (dia lelaki)",
+                    "أَنَا (saya)",
+                    "أَنْتَ (kamu lelaki)",
+                    "هِيَ (dia perempuan)"
+                ],
+                answer: 1,
+                explanation: "'أَنَا' bermaksud 'saya' dan merupakan kata ganti diri pertama. Yang lain adalah kata ganti diri ketiga dan kedua."
+            },
+            {
+                question: "Apakah maksud 'هَذَا'?",
+                options: [
+                    "Itu (lelaki)",
+                    "Ini (lelaki)",
+                    "Itu (perempuan)",
+                    "Ini (perempuan)"
+                ],
+                answer: 1,
+                explanation: "'هَذَا' bermaksud 'ini' untuk kata nama maskulin (lelaki). Untuk feminin, bentuknya adalah 'هَذِهِ'."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Ism Nakirah?",
+                options: [
+                    "الوَلَدُ (budak lelaki itu)",
+                    "وَلَدٌ (seorang budak lelaki)",
+                    "هَذَا الوَلَدُ (budak lelaki ini)",
+                    "وَلَدِي (budak lelaki saya)"
+                ],
+                answer: 1,
+                explanation: "'وَلَدٌ' adalah Ism Nakirah (umum) kerana tidak ada penentu khusus seperti alif lam, kata tunjuk, atau kata ganti."
+            },
+            {
+                question: "Apakah bentuk dual bagi 'بَابٌ' (pintu)?",
+                options: [
+                    "بَابَانِ",
+                    "بَابَاتٌ",
+                    "أَبْوَابٌ",
+                    "بَابَيْنِ"
+                ],
+                answer: 0,
+                explanation: "Bentuk dual bagi 'بَابٌ' adalah 'بَابَانِ' dalam keadaan marfu' (subjek) dan 'بَابَيْنِ' dalam keadaan mansub/majrur (objek)."
+            },
+            {
+                question: "Manakah antara berikut adalah Ism yang merujuk kepada tempat?",
+                options: [
+                    "قَلَمٌ (pen)",
+                    "مَكْتَبٌ (meja)",
+                    "مَدْرَسَةٌ (sekolah)",
+                    "كِتَابٌ (buku)"
+                ],
+                answer: 2,
+                explanation: "'مَدْرَسَةٌ' (sekolah) adalah Ism yang merujuk kepada tempat. Yang lain merujuk kepada benda."
+            },
+            // Medium Questions (11-20)
+            {
+                question: "Apakah jenis Ism dalam ayat: 'الرَّجُلُ الطَّوِيلُ فِي الحَدِيقَةِ'?",
+                options: [
+                    "Nakirah",
+                    "Ma'rifah",
+                    "Mu'annath",
+                    "Jam'"
+                ],
+                answer: 1,
+                explanation: "'الرَّجُلُ' adalah Ism Ma'rifah kerana ada alif lam (ال) yang menjadikannya khusus (lelaki tertentu)."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Ism Jam' Taksir?",
+                options: [
+                    "طُلَّابٌ (pelajar-pelajar)",
+                    "كُتُبٌ (buku-buku)",
+                    "مُعَلِّمُونَ (guru-guru)",
+                    "طَالِبَاتٌ (pelajar-pelajar perempuan)"
+                ],
+                answer: 1,
+                explanation: "'كُتُبٌ' adalah Jam' Taksir (jamak tidak teratur) bagi 'كِتَابٌ'. Bentuk jamaknya tidak mengikut pola biasa."
+            },
+            {
+                question: "Apakah kata ganti yang sesuai untuk menggantikan 'الطَّالِبَاتُ' dalam ayat: 'الطَّالِبَاتُ مُجْتَهِدَاتٌ'?",
+                options: [
+                    "هُنَّ",
+                    "هُمْ",
+                    "أَنْتُنَّ",
+                    "نَحْنُ"
+                ],
+                answer: 0,
+                explanation: "'هُنَّ' adalah kata ganti untuk jamak feminin (mereka perempuan) yang sesuai dengan 'الطَّالِبَاتُ'."
+            },
+            {
+                question: "Manakah antara berikut BUKAN ciri Ism?",
+                options: [
+                    "Menerima tanwin",
+                    "Boleh didahului dengan alif lam",
+                    "Mempunyai bentuk lampau, kini dan akan datang",
+                    "Boleh menjadi mubtada' atau khabar"
+                ],
+                answer: 2,
+                explanation: "Ism tidak mempunyai bentuk masa (lampau, kini, akan datang) - ini adalah ciri Fi'il (kata kerja)."
+            },
+            {
+                question: "Apakah jenis Ism 'الَّذِي' dalam ayat: 'الرَّجُلُ الَّذِي رَأَيْتُهُ أَمْسِ'?",
+                options: [
+                    "Isyarah",
+                    "Mausul",
+                    "Dhamir",
+                    "Alam"
+                ],
+                answer: 1,
+                explanation: "'الَّذِي' adalah Ism Mausul (kata sambung) yang menghubungkan dua bahagian ayat."
+            },
+            {
+                question: "Manakah antara berikut adalah Ism Mu'annath Haqiqi?",
+                options: [
+                    "شَمْسٌ (matahari)",
+                    "زَيْنَبُ (Zainab)",
+                    "حَائِطٌ (tembok)",
+                    "بَحْرٌ (laut)"
+                ],
+                answer: 1,
+                explanation: "'زَيْنَبُ' adalah Ism Mu'annath Haqiqi (feminin sebenar) kerana merujuk kepada nama perempuan. 'شَمْسٌ' adalah Mu'annath Lafzi."
+            },
+            {
+                question: "Apakah bentuk jamak bagi 'مُدَرِّسَةٌ'?",
+                options: [
+                    "مُدَرِّسَاتٌ",
+                    "مُدَرِّسُونَ",
+                    "مُدَرِّسَانِ",
+                    "مَدَارِسُ"
+                ],
+                answer: 0,
+                explanation: "Bentuk jamak bagi 'مُدَرِّسَةٌ' (guru perempuan) adalah 'مُدَرِّسَاتٌ' (jamak mu'annath salim)."
+            },
+            {
+                question: "Manakah antara berikut menunjukkan contoh Ism yang di'irab dengan kasrah?",
+                options: [
+                    "جَاءَ الوَلَدُ",
+                    "رَأَيْتُ الوَلَدَ",
+                    "مَرَرْتُ بِالوَلَدِ",
+                    "الوَلَدُ ذَكِيٌّ"
+                ],
+                answer: 2,
+                explanation: "Dalam 'مَرَرْتُ بِالوَلَدِ', 'الوَلَدِ' berirab kasrah kerana didahului huruf jar 'بِ'."
+            },
+            {
+                question: "Apakah jenis Ism dalam frasa: 'هَذِهِ الشَّجَرَةُ'?",
+                options: [
+                    "Nakirah",
+                    "Ma'rifah dengan Isyarah",
+                    "Ma'rifah dengan Dhamir",
+                    "Jam'"
+                ],
+                answer: 1,
+                explanation: "'هَذِهِ الشَّجَرَةُ' adalah Ism Ma'rifah yang ditentukan oleh kata tunjuk 'هَذِهِ'."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Ism Jam' Mudhakkar Salim?",
+                options: [
+                    "رِجَالٌ",
+                    "كُتُبٌ",
+                    "مُسْلِمُونَ",
+                    "بَنَاتٌ"
+                ],
+                answer: 2,
+                explanation: "'مُسْلِمُونَ' adalah contoh Jam' Mudhakkar Salim (jamak lelaki tetap) yang mengikut pola tertentu."
+            },
+            // Hard Questions (21-30)
+            {
+                question: "Apakah jenis Ism dalam ayat: 'مَا فِي القَاعَةِ إِلَّا طَالِبٌ' dari segi bilangan?",
+                options: [
+                    "Mufrad",
+                    "Tathniyah",
+                    "Jam' Qillah",
+                    "Jam' Kathrah"
+                ],
+                answer: 0,
+                explanation: "'طَالِبٌ' dalam ayat ini adalah Ism Mufrad (tunggal) walaupun ayat bermaksud 'Tiada dalam dewan melainkan pelajar(-pelajar)' kerana tatabahasa Arab menggunakan bentuk mufrad selepas 'إِلَّا'."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Ism yang di'irab dengan fathah kerana menjadi maf'ul bih?",
+                options: [
+                    "ذَهَبَ الطَّالِبُ",
+                    "قَرَأَ الطَّالِبُ الكِتَابَ",
+                    "خَرَجَ الطَّالِبُ مِنَ الفَصْلِ",
+                    "الطَّالِبُ نَشِيطٌ"
+                ],
+                answer: 1,
+                explanation: "Dalam 'قَرَأَ الطَّالِبُ الكِتَابَ', 'الكِتَابَ' adalah maf'ul bih (objek) yang di'irab dengan fathah."
+            },
+            {
+                question: "Apakah jenis Ism 'مَنْ' dalam ayat: 'مَنْ قَرَأَ القُرْآنَ فَهُوَ كَالشَّجَرَةِ'?",
+                options: [
+                    "Ism Mausul",
+                    "Ism Isyarah",
+                    "Ism Istifham",
+                    "Ism Syarat"
+                ],
+                answer: 3,
+                explanation: "'مَنْ' dalam ayat ini adalah Ism Syarat (kata nama syarat) yang memulakan ayat syarat."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Ism yang menunjukkan makna 'umum' dalam konteks tertentu?",
+                options: [
+                    "الرِّجَالُ فِي الغُرْفَةِ",
+                    "رَجُلٌ فِي الغُرْفَةِ",
+                    "هَذَا الرَّجُلُ فِي الغُرْفَةِ",
+                    "رَجُلَاكَ فِي الغُرْفَةِ"
+                ],
+                answer: 1,
+                explanation: "'رَجُلٌ فِي الغُرْفَةِ' menunjukkan makna umum (seorang lelaki) berbanding yang lain yang spesifik."
+            },
+            {
+                question: "Apakah jenis Ism 'أَيُّ' dalam ayat: 'أَيُّ كِتَابٍ تُحِبُّ؟'?",
+                options: [
+                    "Ism Istifham",
+                    "Ism Mausul",
+                    "Ism Isyarah",
+                    "Ism Alam"
+                ],
+                answer: 0,
+                explanation: "'أَيُّ' dalam ayat ini adalah Ism Istifham (kata tanya) yang bertanya tentang buku tertentu."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Ism yang menunjukkan makna 'jenis'?",
+                options: [
+                    "اِشْتَرَيْتُ كِتَابًا",
+                    "اِشْتَرَيْتُ الكِتَابَ",
+                    "اِشْتَرَيْتُ كِتَابَيْنِ",
+                    "الكِتَابُ نَافِعٌ"
+                ],
+                answer: 3,
+                explanation: "'الكِتَابُ نَافِعٌ' menunjukkan makna jenis (buku secara umum bermanfaat) bukan buku tertentu."
+            },
+            {
+                question: "Apakah jenis Ism 'مَا' dalam ayat: 'مَا فِي البَيْتِ أَحَدٌ'?",
+                options: [
+                    "Nafiyah",
+                    "Mausula",
+                    "Isyarah",
+                    "Istifham"
+                ],
+                answer: 0,
+                explanation: "'مَا' dalam ayat ini adalah Ism Nafiyah (penafian) yang menafikan kewujudan seseorang di rumah."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Ism yang di'irab dengan dammah kerana menjadi fa'il?",
+                options: [
+                    "ضَرَبَ الأُسْتَاذُ الطَّالِبَ",
+                    "ضَرَبَ الأُسْتَاذَ الطَّالِبُ",
+                    "مَرَرْتُ بِالأُسْتَاذِ",
+                    "هَذَا الأُسْتَاذُ"
+                ],
+                answer: 1,
+                explanation: "Dalam 'ضَرَبَ الأُسْتَاذَ الطَّالِبُ', 'الطَّالِبُ' adalah fa'il (subjek) yang di'irab dengan dammah."
+            },
+            {
+                question: "Apakah jenis Ism 'كُلُّ' dalam ayat: 'كُلُّ طَالِبٍ مُجْتَهِدٌ'?",
+                options: [
+                    "Ism Tafdil",
+                    "Ism Isyarah",
+                    "Ism Mubham",
+                    "Ism Jins"
+                ],
+                answer: 3,
+                explanation: "'كُلُّ' dalam ayat ini adalah Ism Jins yang bermaksud 'setiap' menunjukkan makna umum."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Ism yang menunjukkan makna 'panggilan'?",
+                options: [
+                    "يَا طَالِبُ، اِجْتَهِدْ",
+                    "الطَّالِبُ مُجْتَهِدٌ",
+                    "رَأَيْتُ الطَّالِبَ",
+                    "ذَهَبَ الطَّالِبُ"
+                ],
+                answer: 0,
+                explanation: "'يَا طَالِبُ' adalah contoh Ism Nida' (panggilan) di mana Ism dipanggil dengan 'يَا'."
+            }
+        ];
+
+// Fi'il Quiz Questions
+        const fiilQuestions = [
+            // Easy Questions (1-10)
+            {
+                question: "Apakah maksud 'Fi'il' dalam Bahasa Arab?",
+                options: [
+                    "Kata nama",
+                    "Kata kerja",
+                    "Kata tugas",
+                    "Kata sifat"
+                ],
+                answer: 1,
+                explanation: "Fi'il dalam Bahasa Arab bermaksud 'kata kerja' yang menunjukkan perbuatan atau kejadian."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Fi'il Mazi?",
+                options: [
+                    "يَكْتُبُ (sedang menulis)",
+                    "كَتَبَ (telah menulis)",
+                    "اُكْتُبْ (tulislah)",
+                    "كِتَابٌ (buku)"
+                ],
+                answer: 1,
+                explanation: "'كَتَبَ' adalah Fi'il Mazi (kata kerja lampau), manakala 'يَكْتُبُ' adalah Mudari', 'اُكْتُبْ' adalah Amr, dan 'كِتَابٌ' adalah Ism."
+            },
+            {
+                question: "Apakah bentuk Mudari' bagi 'كَتَبَ'?",
+                options: [
+                    "يَكْتُبُ",
+                    "كَاتِبٌ",
+                    "مَكْتُوبٌ",
+                    "كِتَابٌ"
+                ],
+                answer: 0,
+                explanation: "Bentuk Mudari' bagi 'كَتَبَ' adalah 'يَكْتُبُ' (dia sedang/akan menulis)."
+            },
+            {
+                question: "Manakah antara berikut adalah Fi'il Amr?",
+                options: [
+                    "كَتَبَ (telah menulis)",
+                    "يَكْتُبُ (sedang menulis)",
+                    "اُكْتُبْ (tulislah)",
+                    "كِتَابٌ (buku)"
+                ],
+                answer: 2,
+                explanation: "'اُكْتُبْ' adalah Fi'il Amr (kata perintah) yang bermaksud 'tulislah'."
+            },
+            {
+                question: "Apakah maksud 'يَقْرَأُ'?",
+                options: [
+                    "Dia telah membaca",
+                    "Dia sedang/akan membaca",
+                    "Bacalah!",
+                    "Telah dibaca"
+                ],
+                answer: 1,
+                explanation: "'يَقْرَأُ' adalah Fi'il Mudari' yang bermaksud 'dia sedang/akan membaca'."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Fi'il Majhul?",
+                options: [
+                    "كَتَبَ (telah menulis)",
+                    "كُتِبَ (telah ditulis)",
+                    "يَكْتُبُ (sedang menulis)",
+                    "اُكْتُبْ (tulislah)"
+                ],
+                answer: 1,
+                explanation: "'كُتِبَ' adalah Fi'il Majhul (kata kerja pasif) yang bermaksud 'telah ditulis'."
+            },
+            {
+                question: "Apakah bentuk Amr bagi 'يَكْتُبُ'?",
+                options: [
+                    "كَتَبَ",
+                    "كُتِبَ",
+                    "اُكْتُبْ",
+                    "يَكْتُبُ"
+                ],
+                answer: 2,
+                explanation: "Bentuk Amr bagi 'يَكْتُبُ' adalah 'اُكْتُبْ' (tulislah!)."
+            },
+            {
+                question: "Manakah antara berikut adalah Fi'il Lazim?",
+                options: [
+                    "ضَرَبَ (telah memukul)",
+                    "ذَهَبَ (telah pergi)",
+                    "أَكَلَ (telah makan)",
+                    "شَرِبَ (telah minum)"
+                ],
+                answer: 1,
+                explanation: "'ذَهَبَ' adalah Fi'il Lazim (intransitif) kerana tidak memerlukan objek langsung."
+            },
+            {
+                question: "Apakah bentuk Mazi bagi 'يَذْهَبُ'?",
+                options: [
+                    "ذَهَبَ",
+                    "اِذْهَبْ",
+                    "ذَاهِبٌ",
+                    "مَذْهَبٌ"
+                ],
+                answer: 0,
+                explanation: "Bentuk Mazi bagi 'يَذْهَبُ' adalah 'ذَهَبَ' (dia telah pergi)."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Fi'il Mu'tal?",
+                options: [
+                    "ضَرَبَ (telah memukul)",
+                    "قَالَ (telah berkata)",
+                    "كَتَبَ (telah menulis)",
+                    "ذَهَبَ (telah pergi)"
+                ],
+                answer: 1,
+                explanation: "'قَالَ' adalah Fi'il Mu'tal kerana mengandungi huruf sakit (alif)."
+            },
+            // Medium Questions (11-20)
+            {
+                question: "Apakah jenis Fi'il dalam ayat: 'قَدْ فَهِمَ الطَّالِبُ الدَّرْسَ'?",
+                options: [
+                    "Mazi dengan Qad",
+                    "Mudari'",
+                    "Amr",
+                    "Majhul"
+                ],
+                answer: 0,
+                explanation: "'قَدْ فَهِمَ' adalah Fi'il Mazi yang didahului dengan 'qad' untuk menunjukkan kepastian."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Fi'il Mudari' Mansub?",
+                options: [
+                    "لَنْ يَذْهَبَ",
+                    "لَمْ يَذْهَبْ",
+                    "يَذْهَبُ",
+                    "اِذْهَبْ"
+                ],
+                answer: 0,
+                explanation: "'لَنْ يَذْهَبَ' adalah Fi'il Mudari' Mansub kerana didahului 'lan' yang menyebabkan nasb."
+            },
+            {
+                question: "Apakah bentuk Majhul bagi 'ضَرَبَ زَيْدٌ عَمْرًا'?",
+                options: [
+                    "ضُرِبَ زَيْدٌ",
+                    "ضَرَبَ عَمْرٌ",
+                    "ضُرِبَ عَمْرٌ",
+                    "يُضْرَبُ عَمْرٌ"
+                ],
+                answer: 2,
+                explanation: "Bentuk Majhul bagi 'ضَرَبَ زَيْدٌ عَمْرًا' adalah 'ضُرِبَ عَمْرٌ' (Amr telah dipukul)."
+            },
+            {
+                question: "Manakah antara berikut BUKAN ciri Fi'il?",
+                options: [
+                    "Mempunyai bentuk masa",
+                    "Boleh menjadi fa'il atau maf'ul bih",
+                    "Menerima dhomir muttasil",
+                    "Boleh didahului dengan alif lam"
+                ],
+                answer: 3,
+                explanation: "Fi'il tidak boleh didahului dengan alif lam - ini adalah ciri Ism."
+            },
+            {
+                question: "Apakah jenis Fi'il 'لِيَكْتُبْ' dalam ayat: 'لِيَكْتُبِ الطَّالِبُ الوَاجِبَ'?",
+                options: [
+                    "Mudari' Mansub dengan Lam Amr",
+                    "Mazi",
+                    "Amr",
+                    "Majhul"
+                ],
+                answer: 0,
+                explanation: "'لِيَكْتُبْ' adalah Fi'il Mudari' Mansub dengan Lam Amr yang bermaksud 'hendaklah dia menulis'."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Fi'il Sahih?",
+                options: [
+                    "قَالَ (telah berkata)",
+                    "ضَرَبَ (telah memukul)",
+                    "بَاعَ (telah menjual)",
+                    "ذَهَبَ (telah pergi)"
+                ],
+                answer: 1,
+                explanation: "'ضَرَبَ' adalah Fi'il Sahih kerana tidak mengandungi huruf sakit."
+            },
+            {
+                question: "Apakah bentuk Amr untuk perempuan bagi 'يَكْتُبُ'?",
+                options: [
+                    "اُكْتُبْ",
+                    "اُكْتُبِي",
+                    "اُكْتُبَا",
+                    "اُكْتُبْنَ"
+                ],
+                answer: 1,
+                explanation: "Bentuk Amr untuk perempuan bagi 'يَكْتُبُ' adalah 'اُكْتُبِي' (tulislah! - untuk perempuan)."
+            },
+            {
+                question: "Manakah antara berikut menunjukkan contoh Fi'il Mudari' yang di'irab dengan jazm?",
+                options: [
+                    "لَمْ يَكْتُبْ",
+                    "لَنْ يَكْتُبَ",
+                    "يَكْتُبُ",
+                    "قَدْ كَتَبَ"
+                ],
+                answer: 0,
+                explanation: "'لَمْ يَكْتُبْ' adalah Fi'il Mudari' yang di'irab dengan jazm kerana didahului 'lam' nafi."
+            },
+            {
+                question: "Apakah jenis Fi'il dalam frasa: 'قَدْ نَجَحَ الطَّالِبُ'?",
+                options: [
+                    "Mazi dengan Qad",
+                    "Mudari'",
+                    "Amr",
+                    "Majhul"
+                ],
+                answer: 0,
+                explanation: "'قَدْ نَجَحَ' adalah Fi'il Mazi yang didahului 'qad' untuk menunjukkan kepastian."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Fi'il Mazid?",
+                options: [
+                    "ضَرَبَ (telah memukul)",
+                    "أَكْرَمَ (telah memuliakan)",
+                    "ذَهَبَ (telah pergi)",
+                    "كَتَبَ (telah menulis)"
+                ],
+                answer: 1,
+                explanation: "'أَكْرَمَ' adalah Fi'il Mazid (ditambah) kerana mempunyai lebih dari tiga huruf asas."
+            },
+            // Hard Questions (21-30)
+            {
+                question: "Apakah jenis Fi'il dalam ayat: 'لَنْ يَنْجَحَ الكَسُولُ' dari segi i'rab?",
+                options: [
+                    "Mudari' Marfu'",
+                    "Mudari' Mansub",
+                    "Mudari' Majzum",
+                    "Mazi"
+                ],
+                answer: 1,
+                explanation: "'لَنْ يَنْجَحَ' adalah Fi'il Mudari' Mansub kerana didahului 'lan' yang menyebabkan nasb."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Fi'il yang di'irab dengan fathah kerana menjadi jawab 'lan'?",
+                options: [
+                    "لَمْ يَكْتُبْ",
+                    "لَنْ يَكْتُبَ",
+                    "لِيَكْتُبْ",
+                    "يَكْتُبُ"
+                ],
+                answer: 1,
+                explanation: "'لَنْ يَكْتُبَ' adalah Fi'il Mudari' yang di'irab dengan fathah kerana didahului 'lan'."
+            },
+            {
+                question: "Apakah jenis Fi'il 'لِيُتِمَّ' dalam ayat: 'لِيُتِمَّ الطَّالِبُ الدَّرْسَ'?",
+                options: [
+                    "Mudari' Mansub dengan Lam Amr",
+                    "Mazi",
+                    "Amr",
+                    "Majhul"
+                ],
+                answer: 0,
+                explanation: "'لِيُتِمَّ' adalah Fi'il Mudari' Mansub dengan Lam Amr yang bermaksud 'hendaklah dia menyelesaikan'."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Fi'il yang menunjukkan makna 'permulaan'?",
+                options: [
+                    "قَدْ فَهِمَ",
+                    "أَخَذَ يَفْهَمُ",
+                    "كَانَ يَفْهَمُ",
+                    "لَنْ يَفْهَمَ"
+                ],
+                answer: 1,
+                explanation: "'أَخَذَ يَفْهَمُ' menunjukkan permulaan perbuatan (dia mula memahami)."
+            },
+            {
+                question: "Apakah jenis Fi'il 'كُنْ' dalam ayat: 'كُنْ صَادِقًا'?",
+                options: [
+                    "Amr dari 'كَانَ'",
+                    "Mudari'",
+                    "Mazi",
+                    "Majhul"
+                ],
+                answer: 0,
+                explanation: "'كُنْ' adalah Fi'il Amr yang berasal dari 'كَانَ' (adalah)."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Fi'il yang menunjukkan makna 'kebiasaan'?",
+                options: [
+                    "كَانَ يَكْتُبُ",
+                    "أَخَذَ يَكْتُبُ",
+                    "قَدْ كَتَبَ",
+                    "لَنْ يَكْتُبَ"
+                ],
+                answer: 0,
+                explanation: "'كَانَ يَكْتُبُ' menunjukkan perbuatan kebiasaan (dia biasa menulis)."
+            },
+            {
+                question: "Apakah jenis Fi'il 'يُكْتَبُ' dalam ayat: 'يُكْتَبُ الوَاجِبُ كُلَّ يَوْمٍ'?",
+                options: [
+                    "Mudari' Majhul",
+                    "Mudari' Ma'lum",
+                    "Mazi",
+                    "Amr"
+                ],
+                answer: 0,
+                explanation: "'يُكْتَبُ' adalah Fi'il Mudari' Majhul (pasif) yang bermaksud 'ditulis'."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Fi'il yang di'irab dengan sukun kerana menjadi jawab 'lam' nafi?",
+                options: [
+                    "لَمْ يَكْتُبْ",
+                    "لَنْ يَكْتُبَ",
+                    "لِيَكْتُبْ",
+                    "يَكْتُبُ"
+                ],
+                answer: 0,
+                explanation: "'لَمْ يَكْتُبْ' adalah Fi'il Mudari' yang di'irab dengan sukun kerana didahului 'lam' nafi."
+            },
+            {
+                question: "Apakah jenis Fi'il 'تَعَلَّمَ' dalam ayat: 'تَعَلَّمَ الطَّالِبُ العِلْمَ'?",
+                options: [
+                    "Mazid",
+                    "Mujarrad",
+                    "Mu'tal",
+                    "Lazim"
+                ],
+                answer: 0,
+                explanation: "'تَعَلَّمَ' adalah Fi'il Mazid (ditambah) kerana mempunyai lebih dari tiga huruf asas."
+            },
+            {
+                question: "Manakah antara berikut adalah contoh Fi'il yang menunjukkan makna 'permintaan'?",
+                options: [
+                    "اُكْتُبْ",
+                    "يَكْتُبُ",
+                    "كَتَبَ",
+                    "كُتِبَ"
+                ],
+                answer: 0,
+                explanation: "'اُكْتُبْ' adalah Fi'il Amr yang menunjukkan permintaan atau perintah."
+            }
+        ];
+
+let currentDialog = 0;
+        let currentFiilDialog = 0;
+        let currentQuestion = 0;
+        let currentFiilQuestion = 0;
+        let score = 0;
+        let fiilScore = 0;
+        let selectedOption = null;
+        let selectedFiilOption = null;
+        let answeredQuestions = Array(questions.length).fill(false);
+        let answeredFiilQuestions = Array(fiilQuestions.length).fill(false);
+
+function showCheckpointPage() {
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('checkpoint-page').style.display = 'flex';
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'none';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            playClickSound();
+        }
+
+function showHomePage() {
+            document.getElementById('checkpoint-page').style.display = 'none';
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'none';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            document.getElementById('home-page').style.display = 'flex';
+            playClickSound();
+        }
+
+function showIsmPage() {
+            document.getElementById('checkpoint-page').style.display = 'none';
+            document.getElementById('ism-page').style.display = 'flex';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'none';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            currentDialog = 0;
+            updateDialog();
+            playClickSound();
+        }
+
+function showIsmSubtopics() {
+            document.getElementById('checkpoint-page').style.display = 'none';
+            document.getElementById('ism-page').style.display = 'flex';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'none';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            currentDialog = 6;
+            updateDialog();
+            playClickSound();
+        }
+
+function showBilanganPage() {
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('bilangan-page').style.display = 'flex';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'none';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            playClickSound();
+        }
+
+function showJantinaPage() {
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'flex';
+            document.getElementById('spesifik-umum-page').style.display = 'none';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            playClickSound();
+        }
+
+function showSpesifikUmumPage() {
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'flex';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            document.querySelector('.ma-rifah-subtopic-buttons').classList.add('active');
+            playClickSound();
+        }
+
+function showSpesifikUmumSubtopics() {
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'flex';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            document.querySelector('.ma-rifah-subtopic-buttons').classList.add('active');
+            playClickSound();
+        }
+
+function showDhamirPage(scrollToTop = false) {
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'none';
+            document.getElementById('dhamir-page').style.display = 'flex';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            if (scrollToTop) {
+                window.scrollTo(0, 0);
+            }
+            playClickSound();
+        }
+
+function showIsyarahPage(scrollToTop = false) {
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'none';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'flex';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            if (scrollToTop) {
+                window.scrollTo(0, 0);
+            }
+            playClickSound();
+        }
+
+function showMausulPage(scrollToTop = false) {
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'none';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'flex';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            if (scrollToTop) {
+                window.scrollTo(0, 0);
+            }
+            playClickSound();
+        }
+
+function showAlifLamPage(scrollToTop = false) {
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'none';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'flex';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            if (scrollToTop) {
+                window.scrollTo(0, 0);
+            }
+            playClickSound();
+        }
+
+function startQuiz() {
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'flex';
+            document.getElementById('question-container').style.display = 'block';
+            document.getElementById('result-container').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+
+currentQuestion = 0;
+            score = 0;
+            selectedOption = null;
+            answeredQuestions = Array(questions.length).fill(false);
+
+loadQuestion();
+            playClickSound();
+        }
+
+function loadQuestion() {
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const quizProgress = document.getElementById('quiz-progress');
+            const nextBtn = document.getElementById('next-btn');
+            const feedbackContainer = document.getElementById('feedback-container');
+
+// Update progress
+            quizProgress.textContent = `Soalan ${currentQuestion + 1} daripada ${questions.length}`;
+
+// Update next button text
+            nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Selesai' : 'Seterusnya';
+
+// Load question
+            const currentQ = questions[currentQuestion];
+            questionText.textContent = currentQ.question;
+
+// Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            feedbackContainer.className = 'feedback-container';
+
+// Load options
+            currentQ.options.forEach((option, index) => {
+                const optionBtn = document.createElement('button');
+                optionBtn.className = 'option-btn';
+                if (answeredQuestions[currentQuestion] && index === selectedOption) {
+                    optionBtn.classList.add('selected');
                 }
+                optionBtn.textContent = option;
+                optionBtn.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionBtn);
+            });
+
+// If question was already answered, show feedback
+            if (answeredQuestions[currentQuestion]) {
+                showFeedback();
             }
         }
-        
-        // Event listener untuk klik/tap pertama
-        document.addEventListener('click', function() {
-            initMusic();
-        }, { once: true });
-        
-        // Event listener untuk tombol musik
-        musicBtn.addEventListener('click', function() {
-            if (musicPlaying) {
-                bgMusic.pause();
-                musicPlaying = false;
-                musicBtn.textContent = '🔇';
+
+function selectOption(index) {
+            if (answeredQuestions[currentQuestion]) return;
+
+const options = document.querySelectorAll('.option-btn');
+            options.forEach(btn => btn.classList.remove('selected'));
+            options[index].classList.add('selected');
+            selectedOption = index;
+
+// Check answer immediately
+            checkAnswer();
+        }
+
+function checkAnswer() {
+            if (selectedOption === null || answeredQuestions[currentQuestion]) return;
+
+const currentQ = questions[currentQuestion];
+            const options = document.querySelectorAll('.option-btn');
+
+// Mark as answered
+            answeredQuestions[currentQuestion] = true;
+
+// Check if correct
+            const isCorrect = selectedOption === currentQ.answer;
+            if (isCorrect) {
+                score++;
+                options[selectedOption].classList.add('correct');
+                playCorrectSound();
             } else {
-                bgMusic.play()
-                    .then(() => {
-                        musicPlaying = true;
-                        musicBtn.textContent = '🔊';
-                    })
-                    .catch(error => {
-                        console.log("Playback failed:", error);
-                    });
+                options[selectedOption].classList.add('incorrect');
+                options[currentQ.answer].classList.add('correct');
+                playIncorrectSound();
             }
-        });
-        
-        // Navigasi halaman sederhana
-        nextBtn.addEventListener('click', function() {
-            pages[currentPage].classList.remove('active');
-            currentPage = (currentPage + 1) % pages.length;
-            pages[currentPage].classList.add('active');
-        });
+
+// Show feedback
+            showFeedback();
+        }
+
+function showFeedback() {
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackTitle = document.getElementById('feedback-title');
+            const explanation = document.getElementById('explanation');
+            const currentQ = questions[currentQuestion];
+
+if (selectedOption === currentQ.answer) {
+                feedbackContainer.classList.add('correct-feedback');
+                feedbackTitle.textContent = 'Betul!';
+                feedbackTitle.style.color = '#27ae60';
+            } else {
+                feedbackContainer.classList.add('incorrect-feedback');
+                feedbackTitle.textContent = 'Salah! Jawapan yang betul:';
+                feedbackTitle.style.color = '#e74c3c';
+            }
+
+explanation.textContent = currentQ.explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                selectedOption = null;
+                loadQuestion();
+                playClickSound();
+            } else {
+                showResults();
+            }
+        }
+
+function showResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('result-container').style.display = 'block';
+
+const resultScore = document.getElementById('result-score');
+            const celebration = document.getElementById('celebration');
+            const encouragement = document.getElementById('encouragement');
+
+resultScore.textContent = `${score} / ${questions.length}`;
+
+if (score >= 15) {
+                celebration.textContent = 'TAHNIAH! ANDA HEBAT!';
+                encouragement.textContent = 'Anda telah menunjukkan penguasaan yang baik dalam topik Ism. Teruskan usaha!';
+                triggerConfetti();
+                playCelebrationSound();
+            } else {
+                celebration.textContent = 'TERUSKAN USAHA!';
+                encouragement.textContent = 'Jangan kecewa! Setiap kesilapan adalah peluang untuk belajar. Ulangi pelajaran dan cuba lagi! Anda pasti boleh berjaya jika terus berusaha!';
+                playEncouragementSound();
+            }
+        }
+
+function restartQuiz() {
+            startQuiz();
+            playClickSound();
+        }
+
+function updateDialog() {
+            const dialogBox = document.getElementById('dialog-box');
+            const subtopicButtons = document.getElementById('subtopic-buttons');
+            dialogBox.innerHTML = `<strong>${ismDialogs[currentDialog].character}:</strong> ${ismDialogs[currentDialog].text}`;
+            dialogBox.classList.add('active');
+            setTimeout(() => dialogBox.classList.remove('active'), 300);
+            document.querySelectorAll('.character img').forEach(img => {
+                img.style.opacity = ismDialogs[currentDialog].character === img.alt ? '1' : '0.5';
+            });
+            subtopicButtons.classList.toggle('active', currentDialog === 6);
+        }
+
+function nextDialog() {
+            currentDialog = (currentDialog + 1) % ismDialogs.length;
+            updateDialog();
+            playClickSound();
+        }
+
+function prevDialog() {
+            if (currentDialog > 0) {
+                currentDialog -= 1;
+            }
+            updateDialog();
+            playClickSound();
+        }
+
+// Fi'il Functions
+        function showFiilPage() {
+            document.getElementById('checkpoint-page').style.display = 'none';
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'none';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'flex';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            currentFiilDialog = 0;
+            updateFiilDialog();
+            playClickSound();
+        }
+
+function showFiilSubtopics() {
+            document.getElementById('checkpoint-page').style.display = 'none';
+            document.getElementById('ism-page').style.display = 'none';
+            document.getElementById('bilangan-page').style.display = 'none';
+            document.getElementById('jantina-page').style.display = 'none';
+            document.getElementById('spesifik-umum-page').style.display = 'none';
+            document.getElementById('dhamir-page').style.display = 'none';
+            document.getElementById('isyarah-page').style.display = 'none';
+            document.getElementById('mausul-page').style.display = 'none';
+            document.getElementById('alif-lam-page').style.display = 'none';
+            document.getElementById('quiz-page').style.display = 'none';
+            document.getElementById('fiil-page').style.display = 'flex';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            currentFiilDialog = 7;
+            updateFiilDialog();
+            playClickSound();
+        }
+
+function showFiilMaziPage() {
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'flex';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            playClickSound();
+        }
+
+function showFiilMudariPage() {
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'flex';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            playClickSound();
+        }
+
+function showFiilAmrPage() {
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'flex';
+            document.getElementById('fiil-ahwal-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            playClickSound();
+        }
+
+function showFiilAhwalPage() {
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-mazi-page').style.display = 'none';
+            document.getElementById('fiil-mudari-page').style.display = 'none';
+            document.getElementById('fiil-amr-page').style.display = 'none';
+            document.getElementById('fiil-ahwal-page').style.display = 'flex';
+            document.getElementById('fiil-quiz-page').style.display = 'none';
+            playClickSound();
+        }
+
+function startFiilQuiz() {
+            document.getElementById('fiil-page').style.display = 'none';
+            document.getElementById('fiil-quiz-page').style.display = 'flex';
+            document.getElementById('fiil-question-container').style.display = 'block';
+            document.getElementById('fiil-result-container').style.display = 'none';
+            document.getElementById('fiil-quiz-container').style.display = 'block';
+
+currentFiilQuestion = 0;
+            fiilScore = 0;
+            selectedFiilOption = null;
+            answeredFiilQuestions = Array(fiilQuestions.length).fill(false);
+
+loadFiilQuestion();
+            playClickSound();
+        }
+
+function loadFiilQuestion() {
+            const questionText = document.getElementById('fiil-question-text');
+            const optionsContainer = document.getElementById('fiil-options-container');
+            const quizProgress = document.getElementById('fiil-quiz-progress');
+            const nextBtn = document.getElementById('fiil-next-btn');
+            const feedbackContainer = document.getElementById('fiil-feedback-container');
+
+// Update progress
+            quizProgress.textContent = `Soalan ${currentFiilQuestion + 1} daripada ${fiilQuestions.length}`;
+
+// Update next button text
+            nextBtn.textContent = currentFiilQuestion === fiilQuestions.length - 1 ? 'Selesai' : 'Seterusnya';
+
+// Load question
+            const currentQ = fiilQuestions[currentFiilQuestion];
+            questionText.textContent = currentQ.question;
+
+// Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            feedbackContainer.className = 'feedback-container';
+
+// Load options
+            currentQ.options.forEach((option, index) => {
+                const optionBtn = document.createElement('button');
+                optionBtn.className = 'option-btn';
+                if (answeredFiilQuestions[currentFiilQuestion] && index === selectedFiilOption) {
+                    optionBtn.classList.add('selected');
+                }
+                optionBtn.textContent = option;
+                optionBtn.onclick = () => selectFiilOption(index);
+                optionsContainer.appendChild(optionBtn);
+            });
+
+// If question was already answered, show feedback
+            if (answeredFiilQuestions[currentFiilQuestion]) {
+                showFiilFeedback();
+            }
+        }
+
+function selectFiilOption(index) {
+            if (answeredFiilQuestions[currentFiilQuestion]) return;
+
+const options = document.querySelectorAll('#fiil-options-container .option-btn');
+            options.forEach(btn => btn.classList.remove('selected'));
+            options[index].classList.add('selected');
+            selectedFiilOption = index;
+
+// Check answer immediately
+            checkFiilAnswer();
+        }
+
+function checkFiilAnswer() {
+            if (selectedFiilOption === null || answeredFiilQuestions[currentFiilQuestion]) return;
+
+const currentQ = fiilQuestions[currentFiilQuestion];
+            const options = document.querySelectorAll('#fiil-options-container .option-btn');
+
+// Mark as answered
+            answeredFiilQuestions[currentFiilQuestion] = true;
+
+// Check if correct
+            const isCorrect = selectedFiilOption === currentQ.answer;
+            if (isCorrect) {
+                fiilScore++;
+                options[selectedFiilOption].classList.add('correct');
+                playCorrectSound();
+            } else {
+                options[selectedFiilOption].classList.add('incorrect');
+                options[currentQ.answer].classList.add('correct');
+                playIncorrectSound();
+            }
+
+// Show feedback
+            showFiilFeedback();
+        }
+
+function showFiilFeedback() {
+            const feedbackContainer = document.getElementById('fiil-feedback-container');
+            const feedbackTitle = document.getElementById('fiil-feedback-title');
+            const explanation = document.getElementById('fiil-explanation');
+            const currentQ = fiilQuestions[currentFiilQuestion];
+
+if (selectedFiilOption === currentQ.answer) {
+                feedbackContainer.classList.add('correct-feedback');
+                feedbackTitle.textContent = 'Betul!';
+                feedbackTitle.style.color = '#27ae60';
+            } else {
+                feedbackContainer.classList.add('incorrect-feedback');
+                feedbackTitle.textContent = 'Salah! Jawapan yang betul:';
+                feedbackTitle.style.color = '#e74c3c';
+            }
+
+explanation.textContent = currentQ.explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+function nextFiilQuestion() {
+            if (currentFiilQuestion < fiilQuestions.length - 1) {
+                currentFiilQuestion++;
+                selectedFiilOption = null;
+                loadFiilQuestion();
+                playClickSound();
+            } else {
+                showFiilResults();
+            }
+        }
+
+function showFiilResults() {
+            document.getElementById('fiil-quiz-container').style.display = 'none';
+            document.getElementById('fiil-result-container').style.display = 'block';
+
+const resultScore = document.getElementById('fiil-result-score');
+            const celebration = document.getElementById('fiil-celebration');
+            const encouragement = document.getElementById('fiil-encouragement');
+
+resultScore.textContent = `${fiilScore} / ${fiilQuestions.length}`;
+
+if (fiilScore >= 15) {
+                celebration.textContent = 'TAHNIAH! ANDA HEBAT!';
+                encouragement.textContent = 'Anda telah menunjukkan penguasaan yang baik dalam topik Fi\'il. Teruskan usaha!';
+                triggerConfetti();
+                playCelebrationSound();
+            } else {
+                celebration.textContent = 'TERUSKAN USAHA!';
+                encouragement.textContent = 'Jangan kecewa! Setiap kesilapan adalah peluang untuk belajar. Ulangi pelajaran dan cuba lagi! Anda pasti boleh berjaya jika terus berusaha!';
+                playEncouragementSound();
+            }
+        }
+
+function restartFiilQuiz() {
+            startFiilQuiz();
+            playClickSound();
+        }
+
+function updateFiilDialog() {
+            const dialogBox = document.getElementById('fiil-dialog-box');
+            const subtopicButtons = document.getElementById('fiil-subtopic-buttons');
+            dialogBox.innerHTML = `<strong>${fiilDialogs[currentFiilDialog].character}:</strong> ${fiilDialogs[currentFiilDialog].text}`;
+            dialogBox.classList.add('active');
+            setTimeout(() => dialogBox.classList.remove('active'), 300);
+            document.querySelectorAll('.character img').forEach(img => {
+                img.style.opacity = fiilDialogs[currentFiilDialog].character === img.alt ? '1' : '0.5';
+            });
+            subtopicButtons.classList.toggle('active', currentFiilDialog === 7);
+        }
+
+function nextFiilDialog() {
+            currentFiilDialog = (currentFiilDialog + 1) % fiilDialogs.length;
+            updateFiilDialog();
+            playClickSound();
+        }
+
+function prevFiilDialog() {
+            if (currentFiilDialog > 0) {
+                currentFiilDialog -= 1;
+            }
+            updateFiilDialog();
+            playClickSound();
+        }
+
+function alertLocked() {
+            alert('Tahap ini terkunci! Selesaikan tahap sebelumnya terlebih dahulu.');
+            playLockedSound();
+        }
+
+// Sound functions
+        function playHoverSound() {
+            const audio = new Audio('https://freesound.org/data/previews/501/501690_1648170-lq.mp3');
+            audio.play().catch(() => {});
+        }
+
+function playClickSound() {
+            const audio = new Audio('https://freesound.org/data/previews/171/171671_2437358-lq.mp3');
+            audio.play().catch(() => {});
+        }
+
+function playLockedSound() {
+            const audio = new Audio('https://freesound.org/data/previews/531/531891_11521604-lq.mp3');
+            audio.play().catch(() => {});
+        }
+
+function playCorrectSound() {
+            const audio = new Audio('https://freesound.org/data/previews/467/467390_8735733-lq.mp3');
+            audio.play().catch(() => {});
+        }
+
+function playIncorrectSound() {
+            const audio = new Audio('https://freesound.org/data/previews/448/448928_9312436-lq.mp3');
+            audio.play().catch(() => {});
+        }
+
+function playCelebrationSound() {
+            const audio = new Audio('https://freesound.org/data/previews/341/341275_5963107-lq.mp3');
+            audio.play().catch(() => {});
+        }
+
+function playEncouragementSound() {
+            const audio = new Audio('https://freesound.org/data/previews/135/135936_2499460-lq.mp3');
+            audio.play().catch(() => {});
+        }
+
+// Enhanced Confetti effect
+        function triggerConfetti() {
+            const colors = ['#ffd700', '#ff8c00', '#e67e22', '#d35400', '#27ae60', '#2ecc71'];
+            const confettiContainer = document.getElementById('confetti-container');
+
+// Clear any existing confetti
+            confettiContainer.innerHTML = '';
+
+// Create 150 confetti pieces
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+
+// Random properties
+                const size = Math.random() * 10 + 5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 3 + 2;
+                const animationDelay = Math.random() * 2;
+                const shape = Math.random() > 0.5 ? '50%' : '0';
+
+// Apply styles
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.backgroundColor = color;
+                confetti.style.left = `${left}%`;
+                confetti.style.borderRadius = shape;
+                confetti.style.animationDuration = `${animationDuration}s`;
+                confetti.style.animationDelay = `${animationDelay}s`;
+
+confettiContainer.appendChild(confetti);
+
+// Remove confetti after animation ends
+                setTimeout(() => {
+                    confetti.remove();
+                }, animationDuration * 1000);
+            }
+        }
     </script>
+</body>
+</html>
+Here's the code with the Middle Eastern background music added:
+
+html
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kembara Bahasa Arab</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://arleta.site/interactivelink/1262/Make-an-an-magic-syou-1.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Arial', sans-serif;
+            overflow: auto;
+            position: relative;
+        }
+
+        h1 {
+            color: #ffd700;
+            font-size: 4.5em;
+            font-family: 'Georgia', serif;
+            text-shadow: 0 0 15px #ff8c00, 0 0 30px #e67e22, 0 0 45px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        #home-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #home-page .container {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 245, 224, 0.9), rgba(255, 228, 181, 0.9));
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 215, 0, 0.3);
+            border: 3px solid #ffd700;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        #home-page p {
+            color: #3c2005;
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .start-button {
+            padding: 20px 40px;
+            font-size: 1.8em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .start-button:hover::before {
+            left: 100%;
+        }
+
+        .start-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .start-button:active {
+            transform: translateY(0) scale(0.95);
+        }
+
+        #checkpoint-page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 30px;
+            margin: 20px;
+        }
+
+        .checkpoint-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .checkpoint {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, #f4e4bc, #d4a017);
+            color: #3c2005;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 215, 0, 0.3);
+            border: 3px solid #ffd700;
+            position: relative;
+            animation: bounce 1.5s infinite;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .checkpoint:hover {
+            transform: scale(1.15);
+            background: radial-gradient(circle at 30% 30%, #ffd700, #e67e22);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 20px #ffd700;
+        }
+
+        .checkpoint:active {
+            transform: scale(0.95);
+        }
+
+        .checkpoint.completed {
+            background: radial-gradient(circle at 30% 30%, #27ae60, #2ecc71);
+            color: white;
+        }
+
+        .checkpoint.locked {
+            background: radial-gradient(circle at 30% 30%, #7f8c8d, #95a5a6);
+            color: #4a2c0b;
+            cursor: not-allowed;
+        }
+
+        .checkpoint-label {
+            position: absolute;
+            bottom: -35px;
+            color: #ffd700;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .stars {
+            position: absolute;
+            top: -30px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .star {
+            color: #ffd700;
+            font-size: 1em;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .path {
+            width: 6px;
+            height: 60px;
+            background: linear-gradient(#ffd700, #d4a017);
+            margin: 10px 0;
+            position: relative;
+            animation: path-glow 2s infinite alternate;
+        }
+
+        .path::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -3px;
+            width: 12px;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent);
+        }
+
+        #ism-page, #bilangan-page, #jantina-page, #spesifik-umum-page, #dhamir-page, #isyarah-page, #mausul-page, #alif-lam-page, #quiz-page, #fiil-page, #fiil-mazi-page, #fiil-mudari-page, #fiil-amr-page, #fiil-ahwal-page, #fiil-quiz-page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 30px;
+            margin: 20px;
+        }
+
+        .dialog-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .character-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 700px;
+            margin-bottom: 20px;
+        }
+
+        .character {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 45%;
+        }
+
+        .character img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #800000;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            animation: character-bounce 2s infinite;
+        }
+
+        .character-name {
+            color: #ffd700;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .dialog-box {
+            background: rgba(255, 245, 224, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #e67e22;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            text-align: left;
+            color: #3c2005;
+            font-size: 1.1em;
+            position: relative;
+            animation: fade-in 0.5s ease;
+        }
+
+        .dialog-box.active {
+            animation: dialog-pop 0.3s ease;
+        }
+
+        .subtopic-buttons, .ma-rifah-subtopic-buttons, .fiil-subtopic-buttons {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            max-width: 600px;
+        }
+
+        .subtopic-buttons.active, .ma-rifah-subtopic-buttons.active, .fiil-subtopic-buttons.active {
+            display: flex;
+        }
+
+        .subtopic-button {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .ma-rifah-subtopic-button, .fiil-subtopic-button {
+            padding: 8px 16px;
+            font-size: 1em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .subtopic-button:hover, .ma-rifah-subtopic-button:hover, .fiil-subtopic-button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtopic-button:active, .ma-rifah-subtopic-button:active, .fiil-subtopic-button:active {
+            transform: translateY(0);
+        }
+
+        .dialog-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .next-button, .prev-button {
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .next-button:hover, .prev-button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .next-button:active, .prev-button:active {
+            transform: translateY(0);
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px; /* Changed from left to right */
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px; /* Changed from right to left */
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .topic-button {
+            position: absolute;
+            top: 20px;
+            left: 150px;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .back-to-prev-button {
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .back-to-prev-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .back-button:hover, .back-to-prev-button:hover, .home-button:hover, .topic-button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .back-button:active, .back-to-prev-button:active, .home-button:active, .topic-button:active {
+            transform: translateY(0);
+        }
+
+        .progress-bar {
+            width: 100%;
+            max-width: 600px;
+            height: 20px;
+            background: #3c2005;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .progress-fill {
+            width: 33%;
+            height: 100%;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            transition: width 0.5s ease;
+        }
+
+        .subtopic-content {
+            background: rgba(255, 245, 224, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #e67e22;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 700px;
+            text-align: left;
+            color: #3c2005;
+            font-size: 1.1em;
+            animation: fade-in 0.5s ease;
+            line-height: 1.6;
+        }
+
+        .subtopic-content h2 {
+            color: #3c2005;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtopic-content h3 {
+            color: #d35400;
+            font-size: 1.4em;
+            margin: 15px 0 10px;
+            border-bottom: 2px solid #e67e22;
+            padding-bottom: 5px;
+        }
+
+        .subtopic-content ul {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .subtopic-content li {
+            margin-bottom: 10px;
+        }
+
+        .subtopic-content strong {
+            color: #d35400;
+        }
+
+        .subtopic-content .example {
+            background: rgba(255, 228, 181, 0.3);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #e67e22;
+        }
+
+        .subtopic-content .arabic {
+            font-family: 'Traditional Arabic', 'Arial', sans-serif;
+            font-size: 1.3em;
+            direction: rtl;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: rgba(255, 245, 224, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #e67e22;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 700px;
+            text-align: left;
+            color: #3c2005;
+            font-size: 1.1em;
+            animation: fade-in 0.5s ease;
+            line-height: 1.6;
+            width: 100%;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .quiz-header h2 {
+            color: #3c2005;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-progress {
+            font-size: 1.2em;
+            color: #d35400;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255, 228, 181, 0.5);
+            border-radius: 10px;
+            border-left: 4px solid #e67e22;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #3c2005;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            padding: 10px 15px;
+            background: linear-gradient(45deg, #f8d49c, #f0b76e);
+            border: 1px solid #e67e22;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-size: 1em;
+        }
+
+        .option-btn:hover {
+            background: linear-gradient(45deg, #f0b76e, #e67e22);
+            transform: translateX(5px);
+        }
+
+        .option-btn.selected {
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            color: white;
+            font-weight: bold;
+            border-color: #d35400;
+        }
+
+        .option-btn.correct {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            font-weight: bold;
+            border-color: #27ae60;
+        }
+
+        .option-btn.incorrect {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            font-weight: bold;
+            border-color: #c0392b;
+        }
+
+        .feedback-container {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .correct-feedback {
+            background-color: rgba(46, 204, 113, 0.2);
+            border-left: 4px solid #27ae60;
+        }
+
+        .incorrect-feedback {
+            background-color: rgba(231, 76, 60, 0.2);
+            border-left: 4px solid #c0392b;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .explanation {
+            font-style: italic;
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .quiz-btn {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .quiz-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .result-container {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 245, 224, 0.95);
+            border-radius: 15px;
+            border: 2px solid #e67e22;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 700px;
+            display: none;
+        }
+
+        .result-title {
+            font-size: 2em;
+            color: #3c2005;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-score {
+            font-size: 3em;
+            font-weight: bold;
+            color: #d35400;
+            margin-bottom: 20px;
+        }
+
+        .result-message {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .celebration {
+            font-size: 1.5em;
+            color: #4e8975;
+            text-shadow: 0 0 10px #ff8c00;
+            animation: glow 1s infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        .encouragement {
+            font-size: 1.2em;
+            color: #3c2005;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .restart-btn {
+            padding: 12px 25px;
+            font-size: 1.2em;
+            color: white;
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+
+        /* Confetti styles */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0.8;
+            animation: confetti-fall 5s linear forwards;
+        }
+
+        /* Music player styles */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 245, 224, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .music-btn {
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .music-btn:hover {
+            background: linear-gradient(45deg, #e67e22, #d35400);
+        }
+
+        .volume-control {
+            width: 80px;
+        }
     
+@keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+@keyframes glow {
+            0% { text-shadow: 0 0 15px #ff8c00, 0 0 30px #e67e22; }
+            100% { text-shadow: 0 0 20px #ff8c00, 0 0 40px #e67e22; }
+        }
+
+@keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+@keyframes path-glow {
+            0% { background: linear-gradient(#ffd700, #d4a017); }
+            100% { background: linear-gradient(#d4a017, #ffd700); }
+        }
+
+@keyframes character-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+@keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+@keyframes dialog-pop {
+            0% { transform: scale(0.95); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+@media (max-width: 600px) {
+            h1 {
+                font-size: 3em;
+            }
+
+.container {
+                padding: 30px;
+            }
+
+.start-button {
+                font-size: 1.5em;
+                padding: 15px 30px;
+            }
+
+.checkpoint {
+                width: 90px;
+                height: 90px;
+                font-size: 1.4em;
+            }
+
+.checkpoint-label {
+                font-size: 1em;
+            }
+
+.character img {
+                width: 100px;
+                height: 100px;
+            }
+
+.dialog-box {
+                font-size: 1em;
+                padding: 15px;
+            }
+
+.subtopic-button {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+
+.ma-rifah-subtopic-button, .fiil-subtopic-button {
+                font-size: 0.85em;
+                padding: 7px 14px;
+            }
+
+.next-button, .prev-button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+
+.subtopic-content {
+                font-size: 1em;
+                padding: 20px;
+            }
+
+.subtopic-content h2 {
+                font-size: 1.5em;
+            }
+
+.back-button, .back-to-prev-button, .home-button, .topic-button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+
+.topic-button {
+                left: 120px;
+            }
+
+.quiz-container {
+                padding: 20px;
+            }
+
+.question-text {
+                font-size: 1.1em;
+            }
+
+.option-btn {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+
+.result-title {
+                font-size: 1.5em;
+            }
+
+.result-score {
+                font-size: 2.5em;
+            }
+    
+ .music-player {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="home-page">
+        <h1>Kembara Bahasa Arab</h1>
+        <div class="container">
+            <p>Selamat datang ke pengembaraan pembelajaran Bahasa Arab yang menyeronokkan! Tekan butang di bawah untuk memulakan.</p>
+            <button class="start-button" onmouseover="playHoverSound()" onclick="showCheckpointPage()">Mulakan Kembara</button>
+        </div>
+    </div>
+
 <div id="checkpoint-page">
         <button class="home-button" onmouseover="playHoverSound()" onclick="showHomePage()">Home</button>
         <button class="back-button" onmouseover="playHoverSound()" onclick="showHomePage()">Back</button>

@@ -724,78 +724,7 @@ h1 {
             opacity: 0.8;
             animation: confetti-fall 5s linear forwards;
         }
-/* Music Player Styles */
-        .music-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .music-btn {
-            background: linear-gradient(45deg, #ff8c00, #e67e22);
-            border: none;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .music-btn:hover {
-            transform: scale(1.1);
-            background: linear-gradient(45deg, #e67e22, #d35400);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .music-menu {
-            position: absolute;
-            bottom: 60px;
-            right: 0;
-            background: rgba(255, 245, 224, 0.95);
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            min-width: 150px;
-            border: 2px solid #e67e22;
-        }
-
-        .music-menu.active {
-            display: flex;
-            animation: fade-in 0.3s ease;
-        }
-
-        .music-menu-btn {
-            background: linear-gradient(45deg, #ff8c00, #e67e22);
-            border: none;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            transition: all 0.2s ease;
-        }
-
-        .music-menu-btn:hover {
-            background: linear-gradient(45deg, #e67e22, #d35400);
-        }
-
-        .music-menu-btn i {
-            font-size: 16px;
-        }
-
+        
         .volume-container {
             display: flex;
             align-items: center;
@@ -1785,6 +1714,62 @@ h1 {
     <div id="confetti-container" class="confetti-container"></div>
 
 <script>
+
+    // Background Music Setup
+        const bgMusic = new Audio('https://arleta.site/interactivelink/1262/Middle-Eastern-Music-Instrumental-Palm-Sanctuary-AudioTrimmer.com_.mp3');
+        bgMusic.loop = true;
+        bgMusic.volume = 0.5;
+
+        // Music Controls
+        const musicToggle = document.getElementById('music-toggle');
+        const musicMenu = document.getElementById('music-menu');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const volumeControl = document.getElementById('volume-control');
+
+        // Toggle music menu
+        musicToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            musicMenu.classList.toggle('active');
+            playClickSound();
+        });
+
+        // Close menu when clicking elsewhere
+        document.addEventListener('click', () => {
+            musicMenu.classList.remove('active');
+        });
+
+        // Music control functions
+        playBtn.addEventListener('click', () => {
+            bgMusic.play();
+            playClickSound();
+            musicMenu.classList.remove('active');
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            bgMusic.pause();
+            playClickSound();
+            musicMenu.classList.remove('active');
+        });
+
+        stopBtn.addEventListener('click', () => {
+            bgMusic.pause();
+            bgMusic.currentTime = 0;
+            playClickSound();
+            musicMenu.classList.remove('active');
+        });
+
+        volumeControl.addEventListener('input', (e) => {
+            bgMusic.volume = e.target.value;
+        });
+
+        // Start playing music when page loads (with user interaction)
+        document.addEventListener('click', () => {
+            // Try to play music (will work only after user interaction)
+            bgMusic.play().catch(e => console.log("Auto-play prevented:", e));
+        }, { once: true });
+
         // Ism Dialogs
         const ismDialogs = [
             {
@@ -3308,28 +3293,6 @@ confettiContainer.appendChild(confetti);
                 }, animationDuration * 1000);
             }
         }
-                bgMusic.pause();
-            playClickSound();
-            musicMenu.classList.remove('active');
-        });
-
-        stopBtn.addEventListener('click', () => {
-            bgMusic.pause();
-            bgMusic.currentTime = 0;
-            playClickSound();
-            musicMenu.classList.remove('active');
-        });
-
-        volumeControl.addEventListener('input', (e) => {
-            bgMusic.volume = e.target.value;
-        });
-
-        // Start playing music when page loads (with user interaction)
-        document.addEventListener('click', () => {
-            // Try to play music (will work only after user interaction)
-            bgMusic.play().catch(e => console.log("Auto-play prevented:", e));
-        }, { once: true });
-    
     </script>
 </body>
 </html>

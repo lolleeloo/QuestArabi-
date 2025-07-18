@@ -723,49 +723,7 @@ h1 {
             background-color: #f00;
             opacity: 0.8;
             animation: confetti-fall 5s linear forwards;
-        }
-                /* Music player styles */
-        .music-player {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(255, 245, 224, 0.9);
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .music-controls {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .music-btn {
-            background: linear-gradient(45deg, #ff8c00, #e67e22);
-            border: none;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 12px;
-        }
-
-        .music-btn:hover {
-            background: linear-gradient(45deg, #e67e22, #d35400);
-        }
-
-        .volume-control {
-            width: 80px;
-        }
+}
 
 
 @keyframes confetti-fall {
@@ -781,7 +739,98 @@ h1 {
 
 @keyframes glow {
             0% { text-shadow: 0 0 15px #ff8c00, 0 0 30px #e67e22; }
-            100% { text-shadow: 0 0 20px #ff8c00, 0 0 40px #e67e22; }
+            100% { text-shadow: 0 0 20px #ff8c0/* Music Player Styles */
+        .music-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .music-btn {
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .music-menu {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            background: rgba(255, 245, 224, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 150px;
+            border: 2px solid #e67e22;
+        }
+
+        .music-menu.active {
+            display: flex;
+            animation: fade-in 0.3s ease;
+        }
+
+        .music-menu-btn {
+            background: linear-gradient(45deg, #ff8c00, #e67e22);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .music-menu-btn:hover {
+            background: linear-gradient(45deg, #e67e22, #d35400);
+        }
+
+        .music-menu-btn i {
+            font-size: 16px;
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px;
+        }
+
+        .volume-icon {
+            font-size: 16px;
+            color: #3c2005;
+        }
+
+        .volume-control {
+            width: 100px;
+        }
+
+        /* Font Awesome Icons */
+        .fa-music {
+            font-size: 20px;
+        }0, 0 0 40px #e67e22; }
         }
 
 @keyframes bounce {
@@ -904,16 +953,30 @@ h1 {
             }
         }
     </style>
+     <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Music Player -->
-    <div class="music-player">
-        <div class="music-controls">
-            <button class="music-btn" id="play-btn">▶</button>
-            <button class="music-btn" id="pause-btn">❚❚</button>
-            <button class="music-btn" id="stop-btn">■</button>
+   <!-- Music Player -->
+    <div class="music-container">
+        <button class="music-btn" id="music-toggle">
+            <i class="fas fa-music"></i>
+        </button>
+        <div class="music-menu" id="music-menu">
+            <button class="music-menu-btn" id="play-btn">
+                <i class="fas fa-play"></i> Mainkan
+            </button>
+            <button class="music-menu-btn" id="pause-btn">
+                <i class="fas fa-pause"></i> Jeda
+            </button>
+            <button class="music-menu-btn" id="stop-btn">
+                <i class="fas fa-stop"></i> Berhenti
+            </button>
+            <div class="volume-container">
+                <i class="fas fa-volume-up volume-icon"></i>
+                <input type="range" min="0" max="1" step="0.1" value="0.5" class="volume-control" id="volume-control">
+            </div>
         </div>
-        <input type="range" min="0" max="1" step="0.1" value="0.5" class="volume-control" id="volume-control">
     </div>
     
     <div id="home-page">
@@ -1725,30 +1788,52 @@ h1 {
     <div id="confetti-container" class="confetti-container"></div>
 
 <script>
-
-    // Background Music Setup
+// Background Music Setup
         const bgMusic = new Audio('https://arleta.site/interactivelink/1262/Middle-Eastern-Music-Instrumental-Palm-Sanctuary-AudioTrimmer.com_.mp3');
         bgMusic.loop = true;
         bgMusic.volume = 0.5;
 
         // Music Controls
-        document.getElementById('play-btn').addEventListener('click', () => {
+        const musicToggle = document.getElementById('music-toggle');
+        const musicMenu = document.getElementById('music-menu');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const volumeControl = document.getElementById('volume-control');
+
+        // Toggle music menu
+        musicToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            musicMenu.classList.toggle('active');
+            playClickSound();
+        });
+
+        // Close menu when clicking elsewhere
+        document.addEventListener('click', () => {
+            musicMenu.classList.remove('active');
+        });
+
+        // Music control functions
+        playBtn.addEventListener('click', () => {
             bgMusic.play();
             playClickSound();
+            musicMenu.classList.remove('active');
         });
 
-        document.getElementById('pause-btn').addEventListener('click', () => {
+        pauseBtn.addEventListener('click', () => {
             bgMusic.pause();
             playClickSound();
+            musicMenu.classList.remove('active');
         });
 
-        document.getElementById('stop-btn').addEventListener('click', () => {
+        stopBtn.addEventListener('click', () => {
             bgMusic.pause();
             bgMusic.currentTime = 0;
             playClickSound();
+            musicMenu.classList.remove('active');
         });
 
-        document.getElementById('volume-control').addEventListener('input', (e) => {
+        volumeControl.addEventListener('input', (e) => {
             bgMusic.volume = e.target.value;
         });
 
@@ -1757,6 +1842,8 @@ h1 {
             // Try to play music (will work only after user interaction)
             bgMusic.play().catch(e => console.log("Auto-play prevented:", e));
         }, { once: true });
+
+    
         // Ism Dialogs
         const ismDialogs = [
             {
